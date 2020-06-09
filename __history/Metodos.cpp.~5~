@@ -22,7 +22,6 @@
 
 	int VariablesMetodos::OpcionMenuAdministrador = 0;
 	bool VariablesMetodos::ValidarDato = false;
-	bool VariablesMetodos::ExisteUsuario = false;
 
 //------------------------------Métodos-----------------------------------------
 
@@ -44,53 +43,6 @@
 		}
 
 		return NuevoString;
-	}
-
-	void VerificarUsuario(string Usuario, string Pass, string Departamento, string Empresa)
-	{
-		VariablesMetodos::ExisteUsuario = BuscarMatrizDispersaU(Variables::MatrizDispersaUsuarios, Usuario, Empresa, Departamento);
-
-		if(VariablesMetodos::ExisteUsuario)
-		{
-			if(Variables::PasswordUA == Pass)
-			{
-                if(Usuario == "Admin")
-				{
-					MenuAdministradorCiclo();
-				}
-				else
-				{
-					cout<< "Menu Usuario" <<endl;
-				}
-			}
-			else
-			{
-                Color(0, 4);
-				Posicionar(13, -9);
-				cout<< "La Contrase\244a Es Incorrecta" <<endl;
-				system("pause > 0");
-				MenuLoginCiclo();
-			}
-		}
-		else
-		{
-		   Color(0, 4);
-		   Posicionar(16, -9);
-		   cout<< "No Existe El Nombre De Usuario Indicado" <<endl;
-		   system("pause > 0");
-		}
-	}
-
-	void MenuLoginCiclo()
-	{
-		 do
-		 {
-             system("cls");
-			 Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
-			 MenuLogin();
-			 VerificarUsuario(Variables::UsuarioA, Variables::PasswordUA, Variables::DepartamentoUA, Variables::EmpresaUA);
-		 }
-		 while(!VariablesMetodos::ExisteUsuario);
 	}
 
 	void MenuAdministradorCiclo()
@@ -128,6 +80,7 @@
 			{
 				case 1:
 					system("cls");
+					BuscarMatrizDispersaU(Variables::MatrizDispersaUsuarios, "Admin", "12345", "General", "General");
 					system("pause > 0");
 				break;
 
@@ -141,6 +94,16 @@
         }
 	}
 
-
+	void VerificarUsuario(string Usuario, char Pass[20], string Departamento, string Empresa)
+	{
+		if(Usuario == "Admin")
+		{
+			MenuAdministradorCiclo();
+		}
+		else
+		{
+			cout<< "Menu Usuario" <<endl;
+		}
+	}
 
 

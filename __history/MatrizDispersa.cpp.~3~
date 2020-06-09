@@ -1,0 +1,55 @@
+//------------------------------------------------------------------------------
+
+	#pragma hdrstop
+
+//-----------------------------Librerias----------------------------------------
+
+	#include "MatrizDispersa.h"
+	#include "Variables.h"
+	#include <iostream>
+	#include <string>
+	#include <cstring>
+
+	using namespace std;
+
+//------------------------------------------------------------------------------
+
+	#pragma package(smart_init)
+
+//---------------------------------Métodos--------------------------------------
+
+	void BuscarMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string Pass, string NombreEmpresa, string NombreDepartamento)
+	{
+		MatrizDU Auxiliar = Matriz;
+
+        while(Auxiliar != nullptr)
+		{
+			if(NombreDepartamento == Auxiliar -> NombreDepartamento)
+			{
+				while(Auxiliar != nullptr)
+				{
+					if(NombreEmpresa == Auxiliar -> NombreEmpresa)
+					{
+						while(Auxiliar != nullptr)
+						{
+							if(NombreUsuario == Auxiliar -> NombreUsuario && Pass == Auxiliar -> Password)
+							{
+								Variables::IdentificadorUA = Auxiliar -> Identificador;
+								Variables::NombreCompletoUA = Auxiliar -> NombreCompleto;
+								Variables::UsuarioA = Auxiliar -> NombreUsuario;
+								Variables::PasswordUA = Auxiliar -> Password;
+								Variables::DepartamentoUA = Auxiliar -> NombreDepartamento;
+								Variables::EmpresaUA = Auxiliar -> NombreEmpresa;
+								break;
+							}
+							Auxiliar = Auxiliar -> Atr;
+						}
+						break;
+					}
+					Auxiliar = Auxiliar -> Aba;
+				}
+				break;
+			}
+			Auxiliar = Auxiliar -> Sgte;
+		}
+	}

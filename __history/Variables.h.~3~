@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
 
-	#pragma hdrstop
+	#ifndef VariablesH
+	#define VariablesH
 
 //-----------------------------Librerias----------------------------------------
 
-	#include "Variables.h"
 	#include<iostream>
 	#include<string>
 
@@ -12,17 +12,15 @@
 
 //-----------------------------Variables----------------------------------------
 
-	int Variables::IdentificadorUA = 0;
-	string Variables::NombreCompletoUA = "";
-	string Variables::UsuarioA = "";
-    string Variables::PasswordUA = "";
-	string Variables::DepartamentoUA = "";
-	string Variables::EmpresaUA = "";
-	int Variables::IdentificadorUsuario = 0;
-	MatrizDU Variables::MatrizDispersaUsuarios = nullptr;
+	namespace Variables
+	{
+		extern string UsuarioA;
+		extern string DepartamentoUA;
+		extern string EmpresaUA;
+	}
 
 //------------------------------------------------------------------------------
 
-	#pragma package(smart_init)
+	#endif
 
 

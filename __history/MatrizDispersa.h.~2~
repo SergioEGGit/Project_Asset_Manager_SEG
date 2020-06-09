@@ -1,0 +1,45 @@
+//------------------------------------------------------------------------------
+
+	#ifndef MatrizDispersaH
+	#define MatrizDispersaH
+
+//-----------------------------Librerias----------------------------------------
+
+	#include <iostream>
+	#include <string>
+	#include <cstring>
+
+	using namespace std;
+
+//-----------------------------Estructura---------------------------------------
+
+	struct MatrizDispersa
+	{
+		int Identificador;
+		string NombreCompleto;
+		string NombreUsuario;
+		string Contraseña;
+		string NombreDepartamento;
+		string NombreEmpresa;
+		bool ExisteCabecera;
+		//Arbol AVL
+		struct MatrizDispersa *Sgte;
+		struct MatrizDispersa *Ante;
+		struct MatrizDispersa *Arr;
+		struct MatrizDispersa *Aba;
+		struct MatrizDispersa *Adte;
+		struct MatrizDispersa *Atr;
+	};
+
+	typedef struct MatrizDispersa *MatrizDispersaUsuarios;
+
+//--------------------------------Métodos---------------------------------------
+
+	void BuscarMatrizDispersaUsuarios(MatrizDispersaUsuarios &Matriz, string NombreUsuario, string Empresa, string Departamento);
+
+	bool CrearDepartamentoMatrizDispersaUsuarios(MatrizDispersaUsuarios &Matriz, string NombreDepartamento, MatrizDispersaUsuarios& Usuario, MatrizDispersaUsuarios& Departamento);
+
+	void InsertarMatrizDispersaUsuarios(MatrizDispersaUsuarios &Matriz, string NombreUsuario, string NombreCompleto, string Contraseña, string Empresa, string Departamento);
+
+//---------------------------------------------------------------------------
+	#endif

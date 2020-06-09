@@ -18,7 +18,6 @@
 		extern int IdentificadorUA;
 		extern string NombreCompletoUA;
 		extern string UsuarioA;
-		extern string PasswordUA;
 		extern string DepartamentoUA;
 		extern string EmpresaUA;
 		extern MatrizDU MatrizDispersaUsuarios;

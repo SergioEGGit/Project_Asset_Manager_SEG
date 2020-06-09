@@ -14,20 +14,14 @@
 
 	namespace VariablesMetodos
 	{
-		extern int OpcionMenuAdministrador;
-		extern bool ValidarDato;
-		extern bool ExisteUsuario;
+		extern bool EstoyRegistrado;
 	}
 
 //-------------------------------Métodos----------------------------------------
 
-	string LowerCase(string Cadena);
-
-	void MenuLoginCiclo();
-
-	void MenuAdministradorCiclo();
-
 	void VerificarUsuario(string Usuario, char Pass[20], string Departamento, string Empresa);
+
+	string LowerCase(string Cadena);
 
 //------------------------------------------------------------------------------
 

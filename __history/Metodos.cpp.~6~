@@ -65,17 +65,13 @@
 			}
 			else
 			{
-                Color(0, 4);
-				Posicionar(13, -9);
 				cout<< "La Contrase\244a Es Incorrecta" <<endl;
-				system("pause > 0");
-				MenuLoginCiclo();
 			}
 		}
 		else
 		{
 		   Color(0, 4);
-		   Posicionar(16, -9);
+		   Posicionar(7, -9);
 		   cout<< "No Existe El Nombre De Usuario Indicado" <<endl;
 		   system("pause > 0");
 		}

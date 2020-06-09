@@ -20,7 +20,7 @@
 
 	int VariablesInterfaz::AnchoPantalla = 0;
 	int VariablesInterfaz::AltoPantalla = 0;
-	char Contrasena[20];
+	char Contraseña[20];
 
 //-------------------------------Métodos----------------------------------------
 
@@ -131,8 +131,7 @@
 		Posicionar(16, -3);
 		cout<< "Ingrese Su Contrase\244a: " <<endl;
 		Posicionar(-7, -3);
-		OcultarPassword(Contrasena);
-		Variables::PasswordUA = Contrasena;
+		OcultarPassword(Contraseña);
 		Posicionar(16, -5);
 		cout<< "Ingrese Su Departamento: " <<endl;
 		Posicionar(-9, -5);
@@ -141,36 +140,8 @@
 		cout<< "Ingrese Su Empresa: " <<endl;
 		Posicionar(-4, -7);
 		cin >> Variables::EmpresaUA;
-	}
 
-	void MenuAdministrador()
-	{
-		Color(0,12);
-		Posicionar(14, 17);
-		cout<< "Menú Administrador" <<endl;
-		Posicionar(17, 15);
-		cout<< "1.Registrar Usuario." <<endl;
-		Posicionar(17, 13);
-		cout<< "2.Reporte Matriz Dispersa." <<endl;
-		Posicionar(17, 11);
-		cout<< "3.Reporte Activos Disponibles De Un Departamento." <<endl;
-		Posicionar(17, 9);
-		cout<< "4.Reporte Activos Disponibles De Una Empresa." <<endl;
-		Posicionar(17, 7);
-		cout<< "5.Reporte Transacciones." <<endl;
-		Posicionar(17, 5);
-		cout<< "6.Reporte Activos De Un Usuario." <<endl;
-		Posicionar(17, 3);
-		cout<< "7.Activos Rentados Por Un Usuario." <<endl;
-		Posicionar(17, 1);
-		cout<< "8.Ordenar Transacciones" <<endl;
-		Posicionar(17, -1);
-		cout<< "9.Log Out" <<endl;
-
-		Posicionar(17, -3);
-		cout<< "Ingrese Una Opcion: " <<endl;
-		Posicionar(-3, -3);
-		cin >> VariablesMetodos::OpcionMenuAdministrador;
+		VerificarUsuario(Variables::UsuarioA, Contraseña, Variables::DepartamentoUA, Variables::EmpresaUA);
 	}
 
 	void Marco(int Col1, int Col2, int Fil1, int Fil2)

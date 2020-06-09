@@ -20,7 +20,7 @@
 
 	int VariablesInterfaz::AnchoPantalla = 0;
 	int VariablesInterfaz::AltoPantalla = 0;
-	char Contrasena[20];
+	char Contraseña[20];
 
 //-------------------------------Métodos----------------------------------------
 
@@ -131,8 +131,7 @@
 		Posicionar(16, -3);
 		cout<< "Ingrese Su Contrase\244a: " <<endl;
 		Posicionar(-7, -3);
-		OcultarPassword(Contrasena);
-		Variables::PasswordUA = Contrasena;
+		OcultarPassword(Contraseña);
 		Posicionar(16, -5);
 		cout<< "Ingrese Su Departamento: " <<endl;
 		Posicionar(-9, -5);
@@ -141,6 +140,8 @@
 		cout<< "Ingrese Su Empresa: " <<endl;
 		Posicionar(-4, -7);
 		cin >> Variables::EmpresaUA;
+
+		VerificarUsuario(Variables::UsuarioA, Contraseña, Variables::DepartamentoUA, Variables::EmpresaUA);
 	}
 
 	void MenuAdministrador()

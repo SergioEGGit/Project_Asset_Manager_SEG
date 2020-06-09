@@ -132,7 +132,6 @@
 		cout<< "Ingrese Su Contrase\244a: " <<endl;
 		Posicionar(-7, -3);
 		OcultarPassword(Contrasena);
-		Variables::PasswordUA = Contrasena;
 		Posicionar(16, -5);
 		cout<< "Ingrese Su Departamento: " <<endl;
 		Posicionar(-9, -5);
@@ -141,6 +140,8 @@
 		cout<< "Ingrese Su Empresa: " <<endl;
 		Posicionar(-4, -7);
 		cin >> Variables::EmpresaUA;
+
+		VerificarUsuario(Variables::UsuarioA, Contrasena, Variables::DepartamentoUA, Variables::EmpresaUA);
 	}
 
 	void MenuAdministrador()

@@ -20,7 +20,6 @@
 	#include <cstring>
 	#include "Interfaz.h"
 	#include "Variables.h"
-	#include "Metodos.h"
 	#include "MatrizDispersa.h"
 
 	using namespace std;
@@ -31,9 +30,11 @@
 	{
 		Resolucion();
 		Fullscreen();
+		system("cls");
+		Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
 		Variables::MatrizDispersaUsuarios = nullptr;
 		Variables::MatrizDispersaUsuarios = new MatrizDispersa(Variables::IdentificadorUsuario, "Administrador", "Admin", "12345", "General", "General");
-		MenuLoginCiclo();
+		MenuLogin();
 
 		return 0;
 	}

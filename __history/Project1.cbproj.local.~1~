@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2020/06/04 09:59:34.133,=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2020/06/04 09:59:38.789,=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\File1.cpp</Transaction>
+    <Transaction>2020/06/04 09:59:55.029,=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2020/06/04 10:05:25.441,C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Interfaz.cpp=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2020/06/04 10:05:25.441,C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Interfaz.h=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
+    <Transaction>2020/06/04 12:04:57.700,=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2020/06/04 12:05:06.788,C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Variables.h=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
+    <Transaction>2020/06/04 12:05:06.788,C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Variables.cpp=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2020/06/04 12:11:00.247,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Interfaz.cpp=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Interfaz.cpp</Transaction>
+    <Transaction>2020/06/04 12:11:00.247,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Interfaz.h=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Interfaz.h</Transaction>
+    <Transaction>2020/06/04 12:11:05.519,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Variables.h=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Variables.h</Transaction>
+    <Transaction>2020/06/04 12:11:05.519,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Variables.cpp=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Variables.cpp</Transaction>
+    <Transaction>2020/06/04 12:11:16.305,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Principal.cpp=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\File1.cpp</Transaction>
+    <Transaction>2020/06/04 12:11:20.155,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Project1PCH1.h=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2020/06/04 12:11:23.879,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Project1.cbproj=C:\Users\Sergio EG\Documents\Embarcadero\Studio\Projects\Project1.cbproj</Transaction>
+    <Transaction>2020/06/04 12:21:27.239,=C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Unit1.cpp</Transaction>
+    <Transaction>2020/06/04 12:21:56.626,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Vari.h=C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Unit1.h</Transaction>
+    <Transaction>2020/06/04 12:21:56.626,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Vari.cpp=C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Unit1.cpp</Transaction>
+    <Transaction>2020/06/04 12:22:08.739,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Varibles.h=C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Vari.h</Transaction>
+    <Transaction>2020/06/04 12:22:08.739,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Varibles.cpp=C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Vari.cpp</Transaction>
+    <Transaction>2020/06/04 12:22:14.180,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Variables.cpp=C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Varibles.cpp</Transaction>
+    <Transaction>2020/06/04 12:22:14.180,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Variables.h=C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Varibles.h</Transaction>
+    <Transaction>2020/06/04 14:21:06.935,=C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Unit1.cpp</Transaction>
+    <Transaction>2020/06/04 14:21:16.765,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Metodos.h=C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Unit1.h</Transaction>
+    <Transaction>2020/06/04 14:21:16.765,C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Metodos.cpp=C:\Usac\Estructuras De Datos\Lab\Proyecto 1\EDD_Proyecto1_201801628\Unit1.cpp</Transaction>
+  </Transactions>
+</BorlandProject>

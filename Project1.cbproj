@@ -109,6 +109,10 @@
             <DependentOn>Interfaz.h</DependentOn>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
+        <CppCompile Include="MatrizDispersa.cpp">
+            <DependentOn>MatrizDispersa.h</DependentOn>
+            <BuildOrder>5</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Metodos.cpp">
             <DependentOn>Metodos.h</DependentOn>
             <BuildOrder>4</BuildOrder>
