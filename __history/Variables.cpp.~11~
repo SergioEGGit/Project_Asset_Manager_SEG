@@ -21,8 +21,8 @@
 	int Variables::IdentificadorUsuario = 0;
 	MatrizDU Variables::MatrizDispersaUsuarios = nullptr;
 	string Variables::ArrayAux[9];
-	bool Variables::Cabecera = false;
-	bool Variables::Usuario = false;
+	bool Variables::Cabecera = nullptr;
+	bool Variables::Usuario = nullptr;
 
 //------------------------------------------------------------------------------
 

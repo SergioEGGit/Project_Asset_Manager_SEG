@@ -15,6 +15,7 @@
 
 	struct MatrizDispersa
 	{
+		int Identificador;
 		string NombreCompleto;
 		string NombreUsuario;
 		string Password;
@@ -29,8 +30,9 @@
 		struct MatrizDispersa *Adte;
 		struct MatrizDispersa *Atr;
 
-		MatrizDispersa(string NombreCompleto, string NombreUsuario, string Password, string NombreEmpresa, string NombreDepartamento)
+		MatrizDispersa(int Identificador, string NombreCompleto, string NombreUsuario, string Password, string NombreEmpresa, string NombreDepartamento)
 		{
+			this -> Identificador = Identificador;
 			this -> NombreCompleto = NombreCompleto;
 			this -> NombreUsuario = NombreUsuario;
 			this -> Password = Password;
@@ -43,7 +45,7 @@
 			this -> Aba = nullptr;
 			this -> Adte = nullptr;
 			this -> Atr = nullptr;
-		}
+        }
 
 		MatrizDispersa(string TipoCabecera, string NombreCabecera)
 		{
@@ -53,8 +55,9 @@
 			this -> Aba = nullptr;
 			this -> Adte = nullptr;
 			this -> Atr = nullptr;
+			this -> TipoCabecera = "";
 
-            if(TipoCabecera == "Dep")
+			if(TipoCabecera == "Dep")
 			{
 				//Soy Un Departamento
 				this -> NombreDepartamento = NombreCabecera;
@@ -65,9 +68,7 @@
 				//Soy Una Empresa
 				this -> NombreEmpresa = NombreCabecera;
 				this -> NombreDepartamento = "";
-			}
-
-			this -> TipoCabecera = "";
+            }
 		}
 	};
 

@@ -31,7 +31,7 @@
 	{
 		Resolucion();
 		Fullscreen();
-		Variables::MatrizDispersaUsuarios = new MatrizDispersa("Administrador", "Admin", "12345", "", "");
+		Variables::MatrizDispersaUsuarios = new MatrizDispersa(Variables::IdentificadorUsuario, "Administrador", "Admin", "12345", "General", "General");
 		Variables::IdentificadorUsuario++;
 		MenuLoginCiclo();
 

@@ -15,6 +15,7 @@
 
 	struct MatrizDispersa
 	{
+		int Identificador;
 		string NombreCompleto;
 		string NombreUsuario;
 		string Password;
@@ -29,21 +30,22 @@
 		struct MatrizDispersa *Adte;
 		struct MatrizDispersa *Atr;
 
-		MatrizDispersa(string NombreCompleto, string NombreUsuario, string Password, string NombreEmpresa, string NombreDepartamento)
+		MatrizDispersa(int Identificador, string NombreCompleto, string NombreUsuario, string Password, string NombreEmpresa, string NombreDepartamento)
 		{
+			this -> Identificador = Identificador;
 			this -> NombreCompleto = NombreCompleto;
 			this -> NombreUsuario = NombreUsuario;
 			this -> Password = Password;
 			this -> NombreEmpresa = NombreEmpresa;
 			this -> NombreDepartamento = NombreDepartamento;
-			this -> TipoCabecera = "";
+			this -> TipoCabecera = false;
 			this -> Sgte = nullptr;
 			this -> Ante = nullptr;
 			this -> Arr = nullptr;
 			this -> Aba = nullptr;
 			this -> Adte = nullptr;
 			this -> Atr = nullptr;
-		}
+        }
 
 		MatrizDispersa(string TipoCabecera, string NombreCabecera)
 		{
@@ -53,8 +55,9 @@
 			this -> Aba = nullptr;
 			this -> Adte = nullptr;
 			this -> Atr = nullptr;
+			this -> TipoCabecera = "";
 
-            if(TipoCabecera == "Dep")
+			if(TipoCabecera == "Dep")
 			{
 				//Soy Un Departamento
 				this -> NombreDepartamento = NombreCabecera;
@@ -65,9 +68,7 @@
 				//Soy Una Empresa
 				this -> NombreEmpresa = NombreCabecera;
 				this -> NombreDepartamento = "";
-			}
-
-			this -> TipoCabecera = "";
+            }
 		}
 	};
 
@@ -75,15 +76,13 @@
 
 //--------------------------------Métodos---------------------------------------
 
-	bool InsertarCabeceraEmpresaMatrizDispersaU(string NombreEmpresa, MatrizDispersa& UsuarioAux, MatrizDispersa& EmpresaAux);
+	bool InsertarCabeceraEmpresaMatrizDispersaU(MatrizDU &Matriz, string NombreEmpresa, MatrizDispersa& UsuarioAux, MatrizDispersa& EmpresaAux);
 
 	bool InsertarCabeceraDepartamentoMatrizDispersaU(MatrizDU &Matriz, string NombreDepartamento, MatrizDispersa& UsuarioAux, MatrizDispersa& DepartamentoAux);
 
 	bool InsertarUsuarioMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreCompleto, string Password, string NombreDepartamento, string NombreEmpresa);
 
 	bool BuscarMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreEmpresa, string NombreDepartamento);
-
-	void ReporteMatrizDispersaU(MatrizDU &Matriz);
 
 //---------------------------------------------------------------------------
 	#endif

@@ -147,11 +147,7 @@
 						cout << "El Usuario Indicado Ya Existe En El Sistema.";
 						system("pause > 0");
 					}
-				break;
-
-				case 2:
-						ReporteMatrizDispersaU(Variables::MatrizDispersaUsuarios);
-						system("pause > 0");
+                    system("pause > 0");
 				break;
 
 				default:

@@ -24,8 +24,6 @@
 		extern MatrizDU MatrizDispersaUsuarios;
 		extern int IdentificadorUsuario;
 		extern string ArrayAux[9];
-		extern bool Cabecera;
-        extern bool Usuario;
 	}
 
 //------------------------------------------------------------------------------

@@ -130,28 +130,7 @@
 					system("cls");
 					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
 					MenuRegistrarUsuario();
-
-					VariablesMetodos::ExisteUsuario = InsertarUsuarioMatrizDispersaU(Variables::MatrizDispersaUsuarios, Variables::ArrayAux[1], Variables::ArrayAux[0], Variables::ArrayAux[2], Variables::ArrayAux[4], Variables::ArrayAux[3]);
-
-					if(VariablesMetodos::ExisteUsuario == true)
-					{
-						Color(0, 10);
-						Posicionar(10, 5);
-						cout << "Usuario Agregado Con Exito!";
-						system("pause > 0");
-					}
-					else
-					{
-						Color(0, 4);
-						Posicionar(17, 5);
-						cout << "El Usuario Indicado Ya Existe En El Sistema.";
-						system("pause > 0");
-					}
-				break;
-
-				case 2:
-						ReporteMatrizDispersaU(Variables::MatrizDispersaUsuarios);
-						system("pause > 0");
+                    system("pause > 0");
 				break;
 
 				default:

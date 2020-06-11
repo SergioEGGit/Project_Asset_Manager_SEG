@@ -105,6 +105,10 @@
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="ArbolAVL.cpp">
+            <DependentOn>ArbolAVL.h</DependentOn>
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Interfaz.cpp">
             <DependentOn>Interfaz.h</DependentOn>
             <BuildOrder>2</BuildOrder>

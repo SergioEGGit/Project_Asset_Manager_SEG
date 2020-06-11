@@ -27,25 +27,30 @@
 
 		while(NuevaEmpresa != NULL)
 		{
-			if(NuevaEmpresa -> Aba != NULL)
+			if(strcmp(NombreEmpresa.c_str(), NuevaEmpresa -> NombreEmpresa.c_str()) == 1)
 			{
-				MatrizDU AuxiliarNuevaEmpresa = NuevaEmpresa -> Aba;
-				NuevaEmpresa -> Aba = EmpresaNuevaAux;
-				AuxiliarNuevaEmpresa -> Arr = EmpresaNuevaAux;
-				EmpresaNuevaAux -> Arr = NuevaEmpresa;
-				EmpresaNuevaAux -> Aba = AuxiliarNuevaEmpresa;
-				EmpresaNuevaAux -> Sgte = UsuarioNuevoAux;
-				UsuarioNuevoAux -> Ante = EmpresaNuevaAux;
-				return true;
-
-			}
-			else
-			{
-				NuevaEmpresa -> Aba = EmpresaNuevaAux;
-				EmpresaNuevaAux -> Arr = NuevaEmpresa;
-				EmpresaNuevaAux -> Sgte = UsuarioNuevoAux;
-				UsuarioNuevoAux -> Ante = EmpresaNuevaAux;
-				return true;
+				if(NuevaEmpresa -> Aba != NULL)
+				{
+					if(strcmp(NombreEmpresa.c_str(), NuevaEmpresa -> Aba -> NombreEmpresa.c_str()) == -1)
+					{
+						MatrizDU AuxiliarNuevaEmpresa = NuevaEmpresa -> Aba;
+						NuevaEmpresa -> Aba = EmpresaNuevaAux;
+						AuxiliarNuevaEmpresa -> Arr = EmpresaNuevaAux;
+						EmpresaNuevaAux -> Arr = NuevaEmpresa;
+						EmpresaNuevaAux -> Aba = AuxiliarNuevaEmpresa;
+						EmpresaNuevaAux -> Sgte = UsuarioNuevoAux;
+						UsuarioNuevoAux -> Ante = EmpresaNuevaAux;
+						return true;
+					}
+				}
+				else
+				{
+					NuevaEmpresa -> Aba = EmpresaNuevaAux;
+					EmpresaNuevaAux -> Arr = NuevaEmpresa;
+					EmpresaNuevaAux -> Sgte = UsuarioNuevoAux;
+					UsuarioNuevoAux -> Ante = EmpresaNuevaAux;
+					return true;
+				}
 			}
 			NuevaEmpresa = NuevaEmpresa -> Aba;
 		}
@@ -60,25 +65,30 @@
 
 		while(NuevoDepartamento != nullptr)
 		{
-			if(NuevoDepartamento -> Sgte != NULL)
+			if(strcmp(NombreDepartamento.c_str(), NuevoDepartamento -> NombreDepartamento.c_str()) == 1)
 			{
-				MatrizDU AuxiliarNuevoDepartamento = NuevoDepartamento -> Sgte;
-				NuevoDepartamento -> Sgte = DepartamentoNuevoAux;
-				AuxiliarNuevoDepartamento -> Ante = DepartamentoNuevoAux;
-				DepartamentoNuevoAux -> Ante = NuevoDepartamento;
-				DepartamentoNuevoAux -> Sgte = AuxiliarNuevoDepartamento;
-				DepartamentoNuevoAux -> Aba = UsuarioNuevoAux;
-				UsuarioNuevoAux -> Arr = DepartamentoNuevoAux;
-				return true;
-
-			}
-			else
-			{
-				NuevoDepartamento -> Sgte = DepartamentoNuevoAux;
-				DepartamentoNuevoAux -> Ante = NuevoDepartamento;
-				DepartamentoNuevoAux -> Aba = UsuarioNuevoAux;
-				UsuarioNuevoAux -> Arr = DepartamentoNuevoAux;
-				return true;
+				if(NuevoDepartamento -> Sgte != NULL)
+				{
+					if(strcmp(NombreDepartamento.c_str(), NuevoDepartamento -> Sgte -> NombreDepartamento.c_str()) == - 1)
+					{
+						MatrizDU AuxiliarNuevoDepartamento = NuevoDepartamento -> Sgte;
+						NuevoDepartamento -> Sgte = DepartamentoNuevoAux;
+						AuxiliarNuevoDepartamento -> Ante = DepartamentoNuevoAux;
+						DepartamentoNuevoAux -> Ante = NuevoDepartamento;
+						DepartamentoNuevoAux -> Sgte = AuxiliarNuevoDepartamento;
+						DepartamentoNuevoAux -> Aba = UsuarioNuevoAux;
+						UsuarioNuevoAux -> Arr = DepartamentoNuevoAux;
+						return true;
+					}
+				}
+				else
+				{
+					NuevoDepartamento -> Sgte = DepartamentoNuevoAux;
+					DepartamentoNuevoAux -> Ante = NuevoDepartamento;
+					DepartamentoNuevoAux -> Aba = UsuarioNuevoAux;
+					UsuarioNuevoAux -> Arr = DepartamentoNuevoAux;
+					return true;
+				}
 			}
 			NuevoDepartamento = NuevoDepartamento -> Sgte;
 		}
@@ -125,7 +135,8 @@
 						}
 						else if(AuxDepartamento -> Atr == NULL)
 						{
-							MatrizDU UsuarioNuevo = new MatrizDispersa(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
+							MatrizDU UsuarioNuevo = new MatrizDispersa(Variables::IdentificadorUsuario, NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
+							Variables::IdentificadorUsuario++;
 							AuxDepartamento -> Atr = UsuarioNuevo;
 							UsuarioNuevo -> Adte = AuxDepartamento;
 							return true;
@@ -141,7 +152,8 @@
 			//No Existen Cabeceras
 			MatrizDU DepartamentoNuevo = new MatrizDispersa("Dep", NombreDepartamento);
 			MatrizDU EmpresaNueva = new MatrizDispersa("Emp", NombreEmpresa);
-			MatrizDU UsuarioNuevo = new MatrizDispersa(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
+			MatrizDU UsuarioNuevo = new MatrizDispersa(Variables::IdentificadorUsuario, NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
+			Variables::IdentificadorUsuario++;
 
 			if(InsertarCabeceraDepartamentoMatrizDispersaU(Matriz, NombreDepartamento, *UsuarioNuevo, *DepartamentoNuevo) == true)
 			{
@@ -155,7 +167,8 @@
 		{
 			//No Existe Empresa
 			MatrizDU EmpresaNueva = new MatrizDispersa("Emp", NombreEmpresa);
-			MatrizDU UsuarioNuevo = new MatrizDispersa(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
+			MatrizDU UsuarioNuevo = new MatrizDispersa(Variables::IdentificadorUsuario, NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
+			Variables::IdentificadorUsuario++;
 			InsertarCabeceraEmpresaMatrizDispersaU(Matriz, NombreEmpresa, *UsuarioNuevo, *EmpresaNueva);
 			MatrizDU AuxiliarEmpresa = EmpresaNueva -> Arr;
 			string AuxEmpresaAnte = AuxiliarEmpresa -> NombreEmpresa;
@@ -187,11 +200,11 @@
 		{
 			//No Existe Departamento
 			MatrizDU DepartamentoNuevo = new MatrizDispersa("Dep", NombreDepartamento);
-			MatrizDU UsuarioNuevo = new MatrizDispersa(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
+			MatrizDU UsuarioNuevo = new MatrizDispersa(Variables::IdentificadorUsuario, NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
+			Variables::IdentificadorUsuario++;
 			InsertarCabeceraDepartamentoMatrizDispersaU(Matriz, NombreDepartamento, *UsuarioNuevo, *DepartamentoNuevo);
 			MatrizDU AuxiliarDepartamento = DepartamentoNuevo -> Ante;
 			string AuxEmpresaAnte = AuxiliarDepartamento -> NombreDepartamento;
-
 
 			while(AuxEmpresa != NULL)
 			{
@@ -239,6 +252,7 @@
 
 								if(Auxiliar -> NombreUsuario == NombreUsuario)
 								{
+									Variables::IdentificadorUA = Auxiliar -> Identificador;
 									Variables::NombreCompletoUA = Auxiliar -> NombreCompleto;
 									Variables::UsuarioA = Auxiliar -> NombreUsuario;
 									Variables::PasswordUA = Auxiliar -> Password;
@@ -253,6 +267,7 @@
 						}
 						else
 						{
+							Variables::IdentificadorUA = Auxiliar -> Identificador;
 							Variables::NombreCompletoUA = Auxiliar -> NombreCompleto;
 							Variables::UsuarioA = Auxiliar -> NombreUsuario;
 							Variables::PasswordUA = Auxiliar -> Password;
@@ -274,79 +289,68 @@
 
 	void ReporteMatrizDispersaU(MatrizDU &Matriz)
 	{
-		ofstream SalidaArchivo("C:\\ReportesEDD\\ReporteMatrizDispersaUsuarios.txt");
+		ofstream Archivo("C:\\ReportesEDD\\MatrizDispersa.txt");
 
-		int ContadorGrupo = 2;
-
-		if(SalidaArchivo.is_open())
+		if(Archivo.is_open())
 		{
 			if(Matriz != nullptr)
 			{
-				MatrizDispersa *EmpresasCabeceras = Matriz -> Aba;
-				MatrizDispersa *DepartamentosCabeceras = Matriz -> Sgte;
+				MatrizDispersa *FilaHeaders = Matriz -> Aba;
+				MatrizDispersa *ColumnaHeaders = Matriz -> Sgte;
 				MatrizDispersa *AuxFila = Matriz -> Aba;
 				MatrizDispersa *AuxColumna = Matriz -> Sgte;
 				MatrizDispersa *Aux;
-				string ArrayGrupos[50][2];
 
-				SalidaArchivo<< "digraph G {" << endl;
-				SalidaArchivo<< "graph [charset=latin1]" <<endl;
-				SalidaArchivo<< "node [shape = box]" << endl;
-				SalidaArchivo<< "MatrizEstructura[ label = \"Matriz Dispersa: \\l Usuarios\", width = 1.5, font = \"Times New Roman\", fontcolor = darkslategray, style = filled, fillcolor = cadetblue1, group = 1 ];" << endl;
+				Archivo<< "digraph G {" << endl;
+				Archivo<< "graph [charset=latin1]" <<endl;
+				Archivo<< "node [shape = box]" << endl;
+				Archivo<< "Mt[ label = \"Usuarios\", width = 1.5, font = \"Times New Roman\", fontcolor = \"#0131D3\", style = filled, fillcolor = \"#6CFFA4\", group = 1 ];" << endl;
 
-				while(EmpresasCabeceras != nullptr)
+				while(FilaHeaders != nullptr)
 				{
-					SalidaArchivo<< "Emp" << EmpresasCabeceras -> NombreEmpresa;
-					SalidaArchivo<< "[label = \"" << EmpresasCabeceras -> NombreEmpresa << "\"";
-					SalidaArchivo<< "width = 1.5, style = filled, fillcolor = darkslategray1, fontcolor = firebrick1, group = 1 ];" << endl;
-					EmpresasCabeceras = EmpresasCabeceras -> Aba;
+					Archivo<< "R" << FilaHeaders -> NombreEmpresa;
+					Archivo<< "[label = \"" << FilaHeaders -> NombreEmpresa << "\"";
+					Archivo<< "width = 1.5, style = filled, fillcolor = \"#9DFF20\", fontcolor = \"#0131D3\", group = 1 ];" << endl;
+					FilaHeaders = FilaHeaders -> Aba;
 				}
 
-				EmpresasCabeceras = Matriz -> Aba;
+				FilaHeaders = Matriz -> Aba;
 
-				while(EmpresasCabeceras -> Aba != nullptr)
+				while(FilaHeaders -> Aba != nullptr)
 				{
-					SalidaArchivo<< "Emp" << EmpresasCabeceras -> NombreEmpresa << "-> Emp" << EmpresasCabeceras -> Aba -> NombreEmpresa << ";" << endl;
-					EmpresasCabeceras = EmpresasCabeceras -> Aba;
+					Archivo<< "R" << FilaHeaders -> NombreEmpresa << "-> R" << FilaHeaders -> Aba -> NombreEmpresa << ";" << endl;
+					FilaHeaders = FilaHeaders -> Aba;
 				}
 
-				int ContadorArray = 0;
-
-				while(DepartamentosCabeceras != nullptr)
+				while(ColumnaHeaders != nullptr)
 				{
-					SalidaArchivo<< "Dep" << DepartamentosCabeceras -> NombreDepartamento;
-					SalidaArchivo<< "[label = \"" << DepartamentosCabeceras -> NombreDepartamento << "\"";
-					SalidaArchivo<< "width = 1.5, style = filled, fillcolor = \"#9DFF20\", fontcolor = \"#0131D3\", group =" << ContadorGrupo << "];" << endl;
-					ArrayGrupos[ContadorArray][0] = DepartamentosCabeceras -> NombreDepartamento;
-					ArrayGrupos[ContadorArray][1] = to_string(ContadorGrupo);
-					DepartamentosCabeceras = DepartamentosCabeceras -> Sgte;
-					ContadorGrupo++;
-					ContadorArray++;
+					Archivo<< "C" << ColumnaHeaders -> NombreDepartamento;
+					Archivo<< "[label = \"" << ColumnaHeaders -> NombreDepartamento << "\"";
+					Archivo<< "width = 1.5, style = filled, fillcolor = \"#9DFF20\", fontcolor = \"#0131D3\", group =" << ColumnaHeaders -> NombreDepartamento + "." << "];" << endl;
+					ColumnaHeaders = ColumnaHeaders -> Sgte;
 				}
 
-				DepartamentosCabeceras = Matriz -> Sgte;
+				ColumnaHeaders = Matriz -> Sgte;
 
-				while(DepartamentosCabeceras -> Sgte != nullptr)
+				while(ColumnaHeaders -> Sgte != nullptr)
 				{
-					SalidaArchivo<< "Dep" << DepartamentosCabeceras -> NombreDepartamento << "-> Dep" << DepartamentosCabeceras -> Sgte -> NombreDepartamento << ";" << endl;
-					DepartamentosCabeceras = DepartamentosCabeceras -> Sgte;
+					Archivo<< "C" << ColumnaHeaders -> NombreDepartamento << "-> C" << ColumnaHeaders -> Sgte -> NombreDepartamento << ";" << endl;
+					ColumnaHeaders = ColumnaHeaders -> Sgte;
 				}
 
-				SalidaArchivo<< "MatrizEstructura -> Emp" << Matriz -> Aba -> NombreEmpresa << ";" << endl;
-				SalidaArchivo<< "MatrizEstructura -> Dep" << Matriz -> Sgte -> NombreDepartamento << ";" << endl;
+				Archivo<< "Mt -> R" << Matriz -> Aba -> NombreEmpresa << ";" << endl;
+				Archivo<< "Mt -> C" << Matriz -> Sgte -> NombreDepartamento << ";" << endl;
 
-				SalidaArchivo << "{ rank = same; MatrizEstructura;";
-				DepartamentosCabeceras = Matriz -> Sgte;
+				Archivo << "{ rank = same; Mt;";
+				ColumnaHeaders = Matriz -> Sgte;
 
-				while(DepartamentosCabeceras != nullptr)
+				while(ColumnaHeaders != nullptr)
 				{
-					SalidaArchivo<< "Dep" << DepartamentosCabeceras -> NombreDepartamento << ";";
-					DepartamentosCabeceras = DepartamentosCabeceras -> Sgte;
+					Archivo << "C" << ColumnaHeaders -> NombreDepartamento << ";";
+					ColumnaHeaders = ColumnaHeaders -> Sgte;
 				}
 
-				SalidaArchivo<< "}" << endl;
-
-				string ContadorArrayS = "";
+				Archivo<< "}" << endl;
 
 				while(AuxFila != nullptr)
 				{
@@ -354,19 +358,10 @@
 
 					while(Aux != nullptr)
 					{
-						SalidaArchivo<< "Dep" << Aux -> NombreDepartamento;
-						SalidaArchivo<< "Emp" << Aux -> NombreEmpresa;
-						SalidaArchivo<< " [label = \"" << Aux -> NombreUsuario << "\" width = 1.5,";
-
-						for(int i = 0; i < 50; i++)
-						{
-							if(Aux -> NombreDepartamento == ArrayGrupos[i][0])
-							{
-								ContadorArrayS = ArrayGrupos[i][1];
-                            }
-						}
-
-						SalidaArchivo<< " group = " << atoi(ContadorArrayS.c_str()) << "];" << endl;
+						Archivo<< "C" << Aux -> NombreDepartamento;
+						Archivo<< "R" << Aux -> NombreEmpresa;
+						Archivo<< " [label = \"" << Aux -> NombreUsuario << "\" width = 1.5,";
+						Archivo<< " group = " << Aux -> NombreDepartamento + "." << "];" << endl;
 						Aux = Aux -> Sgte;
 					}
 					AuxFila = AuxFila  -> Aba;
@@ -380,70 +375,69 @@
 
 					while(Aux -> Sgte != nullptr)
 					{
-						if(Aux -> NombreDepartamento == "")
+						if(Aux -> NombreDepartamento == Aux -> NombreDepartamento)
 						{
-							SalidaArchivo<< "Emp" << Aux -> NombreEmpresa;
+							Archivo<< "R" << Aux -> NombreEmpresa;
 						}
 						else
 						{
-							SalidaArchivo<< "Dep" << Aux -> NombreDepartamento;
-							SalidaArchivo<< "Emp" << Aux -> NombreEmpresa;
+							Archivo<< "C" << Aux -> NombreDepartamento;
+							Archivo<< "R" << Aux -> NombreEmpresa;
 						}
-						SalidaArchivo<< " -> Dep" << Aux -> Sgte -> NombreDepartamento;
-						SalidaArchivo<< "Emp" << Aux -> Sgte -> NombreEmpresa << " [dir=\"both\"];" << endl;
+						Archivo<< " -> C" << Aux -> Sgte -> NombreDepartamento;
+						Archivo<< "R" << Aux -> Sgte -> NombreEmpresa << " [dir=\"both\"];" << endl;
 						Aux = Aux -> Sgte;
 					}
 
-					SalidaArchivo<< "{ rank = same; ";
+					Archivo<< "{ rank = same; ";
 					Aux = AuxFila;
 
 					while(Aux != nullptr)
 					{
-						if(Aux -> NombreDepartamento == "")
+						if(Aux -> NombreDepartamento == AuxFila -> NombreDepartamento)
 						{
-							SalidaArchivo<< " Emp" << Aux -> NombreEmpresa << ";";
+							Archivo<< " R" << Aux -> NombreEmpresa << ";";
 						}
 						else
 						{
-							SalidaArchivo<< " Dep" << Aux -> NombreDepartamento;
-							SalidaArchivo<< "Emp" << Aux -> NombreEmpresa << ";";
+							Archivo<< " C" << Aux -> NombreDepartamento;
+							Archivo<< "R" << Aux -> NombreEmpresa << ";";
 						}
 						Aux = Aux -> Sgte;
 					}
-					SalidaArchivo<< "}" << endl;
+					Archivo << "}" << endl;
 					AuxFila = AuxFila -> Aba;
 				}
 
-                while(AuxColumna != nullptr)
+				while(AuxColumna != nullptr)
 				{
 					Aux = AuxColumna;
 
 					while(Aux -> Aba != nullptr)
 					{
-						if(Aux -> NombreEmpresa == "")
+						if(Aux -> NombreEmpresa == AuxColumna -> NombreEmpresa)
 						{
-							SalidaArchivo<< "Dep" << Aux -> NombreDepartamento;
+							Archivo<< "C" << Aux -> NombreDepartamento;
 						}
 						else
 						{
-							SalidaArchivo<< "Dep" << Aux -> NombreDepartamento;
-							SalidaArchivo<< "Emp" << Aux -> NombreEmpresa;
+							Archivo<< "C" << Aux -> NombreDepartamento;
+							Archivo<< "R" << Aux -> NombreEmpresa;
 						}
-						SalidaArchivo<< " -> Dep" << Aux -> Aba -> NombreDepartamento;
-						SalidaArchivo<< "Emp" << Aux -> Aba -> NombreEmpresa << " [dir=\"both\"];" << endl;
+						Archivo<< " -> C" << Aux -> Aba -> NombreDepartamento;
+						Archivo<< "R" << Aux -> Aba -> NombreEmpresa << " [dir=\"both\"];" << endl;
 						Aux = Aux -> Aba;
 					}
 					AuxColumna = AuxColumna -> Sgte;
 				}
 
-
-				SalidaArchivo<< "}" << endl;
-				SalidaArchivo.close();
+				Archivo << "}" << endl;
+				Archivo.close();
 
                 //Generar Imagen
-				system("C:\\\"Program Files (x86)\"\\Graphviz2.38\\bin\\dot.exe  -Tpng C:\\ReportesEDD\\ReporteMatrizDispersaUsuarios.txt -o C:\\ReportesEDD\\ReporteMatrizDispersaUsuarios.png");
+				system("C:\\\"Program Files (x86)\"\\Graphviz2.38\\bin\\dot.exe  -Tpng C:\\ReportesEDD\\MatrizDispersa.txt -o C:\\ReportesEDD\\MatrizDispersa.png");
 				//Abrir Imagen
-				system("C:\\ReportesEDD\\ReporteMatrizDispersaUsuarios.png &" );
+				system("C:\\ReportesEDD\\MatrizDispersa.png &" );
 			}
 			else
 			{
@@ -452,3 +446,13 @@
 		}
 	}
 
+
+
+	void Prueba()
+	{
+		while(Variables::MatrizDispersaUsuarios != nullptr)
+		{
+			Variables::Usuario = true;
+		}
+        Variables::Usu
+    }

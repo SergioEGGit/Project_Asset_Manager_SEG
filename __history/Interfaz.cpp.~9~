@@ -136,11 +136,11 @@
 		Posicionar(16, -5);
 		cout<< "Ingrese Su Departamento: " <<endl;
 		Posicionar(-9, -5);
-		getline(cin, Variables::DepartamentoUA);
+		cin >> Variables::DepartamentoUA;
 		Posicionar(16, -7);
 		cout<< "Ingrese Su Empresa: " <<endl;
 		Posicionar(-4, -7);
-		getline(cin, Variables::EmpresaUA);
+		cin >> Variables::EmpresaUA;
 	}
 
 	void MenuAdministrador()
@@ -181,23 +181,22 @@
 		Posicionar(17, 15);
 		cout<< "Ingrese Nombre Completo: " <<endl;
 		Posicionar(-8, 15);
-		getline(cin, Variables::ArrayAux[0]);
+		cin>> Variables::ArrayAux[0];
 		Posicionar(17, 13);
 		cout<< "Ingrese Nombre De Usuario: " <<endl;
-		Posicionar(-10, 13);
+		Posicionar(-10, 15);
 		cin>> Variables::ArrayAux[1];
 		Posicionar(17, 11);
 		cout<< "Ingrese Contrase\244a: " <<endl;
-		Posicionar(-3, 11);
 		OcultarPassword(Contrasena);
 		Variables::ArrayAux[2] = Contrasena;
 		Posicionar(17, 9);
 		cout<< "Ingrese Nombre De Empresa: "<<endl;
-		Posicionar(-10, 9);
+		Posicionar(-10, 15);
 		cin>> Variables::ArrayAux[3];
 		Posicionar(17, 7);
 		cout<< "Ingrese Nombre Departamento: " <<endl;
-		Posicionar(-15, 7);
+		Posicionar(-15, 15);
 		cin>> Variables::ArrayAux[4];
 	}
 

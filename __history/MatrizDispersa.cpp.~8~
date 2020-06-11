@@ -1,0 +1,284 @@
+//------------------------------------------------------------------------------
+
+	#pragma hdrstop
+
+//-----------------------------Librerias----------------------------------------
+
+	#include "MatrizDispersa.h"
+	#include "Variables.h"
+	#include <iostream>
+	#include <string>
+	#include <cstring>
+
+	using namespace std;
+
+//------------------------------------------------------------------------------
+
+	#pragma package(smart_init)
+
+//---------------------------------Métodos--------------------------------------
+
+	bool InsertarCabeceraEmpresaMatrizDispersaU(MatrizDU &Matriz, string NombreEmpresa, MatrizDispersa& UsuarioAux, MatrizDispersa& EmpresaAux)
+	{
+		MatrizDU UsuarioNuevoAux = &UsuarioAux;
+		MatrizDU EmpresaNuevaAux = &EmpresaAux;
+		MatrizDU NuevaEmpresa = Matriz;
+
+		while(NuevaEmpresa != NULL)
+		{
+			if(strcmp(NombreEmpresa.c_str(), NuevaEmpresa -> NombreEmpresa.c_str()) == 1)
+			{
+				if(NuevaEmpresa -> Aba != NULL)
+				{
+					if(strcmp(NombreEmpresa.c_str(), NuevaEmpresa -> Aba -> NombreEmpresa.c_str()) == -1)
+					{
+						MatrizDU AuxiliarNuevaEmpresa = NuevaEmpresa -> Aba;
+						NuevaEmpresa -> Aba = EmpresaNuevaAux;
+						AuxiliarNuevaEmpresa -> Arr = EmpresaNuevaAux;
+						EmpresaNuevaAux -> Arr = NuevaEmpresa;
+						EmpresaNuevaAux -> Aba = AuxiliarNuevaEmpresa;
+						EmpresaNuevaAux -> Sgte = UsuarioNuevoAux;
+						UsuarioNuevoAux -> Ante = EmpresaNuevaAux;
+						return true;
+					}
+				}
+				else
+				{
+					NuevaEmpresa -> Aba = EmpresaNuevaAux;
+					EmpresaNuevaAux -> Arr = NuevaEmpresa;
+					EmpresaNuevaAux -> Sgte = UsuarioNuevoAux;
+					UsuarioNuevoAux -> Ante = EmpresaNuevaAux;
+					return true;
+				}
+			}
+			NuevaEmpresa = NuevaEmpresa -> Aba;
+		}
+		return false;
+	}
+
+	bool InsertarCabeceraDepartamentoMatrizDispersaU(MatrizDU &Matriz, string NombreDepartamento, MatrizDispersa& UsuarioAux, MatrizDispersa& DepartamentoAux)
+	{
+		MatrizDU UsuarioNuevoAux = &UsuarioAux;
+		MatrizDU DepartamentoNuevoAux = &DepartamentoAux;
+		MatrizDU NuevoDepartamento = Matriz;
+
+		while(NuevoDepartamento != NULL)
+		{
+			if(strcmp(NombreDepartamento.c_str(), NuevoDepartamento->NombreDepartamento.c_str()) == 1)
+			{
+				if(NuevoDepartamento -> Sgte != NULL)
+				{
+					if(strcmp(NombreDepartamento.c_str(), NuevoDepartamento -> Sgte -> NombreDepartamento.c_str()) == -1)
+					{
+						MatrizDU AuxiliarNuevoDepartamento = NuevoDepartamento -> Sgte;
+						NuevoDepartamento -> Sgte = DepartamentoNuevoAux;
+						AuxiliarNuevoDepartamento -> Ante = DepartamentoNuevoAux;
+						DepartamentoNuevoAux -> Ante = NuevoDepartamento;
+						DepartamentoNuevoAux -> Sgte = AuxiliarNuevoDepartamento;
+						DepartamentoNuevoAux -> Aba = UsuarioNuevoAux;
+						UsuarioNuevoAux -> Arr = DepartamentoNuevoAux;
+						return true;
+					}
+				}
+				else
+				{
+					NuevoDepartamento -> Sgte = DepartamentoNuevoAux;
+					DepartamentoNuevoAux -> Ante = NuevoDepartamento;
+					DepartamentoNuevoAux -> Aba = UsuarioNuevoAux;
+					UsuarioNuevoAux -> Arr = DepartamentoNuevoAux;
+					return true;
+				}
+			}
+			NuevoDepartamento = NuevoDepartamento -> Sgte;
+		}
+		return false;
+	}
+
+	bool InsertarUsuarioMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreCompleto, string Password, string NombreDepartamento, string NombreEmpresa)
+	{
+		MatrizDU AuxDepartamento = Matriz;
+		MatrizDU AuxEmpresa = Matriz;
+
+		//Recorrer Cabeceras
+
+		while(AuxDepartamento != NULL)
+		{
+			if(AuxDepartamento -> NombreDepartamento == NombreDepartamento)
+			{
+				break;
+			}
+			AuxDepartamento = AuxDepartamento -> Sgte;
+		}
+
+		while(AuxEmpresa != NULL)
+		{
+			if(AuxEmpresa -> NombreEmpresa == NombreEmpresa)
+			{
+				break;
+			}
+			AuxEmpresa = AuxEmpresa -> Aba;
+		}
+
+		if(AuxDepartamento != NULL && AuxEmpresa != NULL)
+		{
+			//Ya Existen Cabeceras
+			while(AuxDepartamento != NULL)
+			{
+				if(AuxDepartamento -> NombreDepartamento == NombreDepartamento && AuxDepartamento -> NombreEmpresa == NombreEmpresa)
+				{
+					while(AuxDepartamento != NULL)
+					{
+						if(AuxDepartamento -> NombreUsuario == NombreUsuario)
+						{
+							return false;
+						}
+						else if(AuxDepartamento -> Atr == NULL)
+						{
+							MatrizDU UsuarioNuevo = new MatrizDispersa(Variables::IdentificadorUsuario, NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
+							Variables::IdentificadorUsuario++;
+							AuxDepartamento -> Atr = UsuarioNuevo;
+							UsuarioNuevo -> Adte = AuxDepartamento;
+							return true;
+						}
+						AuxDepartamento = AuxDepartamento -> Atr;
+					}
+				}
+				AuxDepartamento = AuxDepartamento -> Aba;
+			}
+		}
+		else if(AuxDepartamento == NULL && AuxEmpresa == NULL)
+		{
+			//No Existen Cabeceras
+			MatrizDU DepartamentoNuevo = new MatrizDispersa("Dep", NombreDepartamento);
+			MatrizDU EmpresaNueva = new MatrizDispersa("Emp", NombreEmpresa);
+			MatrizDU UsuarioNuevo = new MatrizDispersa(Variables::IdentificadorUsuario, NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
+
+			if(InsertarCabeceraDepartamentoMatrizDispersaU(Matriz, NombreDepartamento, *UsuarioNuevo, *DepartamentoNuevo) == true)
+			{
+				if(InsertarCabeceraEmpresaMatrizDispersaU(Matriz, NombreEmpresa, *UsuarioNuevo, *EmpresaNueva) == true)
+				{
+					return true;
+                }
+			}
+		}
+		else if(AuxDepartamento != NULL && AuxEmpresa == NULL)
+		{
+			//No Existe Empresa
+			MatrizDU EmpresaNueva = new MatrizDispersa("Emp", NombreEmpresa);
+			MatrizDU UsuarioNuevo = new MatrizDispersa(Variables::IdentificadorUsuario, NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
+			InsertarCabeceraEmpresaMatrizDispersaU(Matriz, NombreEmpresa, *UsuarioNuevo, *EmpresaNueva);
+			MatrizDU AuxiliarEmpresa = EmpresaNueva -> Arr;
+			string AuxEmpresaAnte = AuxiliarEmpresa -> NombreEmpresa;
+
+			while(AuxDepartamento != NULL)
+			{
+				if(AuxDepartamento -> NombreEmpresa == AuxEmpresaAnte)
+				{
+					if(AuxDepartamento -> Aba != NULL)
+					{
+						MatrizDU AuxiliarDepartamento = AuxDepartamento -> Aba;
+						AuxDepartamento -> Aba = UsuarioNuevo;
+						AuxiliarDepartamento -> Arr = UsuarioNuevo;
+						UsuarioNuevo -> Arr = AuxDepartamento;
+						UsuarioNuevo -> Aba = AuxiliarDepartamento;
+						return true;
+					}
+					else
+					{
+						AuxDepartamento -> Aba = UsuarioNuevo;
+						UsuarioNuevo -> Arr = AuxDepartamento;
+						return true;
+					}
+				}
+				AuxDepartamento = AuxDepartamento -> Aba;
+			}
+		}
+		else if(AuxDepartamento == NULL && AuxEmpresa != NULL)
+		{
+			//No Existe Departamento
+			MatrizDU DepartamentoNuevo = new MatrizDispersa("Dep", NombreDepartamento);
+			MatrizDU UsuarioNuevo = new MatrizDispersa(Variables::IdentificadorUsuario, NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
+			InsertarCabeceraDepartamentoMatrizDispersaU(Matriz, NombreDepartamento, *UsuarioNuevo, *DepartamentoNuevo);
+			MatrizDU AuxiliarDepartamento = DepartamentoNuevo -> Ante;
+			string AuxEmpresaAnte = AuxiliarDepartamento -> NombreDepartamento;
+
+			while(AuxEmpresa != NULL)
+			{
+				if(AuxEmpresa -> NombreDepartamento == AuxEmpresaAnte)
+				{
+					if(AuxEmpresa -> Sgte != NULL)
+					{
+						MatrizDU AuxiliarEmpresa = AuxEmpresa -> Sgte;
+						AuxEmpresa -> Sgte = UsuarioNuevo;
+						AuxiliarEmpresa -> Ante = UsuarioNuevo;
+						UsuarioNuevo -> Sgte = AuxiliarEmpresa;
+						UsuarioNuevo -> Ante = AuxEmpresa;
+						return true;
+					}
+					else
+					{
+						AuxEmpresa -> Sgte = UsuarioNuevo;
+						UsuarioNuevo -> Ante = AuxEmpresa;
+						return true;
+					}
+				}
+				AuxEmpresa = AuxEmpresa -> Sgte;
+			}
+		}
+		return false;
+	}
+
+	bool BuscarMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreEmpresa, string NombreDepartamento)
+	{
+		MatrizDU Auxiliar = Matriz;
+		bool Bandera = false;
+
+		while(Auxiliar != nullptr)
+		{
+			if(Auxiliar -> NombreDepartamento == NombreDepartamento)
+			{
+				while(Auxiliar != nullptr)
+				{
+					if(Auxiliar -> NombreEmpresa == NombreEmpresa)
+					{
+						if(Auxiliar -> Atr != nullptr)
+						{
+                            while(Auxiliar != nullptr)
+							{
+
+								if(Auxiliar -> NombreUsuario == NombreUsuario)
+								{
+									Variables::IdentificadorUA = Auxiliar -> Identificador;
+									Variables::NombreCompletoUA = Auxiliar -> NombreCompleto;
+									Variables::UsuarioA = Auxiliar -> NombreUsuario;
+									Variables::PasswordUA = Auxiliar -> Password;
+									Variables::DepartamentoUA = Auxiliar -> NombreDepartamento;
+									Variables::EmpresaUA = Auxiliar -> NombreEmpresa;
+									Bandera = true;
+									return Bandera;
+									break;
+								}
+								Auxiliar = Auxiliar -> Atr;
+							}
+						}
+						else
+						{
+							Variables::IdentificadorUA = Auxiliar -> Identificador;
+							Variables::NombreCompletoUA = Auxiliar -> NombreCompleto;
+							Variables::UsuarioA = Auxiliar -> NombreUsuario;
+							Variables::PasswordUA = Auxiliar -> Password;
+							Variables::DepartamentoUA = Auxiliar -> NombreDepartamento;
+							Variables::EmpresaUA = Auxiliar -> NombreEmpresa;
+							Bandera = true;
+							return Bandera;
+						}
+						break;
+					}
+					Auxiliar = Auxiliar -> Aba;
+				}
+				break;
+			}
+			Auxiliar = Auxiliar -> Sgte;
+		}
+		return Bandera;
+	}

@@ -136,18 +136,18 @@
 		Posicionar(16, -5);
 		cout<< "Ingrese Su Departamento: " <<endl;
 		Posicionar(-9, -5);
-		getline(cin, Variables::DepartamentoUA);
+		cin >> Variables::DepartamentoUA;
 		Posicionar(16, -7);
 		cout<< "Ingrese Su Empresa: " <<endl;
 		Posicionar(-4, -7);
-		getline(cin, Variables::EmpresaUA);
+		cin >> Variables::EmpresaUA;
 	}
 
 	void MenuAdministrador()
 	{
 		Color(0,12);
-		Posicionar(10, 17);
-		cout<< "Menu Administrador : Bienvenido " << Variables::UsuarioA <<endl;
+		Posicionar(14, 17);
+		cout<< "Menú Administrador" <<endl;
 		Posicionar(17, 15);
 		cout<< "1.Registrar Usuario." <<endl;
 		Posicionar(17, 13);
@@ -163,7 +163,7 @@
 		Posicionar(17, 3);
 		cout<< "7.Activos Rentados Por Un Usuario." <<endl;
 		Posicionar(17, 1);
-		cout<< "8.Ordenar Transacciones." <<endl;
+		cout<< "8.Ordenar Transacciones" <<endl;
 		Posicionar(17, -1);
 		cout<< "9.Log Out" <<endl;
 
@@ -171,34 +171,6 @@
 		cout<< "Ingrese Una Opcion: " <<endl;
 		Posicionar(-3, -3);
 		cin >> VariablesMetodos::OpcionMenuAdministrador;
-	}
-
-	void MenuRegistrarUsuario()
-	{
-		Color(0,14);
-		Posicionar(14, 17);
-		cout<< "Registro De Usuarios" <<endl;
-		Posicionar(17, 15);
-		cout<< "Ingrese Nombre Completo: " <<endl;
-		Posicionar(-8, 15);
-		getline(cin, Variables::ArrayAux[0]);
-		Posicionar(17, 13);
-		cout<< "Ingrese Nombre De Usuario: " <<endl;
-		Posicionar(-10, 13);
-		cin>> Variables::ArrayAux[1];
-		Posicionar(17, 11);
-		cout<< "Ingrese Contrase\244a: " <<endl;
-		Posicionar(-3, 11);
-		OcultarPassword(Contrasena);
-		Variables::ArrayAux[2] = Contrasena;
-		Posicionar(17, 9);
-		cout<< "Ingrese Nombre De Empresa: "<<endl;
-		Posicionar(-10, 9);
-		cin>> Variables::ArrayAux[3];
-		Posicionar(17, 7);
-		cout<< "Ingrese Nombre Departamento: " <<endl;
-		Posicionar(-15, 7);
-		cin>> Variables::ArrayAux[4];
 	}
 
 	void Marco(int Col1, int Col2, int Fil1, int Fil2)
