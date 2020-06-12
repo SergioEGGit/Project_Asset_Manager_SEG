@@ -248,7 +248,7 @@
 				case 1:
 					system("cls");
 					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
-					MenuCrearActivo();
+
 				break;
 
 				case 2:

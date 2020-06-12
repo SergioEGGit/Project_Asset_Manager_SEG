@@ -7,7 +7,7 @@
 
 	#include <iostream>
 	#include <string>
-	#include "MatrizDispersaEstructura.h"
+	#include "MatrizDispersa.h"
 
 	using namespace std;
 

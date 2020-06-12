@@ -176,39 +176,11 @@
 		cin >> VariablesMetodos::OpcionMenuAdministrador;
 	}
 
-	void MenuUsuario()
-	{
-        Color(0,12);
-		Posicionar(10, 17);
-		cout<< "Menu Usuario : Bienvenido " << Variables::UsuarioA <<endl;
-		Posicionar(17, 15);
-		cout<< "           1.Agregar Activo." <<endl;
-		Posicionar(17, 13);
-		cout<< "           2.Eliminar Activo." <<endl;
-		Posicionar(17, 11);
-		cout<< "           3.Modificar Activo." <<endl;
-		Posicionar(17, 9);
-		cout<< "           4.Rentar Activo." <<endl;
-		Posicionar(17, 7);
-		cout<< "           5.Activos Rentados." <<endl;
-		Posicionar(17, 5);
-		cout<< "           6.Mis Activos Rentados." <<endl;
-		Posicionar(17, 3);
-		cout<< "           7.Log out." <<endl;
-		Posicionar(17, 1);
-		cout<< "           8.Salir." <<endl;
-
-		Posicionar(7, -1);
-		cout<< "      Ingrese Una Opcion: " <<endl;
-		Posicionar(-19, -1);
-		cin >> VariablesMetodos::OpcionMenuAdministrador;
-    }
-
 	void MenuRegistrarUsuario()
 	{
 		Color(0,14);
-		Posicionar(10, 17);
-		cout<< "    Registro De Usuarios" <<endl;
+		Posicionar(14, 17);
+		cout<< "Registro De Usuarios" <<endl;
 		Posicionar(17, 15);
 		cout<< "Ingrese Nombre Completo: " <<endl;
 		Posicionar(-8, 15);
@@ -217,7 +189,6 @@
 		cout<< "Ingrese Nombre De Usuario: " <<endl;
 		Posicionar(-10, 13);
 		cin>> Variables::ArrayAux[1];
-		cin.ignore();
 		Posicionar(17, 11);
 		cout<< "Ingrese Contrase\244a: " <<endl;
 		Posicionar(-3, 11);
@@ -226,27 +197,12 @@
 		Posicionar(17, 9);
 		cout<< "Ingrese Nombre De Empresa: "<<endl;
 		Posicionar(-10, 9);
-		getline(cin, Variables::ArrayAux[3]);
+		cin>> Variables::ArrayAux[3];
 		Posicionar(17, 7);
 		cout<< "Ingrese Nombre Departamento: " <<endl;
 		Posicionar(-12, 7);
-		getline(cin, Variables::ArrayAux[4]);
+		cin>> Variables::ArrayAux[4];
 	}
-
-	void MenuCrearActivo()
-	{
-        Color(0,14);
-		Posicionar(10, 17);
-		cout<< "    Registro De Activos" <<endl;
-		Posicionar(17, 15);
-		cout<< "Ingrese Nombre: " <<endl;
-		Posicionar(-8, 15);
-		getline(cin, Variables::ArrayAux[0]);
-		Posicionar(17, 13);
-		cout<< "Ingrese Descripcion: " <<endl;
-		Posicionar(-10, 13);
-		getline(cin, Variables::ArrayAux[1]);
-    }
 
 	void Marco(int Col1, int Col2, int Fil1, int Fil2)
 	{
