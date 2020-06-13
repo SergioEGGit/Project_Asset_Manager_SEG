@@ -29,6 +29,10 @@
 
 	void MenuRegistrarUsuario();
 
+	void MenuCrearActivo();
+
+    void MenuReporteActivoPorUsuario();
+
 	void Marco(int Col1, int Col2, int Fil1, int Fil2);
 
 //------------------------------------------------------------------------------

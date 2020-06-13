@@ -17,6 +17,7 @@
 		extern int OpcionMenuAdministrador;
 		extern bool ValidarDato;
 		extern bool ExisteUsuario;
+		extern string CodigoAlfaNumerico;
 	}
 
 //-------------------------------Métodos----------------------------------------
@@ -25,7 +26,9 @@
 
 	string UpperCase(string Cadena);
 
-    string TrimCadena(string Cadena);
+	string TrimCadena(string Cadena);
+
+    string GenerarCodigoAlfanumerico();
 
 	void MenuLoginCiclo();
 

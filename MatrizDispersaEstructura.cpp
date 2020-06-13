@@ -20,6 +20,8 @@
 
 //---------------------------------Métodos--------------------------------------
 
+    //Insercion
+
 	bool InsertarCabeceraEmpresaMatrizDispersaU(MatrizDU &Matriz, string NombreEmpresa, MatrizDispersaEstructura& UsuarioAux, MatrizDispersaEstructura& EmpresaAux)
 	{
 		//Declaraciones
@@ -276,6 +278,7 @@
 									Variables::PasswordUA = Auxiliar -> Password;
 									Variables::DepartamentoUA = Auxiliar -> NombreDepartamento;
 									Variables::EmpresaUA = Auxiliar -> NombreEmpresa;
+									Variables::ArbolAVLActivosUsuarioActual = Auxiliar;
 									Bandera = true;
 									return Bandera;
 									break;
@@ -290,6 +293,7 @@
 							Variables::PasswordUA = Auxiliar -> Password;
 							Variables::DepartamentoUA = Auxiliar -> NombreDepartamento;
 							Variables::EmpresaUA = Auxiliar -> NombreEmpresa;
+							Variables::ArbolAVLActivosUsuarioActual = Auxiliar;
 							Bandera = true;
 							return Bandera;
 						}

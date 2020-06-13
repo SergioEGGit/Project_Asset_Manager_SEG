@@ -20,9 +20,11 @@
 	string Variables::EmpresaUA = "";
 	int Variables::IdentificadorUsuario = 0;
 	MatrizDU Variables::MatrizDispersaUsuarios = nullptr;
+	MatrizDU Variables::ArbolAVLActivosUsuarioActual = nullptr;
 	string Variables::ArrayAux[9];
 	bool Variables::Cabecera = false;
 	bool Variables::Usuario = false;
+	int Variables::NumerosDeNodosArbolAVL = 0;
 
 //------------------------------------------------------------------------------
 

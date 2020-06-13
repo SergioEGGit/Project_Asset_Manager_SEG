@@ -23,8 +23,12 @@
 	int VariablesMetodos::OpcionMenuAdministrador = 0;
 	bool VariablesMetodos::ValidarDato = false;
 	bool VariablesMetodos::ExisteUsuario = false;
+	string VariablesMetodos::CodigoAlfaNumerico = "";
+    ArbolAVLActivos NuevoActivo  = nullptr;
 
 //------------------------------Métodos-----------------------------------------
+
+	//Métodos Sobre Cadenas
 
 	string LowerCase(string Cadena)
 	{
@@ -80,6 +84,37 @@
 		return Frase;
 	}
 
+	//Generar Codigo Aleatorio
+
+	string GenerarCodigoAlfanumerico()
+	{
+		//Declaraciones
+		string Cadena = "";
+		char CaracterYDigitos[36] =
+		{
+			'A','B','C','D','E','F','G','H','I','J','K','L',
+			'M','N','O','P','Q','R','S','T','U','V','W','X',
+			'Y','Z',
+			'0','1','2','3','4','5','6','7','8','9'
+		};
+		char CaracterDigito[15];
+
+		//Numeros Aleatorios
+		srand(time(NULL));
+
+		//Comienzo Generar Código Aleatorio
+
+		for(int i = 0; i < 15; i++)
+		{
+			CaracterDigito[i] = CaracterYDigitos[rand() % 35];
+			Cadena += CaracterDigito[i];
+		}
+
+		return Cadena;
+	}
+
+	//Verificar Usuarios
+
 	void VerificarUsuario(string Usuario, string Pass, string Departamento, string Empresa)
 	{
 		VariablesMetodos::ExisteUsuario = BuscarUsuarioMatrizDispersaU(Variables::MatrizDispersaUsuarios, Usuario, Empresa, Departamento);
@@ -115,6 +150,8 @@
 		}
 	}
 
+	//Menú Ciclos
+
 	void MenuLoginCiclo()
 	{
 		 do
@@ -129,6 +166,9 @@
 
 	void MenuAdministradorCiclo()
 	{
+		//Declaraciones
+		string NombreUsuario = "";
+
 		while(VariablesMetodos::OpcionMenuAdministrador != 10)
 		{
 			VariablesMetodos::ValidarDato = false;
@@ -184,8 +224,32 @@
 				break;
 
 				case 2:
-						ReporteUsuariosMatrizDispersaU(Variables::MatrizDispersaUsuarios);
+					ReporteUsuariosMatrizDispersaU(Variables::MatrizDispersaUsuarios);
+					system("pause > 0");
+				break;
+
+				case 3:
+					GenerarCodigoAlfanumerico();
+					system("pause > 0");
+				break;
+
+				case 6:
+                    system("cls");
+					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
+					MenuReporteActivoPorUsuario();
+					if(BuscarUsuarioMatrizDispersaU(Variables::MatrizDispersaUsuarios, Variables::ArrayAux[0], Variables::ArrayAux[1], Variables::ArrayAux[2]))
+					{
+                        ReporteActivosUsuarioArbolAVLA();
 						system("pause > 0");
+					}
+					else
+					{
+						Color(0, 4);
+						Posicionar(17, 9);
+						cout << "El Usuario No Existe En El Sistema.";
+						system("pause > 0");
+					}
+
 				break;
 
 				case 9:
@@ -223,7 +287,6 @@
 			{
 				system("cls");
 				Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
-
 				MenuUsuario();
 
 				if(cin.fail())
@@ -249,18 +312,37 @@
 					system("cls");
 					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
 					MenuCrearActivo();
+					VariablesMetodos::CodigoAlfaNumerico = GenerarCodigoAlfanumerico();
+					VariablesMetodos::ExisteUsuario = NuevoActivo -> InsertarActvioArbolAVLANuevoActivo(VariablesMetodos::CodigoAlfaNumerico, Variables::ArrayAux[0], Variables::ArrayAux[1]);
+					NuevoActivo -> CalcularAlturaVoidArbolAVLA(*Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
+
+					if(VariablesMetodos::ExisteUsuario == true)
+					{
+						Color(0, 10);
+						Posicionar(12, 11);
+						cout << "Activo Agregado Con Exito!";
+						system("pause > 0");
+					}
+					else
+					{
+						Color(0, 4);
+						Posicionar(19, 11);
+						cout << "El Activo Indicado Ya Existe En El Sistema.";
+						system("pause > 0");
+					}
+
 				break;
 
 				case 2:
 
 				break;
 
-				case 9:
+				case 7:
 					 MenuLoginCiclo();
 					 VariablesMetodos::OpcionMenuAdministrador = 10;
 				break;
 
-				case 10:
+				case 8:
 					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
 					Color(0, 13);
 					Posicionar(17, 17);

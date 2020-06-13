@@ -148,7 +148,7 @@
 	{
 		Color(0,12);
 		Posicionar(11, 17);
-		cout<< "Menu Administrador : Bienvenido " << Variables::UsuarioA <<endl;
+		cout<< "Menu Administrador : Bienvenido " << "Administrador" <<endl;
 		Posicionar(17, 15);
 		cout<< "1.Registrar Usuario." <<endl;
 		Posicionar(17, 13);
@@ -179,28 +179,28 @@
 	void MenuUsuario()
 	{
         Color(0,12);
-		Posicionar(10, 17);
+		Posicionar(12, 17);
 		cout<< "Menu Usuario : Bienvenido " << Variables::UsuarioA <<endl;
 		Posicionar(17, 15);
-		cout<< "           1.Agregar Activo." <<endl;
+		cout<< "          1.Agregar Activo." <<endl;
 		Posicionar(17, 13);
-		cout<< "           2.Eliminar Activo." <<endl;
+		cout<< "          2.Eliminar Activo." <<endl;
 		Posicionar(17, 11);
-		cout<< "           3.Modificar Activo." <<endl;
+		cout<< "          3.Modificar Activo." <<endl;
 		Posicionar(17, 9);
-		cout<< "           4.Rentar Activo." <<endl;
+		cout<< "          4.Rentar Activo." <<endl;
 		Posicionar(17, 7);
-		cout<< "           5.Activos Rentados." <<endl;
+		cout<< "          5.Activos Rentados." <<endl;
 		Posicionar(17, 5);
-		cout<< "           6.Mis Activos Rentados." <<endl;
+		cout<< "          6.Mis Activos Rentados." <<endl;
 		Posicionar(17, 3);
-		cout<< "           7.Log out." <<endl;
+		cout<< "          7.Log out." <<endl;
 		Posicionar(17, 1);
-		cout<< "           8.Salir." <<endl;
+		cout<< "          8.Salir." <<endl;
 
 		Posicionar(7, -1);
-		cout<< "      Ingrese Una Opcion: " <<endl;
-		Posicionar(-19, -1);
+		cout<< "Ingrese Una Opcion: " <<endl;
+		Posicionar(-13, -1);
 		cin >> VariablesMetodos::OpcionMenuAdministrador;
     }
 
@@ -208,7 +208,7 @@
 	{
 		Color(0,14);
 		Posicionar(10, 17);
-		cout<< "    Registro De Usuarios" <<endl;
+		cout<< "  Registro De Usuarios" <<endl;
 		Posicionar(17, 15);
 		cout<< "Ingrese Nombre Completo: " <<endl;
 		Posicionar(-8, 15);
@@ -237,16 +237,35 @@
 	{
         Color(0,14);
 		Posicionar(10, 17);
-		cout<< "    Registro De Activos" <<endl;
-		Posicionar(17, 15);
+		cout<< " Registro De Activos" <<endl;
+		Posicionar(14, 15);
 		cout<< "Ingrese Nombre: " <<endl;
-		Posicionar(-8, 15);
+		Posicionar(-2, 15);
 		getline(cin, Variables::ArrayAux[0]);
-		Posicionar(17, 13);
+		Posicionar(14, 13);
 		cout<< "Ingrese Descripcion: " <<endl;
-		Posicionar(-10, 13);
+		Posicionar(-7, 13);
 		getline(cin, Variables::ArrayAux[1]);
-    }
+	}
+
+	void MenuReporteActivoPorUsuario()
+	{
+		Color(0,15);
+		Posicionar(14, 17);
+		cout<< "Reporte De Activos Por Usuario" <<endl;
+		Posicionar(16, 15);
+		cout<< "Ingrese Nombre De Usuario: " <<endl;
+		Posicionar(-11, 15);
+		getline(cin, Variables::ArrayAux[0]);
+		Posicionar(16, 13);
+		cout<< "Ingrese Empresa: " <<endl;
+		Posicionar(-1, 13);
+		getline(cin, Variables::ArrayAux[1]);
+		Posicionar(16, 11);
+		cout<< "Ingrese Departamento: " <<endl;
+		Posicionar(-6, 11);
+		getline(cin, Variables::ArrayAux[2]);
+	}
 
 	void Marco(int Col1, int Col2, int Fil1, int Fil2)
 	{
