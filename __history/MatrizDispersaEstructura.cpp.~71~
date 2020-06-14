@@ -327,13 +327,13 @@
 		{
 			Comparacion = AuxiliarEmpresa -> NombreEmpresa;
 
-			if(NombreEmpresa.compare(Comparacion) == 1)
+			if(NombreEmpresa.compare(Comparacion) > 0)
 			{
 				if(AuxiliarEmpresa -> Aba != nullptr)
 				{
 					Comparacion = AuxiliarEmpresa -> Aba -> NombreEmpresa;
 
-					if(NombreEmpresa.compare(Comparacion) == -1)
+					if(NombreEmpresa.compare(Comparacion) < 0)
 					{
 						MatrizDU AuxiliarAbajo = AuxiliarEmpresa -> Aba;
 						AuxiliarEmpresa -> Aba = EmpresaNuevaAuxiliar;
@@ -378,13 +378,13 @@
 		{
 			Comparacion = AuxiliarDepartamento -> NombreDepartamento;
 
-			if(NombreDepartamento.compare(Comparacion) == 1)
+			if(NombreDepartamento.compare(Comparacion) > 0)
 			{
 				if(AuxiliarDepartamento -> Sgte != nullptr)
 				{
                     Comparacion = AuxiliarDepartamento -> Sgte -> NombreDepartamento;
 
-					if(NombreDepartamento.compare(Comparacion) == -1)
+					if(NombreDepartamento.compare(Comparacion) < 0)
 					{
 						MatrizDU AuxiliarSiguiente = AuxiliarDepartamento -> Sgte;
 						AuxiliarDepartamento -> Sgte = DepartamentoNuevoAuxiliar;
@@ -433,14 +433,14 @@
 			ComparacionE = UsuarioAuxiliar -> NombreDepartamento;
 			ComparacionE2 = EmpresaAuxiliar -> NombreDepartamento;
 
-			if(ComparacionE.compare(ComparacionE2) == 1)
+			if(ComparacionE.compare(ComparacionE2) > 0)
 			{
 				if(EmpresaAuxiliar -> Sgte != nullptr)
 				{
 					ComparacionE = UsuarioAuxiliar -> NombreDepartamento;
 					ComparacionE2 = EmpresaAuxiliar -> Sgte -> NombreDepartamento;
 
-					if(ComparacionE.compare(ComparacionE2) == -1)
+					if(ComparacionE.compare(ComparacionE2) < 0)
 					{
 						cout<< "Agregue Empresa ";
 						MatrizDU AuxSiguiente = EmpresaAuxiliar -> Sgte;
@@ -469,14 +469,15 @@
 			ComparacionD = UsuarioAuxiliar -> NombreEmpresa;
 			ComparacionD2 = DepartamentoAuxiliar -> NombreEmpresa;
 
-			if(ComparacionD.compare(ComparacionD2) == 1)
+			if(ComparacionD.compare(ComparacionD2) > 0)
 			{
+
 				if(DepartamentoAuxiliar -> Aba != nullptr)
 				{
 					ComparacionD = UsuarioAuxiliar -> NombreEmpresa;
 					ComparacionD2 = DepartamentoAuxiliar -> Aba -> NombreEmpresa;
 
-					if(ComparacionD.compare(ComparacionD2) == -1)
+					if(ComparacionD.compare(ComparacionD2) < 0)
 					{
 						cout<< "Agregue Departamento ";
 						MatrizDU AuxiliarAbajo = DepartamentoAuxiliar -> Aba;
@@ -509,13 +510,13 @@
 		MatrizDU EmpresaAuxiliar = Matriz;
 		MatrizDU UsuarioAuxiliarBusqueda;
 
-		//UpperCase
-		NombreEmpresa = UpperCase(NombreEmpresa);
-		NombreDepartamento = UpperCase(NombreDepartamento);
-
-        //Asignaciones
+		//Asignaciones
 
 		UsuarioAuxiliarBusqueda = BuscarUsuarioAuxMatrizDispersaU(Matriz, NombreUsuario, NombreEmpresa, NombreDepartamento);
+
+        //UpperCase
+		NombreEmpresa = UpperCase(NombreEmpresa);
+		NombreDepartamento = UpperCase(NombreDepartamento);
 
 		//Comenzar Recorrer Matriz Dispersa
 
@@ -549,8 +550,6 @@
 			{
 				//Caso 1: Existen Ambas Cabecera
 
-				cout<< "Caso 1";
-
 				MatrizDU CabeceraDepartamento = DepartamentoAuxiliar;
 				MatrizDU CabeceraEmpresa = EmpresaAuxiliar;
 
@@ -582,8 +581,6 @@
 			{
 				//Caso 2: No Existe Ninguna Cabecera
 
-				cout<< "Caso 2";
-
 				MatrizDU DepartamentoNuevo = new MatrizDispersaEstructura("Dep", NombreDepartamento);
 				MatrizDU EmpresaNueva = new MatrizDispersaEstructura("Emp", NombreEmpresa);
 				MatrizDU UsuarioNuevo = new MatrizDispersaEstructura(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
@@ -600,8 +597,6 @@
 			{
 				//Caso 3: No Existe Empresa
 
-				cout<< "Caso 3";
-
 				MatrizDU EmpresaNueva = new MatrizDispersaEstructura("Emp", NombreEmpresa);
 				MatrizDU UsuarioNuevo = new MatrizDispersaEstructura(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
 				InsertarCabeceraEmpresaMatrizDispersaU(Matriz, NombreEmpresa, *UsuarioNuevo, *EmpresaNueva);
@@ -611,8 +606,6 @@
 			else if(DepartamentoAuxiliar == nullptr && EmpresaAuxiliar != nullptr)
 			{
 				//Caso 4: No Existe Departamento
-
-				cout<< "Caso 4";
 
 				MatrizDU DepartamentoNuevo = new MatrizDispersaEstructura("Dep", NombreDepartamento);
 				MatrizDU UsuarioNuevo = new MatrizDispersaEstructura(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);

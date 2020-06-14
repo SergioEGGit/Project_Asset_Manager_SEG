@@ -7,6 +7,7 @@
 	#include "ArbolAVLEstructura.h"
 	#include "Metodos.h"
 	#include "Variables.h"
+	#include "Interfaz.h"
 	#include <iostream>
 	#include <fstream>
 	#include <string>
@@ -491,8 +492,10 @@
 
 			Cadena += "[label = \" Código: " + ArbolAuxiliar -> LE -> CodigoANumericoActivo +
 							 + "\\lNombre: " + ArbolAuxiliar -> LE -> NombreActivo +
-					   + "\\l Descripción: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> DescripcionActivo +
-							+ "\\lRentado: " + ArbolAuxiliar -> LE -> ExisteRentaActivo + "\"]; \n";
+							 + "\\lRentado: " + ArbolAuxiliar -> LE -> ExisteRentaActivo +
+					   + "\\lDescripción: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> DescripcionActivo +
+					   + "\\l_" + + "\"]; \n";
+
 
 			Cadena += Padre + "->" + "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL) + ";\n";
 			PadreAuxiliar  = "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL);
@@ -508,8 +511,9 @@
 
 			Cadena += "[label = \" Código: " + ArbolAuxiliar -> RI -> CodigoANumericoActivo +
 							 + "\\lNombre: " + ArbolAuxiliar -> RI -> NombreActivo +
-					   + "\\l Descripción: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> DescripcionActivo +
-							+ "\\lRentado: " + ArbolAuxiliar -> RI -> ExisteRentaActivo + "\"]; \n";
+							 + "\\lRentado: " + ArbolAuxiliar -> RI -> ExisteRentaActivo +
+					   + "\\lDescripción: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> DescripcionActivo +
+					   + "\\l_" + + "\"]; \n";
 
 			Cadena += Padre + "->" + "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL) + ";\n";
 			PadreAuxiliar = "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL);
@@ -534,20 +538,21 @@
 
 		if(SalidaArchivo.is_open())
 		{
-			if(Variables::ArbolAVLActivosUsuarioActual != nullptr)
+			if(Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario != nullptr)
 			{
 				SalidaArchivo<< "digraph ArbolAVLActivosUsuarios" <<endl;
 				SalidaArchivo<< "{" <<endl;
 				SalidaArchivo<< "graph [ charset=latin1 ]" <<endl;
-				SalidaArchivo<< "node [shape = box, style = rounded, color = springgreen1, fontcolor = black];" <<endl;
+				SalidaArchivo<< "node [shape = record, style = rounded, color = springgreen1, fontcolor = indigo];" <<endl;
 
 				Cadena += "NodoArbol" + to_string(ContadorNodosArbol);
 				CadenaAux = "NodoArbol" + to_string(ContadorNodosArbol);
 
-				Cadena += "[label = \" Código: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> CodigoANumericoActivo +
-								+ "\\l Nombre: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> NombreActivo +
-						   + "\\l Descripción: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> DescripcionActivo +
-							   + "\\l Rentado: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> ExisteRentaActivo + "\"]; \n";
+				Cadena += "[label = \"Código: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> CodigoANumericoActivo +
+								+ "\\lNombre: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> NombreActivo +
+								+ "\\lRentado: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> ExisteRentaActivo +
+							   + "\\lDescripción: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> DescripcionActivo +
+							   + "\\l_" + "\"]; \n";
 
 				Variables::NumerosDeNodosArbolAVL++;
 
@@ -562,5 +567,12 @@
 				//Abrir Imagen Con El Vizualizador de Imagenes
 				system("C:\\ReportesEDD\\ReporteArbolAVLActivosUsuarios.png &" );
 			}
+			else
+			{
+				Color(0, 4);
+				Posicionar(17, 9);
+				cout<< "El Arbol AVL Se Encuentra Vacio" <<endl;
+				system("pause > 0");
+            }
 		}
 	}

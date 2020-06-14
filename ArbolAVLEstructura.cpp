@@ -7,6 +7,7 @@
 	#include "ArbolAVLEstructura.h"
 	#include "Metodos.h"
 	#include "Variables.h"
+	#include "Interfaz.h"
 	#include <iostream>
 	#include <fstream>
 	#include <string>
@@ -537,7 +538,7 @@
 
 		if(SalidaArchivo.is_open())
 		{
-			if(Variables::ArbolAVLActivosUsuarioActual != nullptr)
+			if(Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario != nullptr)
 			{
 				SalidaArchivo<< "digraph ArbolAVLActivosUsuarios" <<endl;
 				SalidaArchivo<< "{" <<endl;
@@ -566,5 +567,12 @@
 				//Abrir Imagen Con El Vizualizador de Imagenes
 				system("C:\\ReportesEDD\\ReporteArbolAVLActivosUsuarios.png &" );
 			}
+			else
+			{
+				Color(0, 4);
+				Posicionar(17, 9);
+				cout<< "  El Arbol AVL Se Encuentra Vacio" <<endl;
+				system("pause > 0");
+            }
 		}
 	}

@@ -388,8 +388,6 @@
 
 		if(NombreActivo.compare(ArbolAuxiliar -> NombreActivo) > 0)
 		{
-			cout<< "Entre Primero" <<endl;
-
 			if(ArbolAuxiliar -> RI != NULL)
 			{
 				Bandera = InsertarActivoArbolAVLA(CodigoANumerico, NombreActivo, DescripcionActivo, *ArbolAuxiliar -> RI);
@@ -417,8 +415,6 @@
 		}
 		else if(NombreActivo.compare(ArbolAuxiliar -> NombreActivo) < 0)
 		{
-			cout<< "Entre Segundo" <<endl;
-
 			if(ArbolAuxiliar -> LE != NULL)
 			{
 				Bandera = InsertarActivoArbolAVLA(CodigoANumerico, NombreActivo, DescripcionActivo, *ArbolAuxiliar -> LE);
@@ -446,7 +442,6 @@
 		}
 		else
 		{
-            cout<< "ninguno" <<endl;
 			return false;
 		}
 	}
@@ -495,8 +490,11 @@
 			Cadena += "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL);
 
 			Cadena += "[label = \" Código: " + ArbolAuxiliar -> LE -> CodigoANumericoActivo +
-							+ "\\lNombre: " + ArbolAuxiliar -> LE -> NombreActivo +
-						   + "\\lRentado: " + ArbolAuxiliar -> LE -> ExisteRentaActivo + "\"]; \n";
+							 + "\\lNombre: " + ArbolAuxiliar -> LE -> NombreActivo +
+							 + "\\lRentado: " + ArbolAuxiliar -> LE -> ExisteRentaActivo +
+					   + "\\lDescripción: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> DescripcionActivo +
+					   + "\\l_" + + "\"]; \n";
+
 
 			Cadena += Padre + "->" + "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL) + ";\n";
 			PadreAuxiliar  = "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL);
@@ -511,8 +509,10 @@
 			Cadena += "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL);
 
 			Cadena += "[label = \" Código: " + ArbolAuxiliar -> RI -> CodigoANumericoActivo +
-							+ "\\lNombre: " + ArbolAuxiliar -> RI -> NombreActivo +
-						   + "\\lRentado: " + ArbolAuxiliar -> RI -> ExisteRentaActivo + "\"]; \n";
+							 + "\\lNombre: " + ArbolAuxiliar -> RI -> NombreActivo +
+							 + "\\lRentado: " + ArbolAuxiliar -> RI -> ExisteRentaActivo +
+					   + "\\lDescripción: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> DescripcionActivo +
+					   + "\\l_" + + "\"]; \n";
 
 			Cadena += Padre + "->" + "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL) + ";\n";
 			PadreAuxiliar = "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL);
@@ -542,14 +542,16 @@
 				SalidaArchivo<< "digraph ArbolAVLActivosUsuarios" <<endl;
 				SalidaArchivo<< "{" <<endl;
 				SalidaArchivo<< "graph [ charset=latin1 ]" <<endl;
-				SalidaArchivo<< "node [shape = box, style = filled, color = springgreen1, fontcolor = black];" <<endl;
+				SalidaArchivo<< "node [shape = record, style = rounded, color = springgreen1, fontcolor = indigo];" <<endl;
 
 				Cadena += "NodoArbol" + to_string(ContadorNodosArbol);
 				CadenaAux = "NodoArbol" + to_string(ContadorNodosArbol);
 
-				Cadena += "[label = \" Código: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> CodigoANumericoActivo +
+				Cadena += "[label = \"Código: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> CodigoANumericoActivo +
 								+ "\\lNombre: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> NombreActivo +
-							   + "\\lRentado: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> ExisteRentaActivo + "\"]; \n";
+								+ "\\lRentado: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> ExisteRentaActivo +
+							   + "\\lDescripción: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> DescripcionActivo +
+							   + "\\l_" + "\"]; \n";
 
 				Variables::NumerosDeNodosArbolAVL++;
 

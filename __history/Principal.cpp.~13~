@@ -19,6 +19,9 @@
 	#include <windows.h>
 	#include <cstring>
 	#include "Interfaz.h"
+	#include "Variables.h"
+	#include "Metodos.h"
+	#include "MatrizDispersaEstructura.h"
 
 	using namespace std;
 
@@ -28,9 +31,9 @@
 	{
 		Resolucion();
 		Fullscreen();
-		system("cls");
-		Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
-		MenuLogin();
+		Variables::MatrizDispersaUsuarios = new MatrizDispersaEstructura("Administrador", "Admin", "12345", "General", "General");
+		Variables::IdentificadorUsuario++;
+		MenuLoginCiclo();
 
 		return 0;
 	}

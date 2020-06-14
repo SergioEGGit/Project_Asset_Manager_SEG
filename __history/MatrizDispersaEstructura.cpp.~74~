@@ -509,13 +509,13 @@
 		MatrizDU EmpresaAuxiliar = Matriz;
 		MatrizDU UsuarioAuxiliarBusqueda;
 
-		//UpperCase
-		NombreEmpresa = UpperCase(NombreEmpresa);
-		NombreDepartamento = UpperCase(NombreDepartamento);
-
-        //Asignaciones
+		//Asignaciones
 
 		UsuarioAuxiliarBusqueda = BuscarUsuarioAuxMatrizDispersaU(Matriz, NombreUsuario, NombreEmpresa, NombreDepartamento);
+
+        //UpperCase
+		NombreEmpresa = UpperCase(NombreEmpresa);
+		NombreDepartamento = UpperCase(NombreDepartamento);
 
 		//Comenzar Recorrer Matriz Dispersa
 

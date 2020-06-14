@@ -509,13 +509,13 @@
 		MatrizDU EmpresaAuxiliar = Matriz;
 		MatrizDU UsuarioAuxiliarBusqueda;
 
-		//UpperCase
-		NombreEmpresa = UpperCase(NombreEmpresa);
-		NombreDepartamento = UpperCase(NombreDepartamento);
-
-        //Asignaciones
+		//Asignaciones
 
 		UsuarioAuxiliarBusqueda = BuscarUsuarioAuxMatrizDispersaU(Matriz, NombreUsuario, NombreEmpresa, NombreDepartamento);
+
+        //UpperCase
+		NombreEmpresa = UpperCase(NombreEmpresa);
+		NombreDepartamento = UpperCase(NombreDepartamento);
 
 		//Comenzar Recorrer Matriz Dispersa
 
@@ -549,8 +549,6 @@
 			{
 				//Caso 1: Existen Ambas Cabecera
 
-				cout<< "Caso 1";
-
 				MatrizDU CabeceraDepartamento = DepartamentoAuxiliar;
 				MatrizDU CabeceraEmpresa = EmpresaAuxiliar;
 
@@ -582,8 +580,6 @@
 			{
 				//Caso 2: No Existe Ninguna Cabecera
 
-				cout<< "Caso 2";
-
 				MatrizDU DepartamentoNuevo = new MatrizDispersaEstructura("Dep", NombreDepartamento);
 				MatrizDU EmpresaNueva = new MatrizDispersaEstructura("Emp", NombreEmpresa);
 				MatrizDU UsuarioNuevo = new MatrizDispersaEstructura(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
@@ -600,8 +596,6 @@
 			{
 				//Caso 3: No Existe Empresa
 
-				cout<< "Caso 3";
-
 				MatrizDU EmpresaNueva = new MatrizDispersaEstructura("Emp", NombreEmpresa);
 				MatrizDU UsuarioNuevo = new MatrizDispersaEstructura(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
 				InsertarCabeceraEmpresaMatrizDispersaU(Matriz, NombreEmpresa, *UsuarioNuevo, *EmpresaNueva);
@@ -611,8 +605,6 @@
 			else if(DepartamentoAuxiliar == nullptr && EmpresaAuxiliar != nullptr)
 			{
 				//Caso 4: No Existe Departamento
-
-				cout<< "Caso 4";
 
 				MatrizDU DepartamentoNuevo = new MatrizDispersaEstructura("Dep", NombreDepartamento);
 				MatrizDU UsuarioNuevo = new MatrizDispersaEstructura(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
