@@ -24,7 +24,9 @@
 	bool VariablesMetodos::ValidarDato = false;
 	bool VariablesMetodos::ExisteUsuario = false;
 	string VariablesMetodos::CodigoAlfaNumerico = "";
-    ArbolAVLActivos NuevoActivo  = nullptr;
+	ArbolAVLActivos NuevoActivo  = nullptr;
+	string VariablesMetodos::AgregueActivo = "";
+	string VariablesMetodos::ElimineActivo = "";
 
 //------------------------------Métodos-----------------------------------------
 
@@ -239,7 +241,7 @@
 					MenuReporteActivoPorUsuario();
 					if(BuscarUsuarioMatrizDispersaU(Variables::MatrizDispersaUsuarios, Variables::ArrayAux[0], Variables::ArrayAux[1], Variables::ArrayAux[2]))
 					{
-                        ReporteActivosUsuarioArbolAVLA();
+						ReporteActivosUsuarioArbolAVLA(Variables::ArbolAVLAuxiliar);
 						system("pause > 0");
 					}
 					else
@@ -278,6 +280,8 @@
 
 	void MenuUsuarioCiclo()
 	{
+		string Aux = "";
+
 		while(VariablesMetodos::OpcionMenuAdministrador != 8)
 		{
 			VariablesMetodos::ValidarDato = false;
@@ -313,10 +317,10 @@
 					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
 					MenuCrearActivo();
 					VariablesMetodos::CodigoAlfaNumerico = GenerarCodigoAlfanumerico();
-					VariablesMetodos::ExisteUsuario = NuevoActivo -> InsertarActvioArbolAVLANuevoActivo(VariablesMetodos::CodigoAlfaNumerico, Variables::ArrayAux[0], Variables::ArrayAux[1]);
-					NuevoActivo -> CalcularAlturaVoidArbolAVLA(*Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
+					VariablesMetodos::AgregueActivo = NuevoActivo -> InsertarActvioArbolAVLANuevoActivo(Variables::ArbolAVLAuxiliar, VariablesMetodos::CodigoAlfaNumerico, Variables::ArrayAux[0], Variables::ArrayAux[1]);
+					NuevoActivo -> CalcularAlturaVoidArbolAVLA(Variables::ArbolAVLAuxiliar, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
 
-					if(VariablesMetodos::ExisteUsuario == true)
+					if(VariablesMetodos::AgregueActivo == "Si")
 					{
 						Color(0, 10);
 						Posicionar(12, 11);
@@ -334,6 +338,34 @@
 				break;
 
 				case 2:
+					MenuEliminarActivo();
+					VariablesMetodos::ElimineActivo = NuevoActivo -> EliminarActivoArbolAVLA(*Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario, Variables::ArrayAux[0]);
+
+					if(VariablesMetodos::ElimineActivo == "Si")
+					{
+                        Color(0, 10);
+						Posicionar(12, 11);
+						cout << "Activo Eliminado Con Exito!";
+						system("pause > 0");
+					}
+					else
+					{
+                        Color(0, 4);
+						Posicionar(19, 11);
+						cout << "No Se Puede Eliminar El Activo Indicado.";
+						system("pause > 0");
+                    }
+
+				break;
+
+				case 3:
+					MostrarActivosArbolAVLA(Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
+					cout<< " ingrese " <<endl;
+					cin >> Aux;
+
+					NuevoActivo = BuscarActivoArbolAVLA(Variables::ArbolAVLAuxiliar, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario, Aux);
+
+                    system("pause > 0");
 
 				break;
 

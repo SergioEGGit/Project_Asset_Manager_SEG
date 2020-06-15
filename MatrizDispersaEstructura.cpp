@@ -327,13 +327,13 @@
 		{
 			Comparacion = AuxiliarEmpresa -> NombreEmpresa;
 
-			if(NombreEmpresa.compare(Comparacion) == 1)
+			if(NombreEmpresa.compare(Comparacion) >= 0)
 			{
 				if(AuxiliarEmpresa -> Aba != nullptr)
 				{
 					Comparacion = AuxiliarEmpresa -> Aba -> NombreEmpresa;
 
-					if(NombreEmpresa.compare(Comparacion) == -1)
+					if(NombreEmpresa.compare(Comparacion) <= 0)
 					{
 						MatrizDU AuxiliarAbajo = AuxiliarEmpresa -> Aba;
 						AuxiliarEmpresa -> Aba = EmpresaNuevaAuxiliar;
@@ -378,13 +378,13 @@
 		{
 			Comparacion = AuxiliarDepartamento -> NombreDepartamento;
 
-			if(NombreDepartamento.compare(Comparacion) == 1)
+			if(NombreDepartamento.compare(Comparacion) >= 0)
 			{
 				if(AuxiliarDepartamento -> Sgte != nullptr)
 				{
                     Comparacion = AuxiliarDepartamento -> Sgte -> NombreDepartamento;
 
-					if(NombreDepartamento.compare(Comparacion) == -1)
+					if(NombreDepartamento.compare(Comparacion) <= 0)
 					{
 						MatrizDU AuxiliarSiguiente = AuxiliarDepartamento -> Sgte;
 						AuxiliarDepartamento -> Sgte = DepartamentoNuevoAuxiliar;
@@ -433,14 +433,14 @@
 			ComparacionE = UsuarioAuxiliar -> NombreDepartamento;
 			ComparacionE2 = EmpresaAuxiliar -> NombreDepartamento;
 
-			if(ComparacionE.compare(ComparacionE2) == 1)
+			if(ComparacionE.compare(ComparacionE2) >= 0)
 			{
 				if(EmpresaAuxiliar -> Sgte != nullptr)
 				{
 					ComparacionE = UsuarioAuxiliar -> NombreDepartamento;
 					ComparacionE2 = EmpresaAuxiliar -> Sgte -> NombreDepartamento;
 
-					if(ComparacionE.compare(ComparacionE2) == -1)
+					if(ComparacionE.compare(ComparacionE2) <= 0)
 					{
 						cout<< "Agregue Empresa ";
 						MatrizDU AuxSiguiente = EmpresaAuxiliar -> Sgte;
@@ -469,14 +469,14 @@
 			ComparacionD = UsuarioAuxiliar -> NombreEmpresa;
 			ComparacionD2 = DepartamentoAuxiliar -> NombreEmpresa;
 
-			if(ComparacionD.compare(ComparacionD2) == 1)
+			if(ComparacionD.compare(ComparacionD2) >= 0)
 			{
 				if(DepartamentoAuxiliar -> Aba != nullptr)
 				{
 					ComparacionD = UsuarioAuxiliar -> NombreEmpresa;
 					ComparacionD2 = DepartamentoAuxiliar -> Aba -> NombreEmpresa;
 
-					if(ComparacionD.compare(ComparacionD2) == -1)
+					if(ComparacionD.compare(ComparacionD2) <= 0)
 					{
 						cout<< "Agregue Departamento ";
 						MatrizDU AuxiliarAbajo = DepartamentoAuxiliar -> Aba;

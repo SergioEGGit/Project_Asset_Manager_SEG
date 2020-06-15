@@ -18,6 +18,8 @@
 		extern bool ValidarDato;
 		extern bool ExisteUsuario;
 		extern string CodigoAlfaNumerico;
+		extern string AgregueActivo;
+        extern string ElimineActivo ;
 	}
 
 //-------------------------------Métodos----------------------------------------

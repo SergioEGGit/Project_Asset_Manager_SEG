@@ -23,11 +23,17 @@
 		extern string EmpresaUA;
 		extern MatrizDU MatrizDispersaUsuarios;
 		extern MatrizDU ArbolAVLActivosUsuarioActual;
+        extern ArbolAVLActivos ArbolAVLAuxiliar;
 		extern int IdentificadorUsuario;
 		extern string ArrayAux[9];
 		extern bool Cabecera;
 		extern bool Usuario;
-        extern int NumerosDeNodosArbolAVL;
+		extern int NumerosDeNodosArbolAVL;
+		extern int ContadorActivos;
+		extern int ContadorAux;
+		extern string IdentificadorAC;
+		extern string NombreAC;
+        extern string DescripcionAC;
 	}
 
 //------------------------------------------------------------------------------

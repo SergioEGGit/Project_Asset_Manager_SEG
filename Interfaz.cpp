@@ -13,6 +13,7 @@
 	#include <stdio.h>
 	#include "Variables.h"
 	#include "Metodos.h"
+	#include "ArbolAVLEstructura.h"
 
 	using namespace std;
 
@@ -235,7 +236,7 @@
 
 	void MenuCrearActivo()
 	{
-        Color(0,14);
+		Color(0,14);
 		Posicionar(10, 17);
 		cout<< " Registro De Activos" <<endl;
 		Posicionar(14, 15);
@@ -247,6 +248,43 @@
 		Posicionar(-7, 13);
 		getline(cin, Variables::ArrayAux[1]);
 	}
+
+	void MenuEliminarActivo()
+	{
+		Color(0,9);
+		Posicionar(17, 17);
+		cout<< "             Eliminar Activos" <<endl;
+		Posicionar(17, 15);
+		cout<< "                Mis Activos" <<endl;
+
+		Variables::ContadorActivos = 13;
+		Variables::ContadorAux = 1;
+
+		MostrarActivosArbolAVLA(Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
+
+		Posicionar(30, Variables::ContadorActivos - 1);
+		cout<< "Ingrese El Identificador Del Activo A Eliminar: " <<endl;
+		Posicionar(-18, Variables::ContadorActivos - 2);
+		cin >> Variables::ArrayAux[0];
+	}
+
+	void MenuEliminado()
+	{
+
+		Color(0,7);
+		Posicionar(17, 17);
+		cout<< "          Activo Eliminado" <<endl;
+		Posicionar(17, 15);
+		cout<< "       Codigo:" << Variables::IdentificadorAC <<endl;
+		Posicionar(17, 13);
+		cout<< "       Nombre:" << Variables::NombreAC <<endl;
+		Posicionar(17, 11);
+		cout<< "       Descripcion:" << Variables::DescripcionAC <<endl;
+		Posicionar(17, 9);
+		cout<< "         Activo Eliminado Con Exito!" <<endl;
+	}
+
+
 
 	void MenuReporteActivoPorUsuario()
 	{

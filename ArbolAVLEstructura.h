@@ -15,13 +15,15 @@
 
 	struct ArbolAVLEstructura
 	{
-		//Objetos
+		//Declaraciones
+			//Declaracion Variables Tipo Int
 		int AlturaArbolAVL;
+			//Declaracion Variables Tipo String
 		string ExisteRentaActivo;
 		string CodigoANumericoActivo;
 		string NombreActivo;
 		string DescripcionActivo;
-		//Apuntadores
+			//Declaracion Apuntadores Tipo Struct
 		struct ArbolAVLEstructura *RI;
 		struct ArbolAVLEstructura *LE;
 
@@ -29,65 +31,108 @@
 
 		ArbolAVLEstructura(string CodigoANumericoActivo, string NombreActivo, string DescripcionActivo)
 		{
-			//Objetos
-			this -> ExisteRentaActivo = "No";
+			//Asignaicones
+				//Asignaciones Variables Tipo Int
 			this -> AlturaArbolAVL = 0;
+				//Asignaciones Variables Tipo String
 			this -> CodigoANumericoActivo = CodigoANumericoActivo;
 			this -> NombreActivo = NombreActivo;
 			this -> DescripcionActivo = DescripcionActivo;
-			//Apuntadores
+			this -> ExisteRentaActivo = "No";
+				//Asignaciones Apuntadores Tipo Struct
 			this -> RI = nullptr;
 			this -> LE = nullptr;
 		}
 
-		bool InsertarActivoArbolAVLA(string CodigoANumerico, string NombreActivo, string DescripcionActivo, ArbolAVLEstructura& ActivoInsertar);
+		typedef struct ArbolAVLEstructura *ArbolAVLActivos2;
 
-		bool InsertarActvioArbolAVLANuevoActivo(string CodigoANumerico, string NombreActivo, string DescripcionActivo);
+		//Métodos
 
-		void CalcularAlturaVoidArbolAVLA(ArbolAVLEstructura& ActivoParaCalcular);
+			//Insertar Arbol AVL
+
+		static string InsertarActivoArbolAVLA(ArbolAVLActivos2 &Arbol, string CodigoANumerico, string NombreActivo, string DescripcionActivo, ArbolAVLEstructura& ActivoInsertar);
+
+			//Insertar Nuevo Nodo Arbol AVL
+
+		static string InsertarActvioArbolAVLANuevoActivo(ArbolAVLActivos2 &Arbol, string CodigoANumerico, string NombreActivo, string DescripcionActivo);
+
+			//Calcular Altura Arbol AVL
+
+		static void CalcularAlturaVoidArbolAVLA(ArbolAVLActivos2 &Arbol, ArbolAVLEstructura& ActivoParaCalcular);
+
+		static string EliminarActivoArbolAVLA(ArbolAVLEstructura &ActivoActualArbol, string CodigoANumericoActivo);
 	};
+
+	//Definicion Struct Arbol AVL Activos
 
 	typedef struct ArbolAVLEstructura *ArbolAVLActivos;
 
 //---------------------------------Métodos--------------------------------------
 
+    //Generación De Reportes
+
+		//Generar Cadena Reporte Recursivo
+
+	void GenerarReporteRecursivoArbolAVLA(ArbolAVLActivos &Arbol, string Padre, ArbolAVLEstructura& ArbolActivosActual);
+
+		//Generar Imagen Reporte
+
+	void ReporteActivosUsuarioArbolAVLA(ArbolAVLActivos &Arbol);
+
+	//Mostrar Activos
+
+		//Recorrido Pre Orden Arbol AVL
+
+	void MostrarActivosArbolAVLA(ArbolAVLActivos &Arbol);
+
 	//Rotaciones Arbol AVL
 
 		//Rotación Simple Derecha
 
-	void PlantillaRotacionDerechaArbolAVLA(ArbolAVLEstructura &Primero, ArbolAVLEstructura &Ultimo);
+	void PlantillaRotacionDerechaArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura &Primero, ArbolAVLEstructura &Ultimo);
 
 		//Rotación Simple Izquierda
 
-	void PlantillaRotacionIzquierdaArbolAVLA(ArbolAVLEstructura &Primero, ArbolAVLEstructura &Ultimo);
+	void PlantillaRotacionIzquierdaArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura &Primero, ArbolAVLEstructura &Ultimo);
 
 		//Verificar Casos Rotacioens Sub Arbol Izquierdo
 
-	void SubArbolIzquierdoMayor(ArbolAVLActivos &ArbolAuxiliar);
+	void SubArbolIzquierdoMayor(ArbolAVLActivos &Arbol, ArbolAVLActivos &ArbolAuxiliar);
 
 		//Verificar Casos Rotaciones Sub Arbol Derecho
 
-	void SubArbolDerechoMayor(ArbolAVLActivos &ArbolAuxiliar);
+	void SubArbolDerechoMayor(ArbolAVLActivos &Arbol, ArbolAVLActivos &ArbolAuxiliar);
 
 		//Comparación Y Selección De Rotaciones
 
-	void ComparacionYEleccionRotacionArbolAVLA(ArbolAVLEstructura &ArbolAVLActivosActual);
+	void ComparacionYEleccionRotacionArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura &ArbolAVLActivosActual);
 
 	//Calculo De Alturas
 
 		//Calcular Y Devolver Altura
 
-	int CalcularAlturaArbolAVLA(ArbolAVLEstructura& ActivoParaCalcular);
+	int CalcularAlturaArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura& ActivoParaCalcular);
 
-    //Generación De Reportes
+	//Búsqueda
 
-		//Generar Cadena Reporte Recursivo
+		//Buscar Activo
 
-	void GenerarReporteRecursivoArbolAVLA(string Padre, ArbolAVLEstructura& ArbolActivosActual);
+	ArbolAVLActivos BuscarActivoArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura &ActivoActualAuxiliar, string CodigoANumericoActivo);
 
-		//Generar Imagen Reporte
+	//Eliminación
 
-	void ReporteActivosUsuarioArbolAVLA();
+		//Quien Es El Mayor
+
+	ArbolAVLActivos SoyElMayor(ArbolAVLActivos &Arbol, ArbolAVLEstructura &ActivoActualAuxiliar);
+
+		//Eliminar Nodo Auxiliar
+
+	void EliminarNodoAuxilair(ArbolAVLActivos &Arbol, ArbolAVLEstructura &ActivoActualAuxiliar);
+
+		//Comparación Y Elección Casos De Eliminación
+
+	string ComparacionYEleccionArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura &ActivoActualArbol);
+
 
 //------------------------------------------------------------------------------
 	#endif

@@ -21,10 +21,16 @@
 	int Variables::IdentificadorUsuario = 0;
 	MatrizDU Variables::MatrizDispersaUsuarios = nullptr;
 	MatrizDU Variables::ArbolAVLActivosUsuarioActual = nullptr;
+	ArbolAVLActivos Variables::ArbolAVLAuxiliar = nullptr;
 	string Variables::ArrayAux[9];
 	bool Variables::Cabecera = false;
 	bool Variables::Usuario = false;
 	int Variables::NumerosDeNodosArbolAVL = 0;
+	int Variables::ContadorActivos = 0;
+	int Variables::ContadorAux  = 0;
+	string Variables::IdentificadorAC;
+	string Variables::NombreAC;
+    string Variables::DescripcionAC;
 
 //------------------------------------------------------------------------------
 
