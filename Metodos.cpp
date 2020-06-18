@@ -27,6 +27,7 @@
 	ArbolAVLActivos NuevoActivo  = nullptr;
 	string VariablesMetodos::AgregueActivo = "";
 	string VariablesMetodos::ElimineActivo = "";
+	int VariablesMetodos::ContadorAuxiliar = 0;
 
 //------------------------------Métodos-----------------------------------------
 
@@ -207,9 +208,9 @@
 					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
 					MenuRegistrarUsuario();
 
-					VariablesMetodos::ExisteUsuario = InsertarUsuarioMatrizDispersaU(Variables::MatrizDispersaUsuarios, Variables::ArrayAux[1], Variables::ArrayAux[0], Variables::ArrayAux[2], Variables::ArrayAux[4], Variables::ArrayAux[3]);
+					AgregarUsuario(Variables::ArrayAux[0], Variables::ArrayAux[1], Variables::ArrayAux[2], Variables::ArrayAux[4], Variables::ArrayAux[3], Variables::MatrizDispersaUsuarios);
 
-					if(VariablesMetodos::ExisteUsuario == true)
+            		if(VariablesMetodos::ExisteUsuario == true)
 					{
 						Color(0, 10);
 						Posicionar(12, 5);
@@ -231,27 +232,107 @@
 				break;
 
 				case 3:
-					GenerarCodigoAlfanumerico();
+					Variables::ReporteArbol = "";
+					Variables::NumerosDeNodosArbolAVL = 0;
+                    system("cls");
+					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
+					MenuReporteDepartamento();
+					ReporteActivosPorDepartamentoMatrizDispersaU(Variables::MatrizDispersaUsuarios, Variables::ArrayAux[0]);
+					system("pause > 0");
+				break;
+
+				case 4:
+                    Variables::ReporteArbol = "";
+					Variables::NumerosDeNodosArbolAVL = 0;
+                    system("cls");
+					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
+					MenuReporteEmpresa();
+					ReporteActivosPorEmpresaMatrizDispersaU(Variables::MatrizDispersaUsuarios, Variables::ArrayAux[0]);
+					system("pause > 0");
+				break;
+
+				case 5:
+					ReporteListaDobleCircularT(Variables::ListaDobleCircularTransaccion);
 					system("pause > 0");
 				break;
 
 				case 6:
-                    system("cls");
-					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
-					MenuReporteActivoPorUsuario();
-					if(BuscarUsuarioMatrizDispersaU(Variables::MatrizDispersaUsuarios, Variables::ArrayAux[0], Variables::ArrayAux[1], Variables::ArrayAux[2]))
+					if(Variables::MatrizDispersaUsuarios -> Sgte != nullptr)
 					{
-						ReporteActivosUsuarioArbolAVLA(Variables::ArbolAVLAuxiliar);
-						system("pause > 0");
+						system("cls");
+						Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
+
+						Variables::ContadorActivos = 7;
+
+						MostrarUsuarios(Variables::MatrizDispersaUsuarios, Variables::ContadorActivos);
+
+                        MenuReporteActivoPorUsuario();
+
+						if(BuscarUsuarioMatrizDispersaU(Variables::MatrizDispersaUsuarios, Variables::ArrayAux[0], Variables::ArrayAux[1], Variables::ArrayAux[2]))
+						{
+							ReporteActivosUsuarioArbolAVLA(Variables::ArbolAVLAuxiliar);
+							system("pause > 0");
+						}
+						else
+						{
+							Color(0, 4);
+							Posicionar(17, 9);
+							cout << "El Usuario No Existe En El Sistema.";
+							system("pause > 0");
+						}
 					}
 					else
 					{
-						Color(0, 4);
-						Posicionar(17, 9);
-						cout << "El Usuario No Existe En El Sistema.";
+                        Color(0, 4);
+						Posicionar(-13, -5);
+						cout << "Aun No Existen Usuarios En El Sistema";
 						system("pause > 0");
 					}
+				break;
 
+				case 7:
+                    if(Variables::MatrizDispersaUsuarios -> Sgte != nullptr)
+					{
+						system("cls");
+						Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
+
+						Variables::ContadorActivos = 7;
+
+						MostrarUsuarios(Variables::MatrizDispersaUsuarios, Variables::ContadorActivos);
+
+                        MenuReporteActivoPorUsuario();
+
+						if(BuscarUsuarioMatrizDispersaU(Variables::MatrizDispersaUsuarios, Variables::ArrayAux[0], Variables::ArrayAux[1], Variables::ArrayAux[2]))
+						{
+							ReporteUsuarioListaDobleCircularT(Variables::ListaDobleCircularTransaccion, Variables::ArrayAux[0], Variables::ArrayAux[1], Variables::ArrayAux[2]);
+							system("pause > 0");
+						}
+						else
+						{
+							Color(0, 4);
+							Posicionar(17, 9);
+							cout << "El Usuario No Existe En El Sistema.";
+							system("pause > 0");
+						}
+					}
+					else
+					{
+                        Color(0, 4);
+						Posicionar(-13, -5);
+						cout << "Aun No Existen Usuarios En El Sistema";
+						system("pause > 0");
+					}
+				break;
+
+				case 8:
+                    system("cls");
+					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
+					MenuOrdenamiento();
+					OrdenarListaDobleCircularT(Variables::ListaDobleCircularTransaccion, Variables::TipoOrdenamiento);
+					Color(0, 8);
+					Posicionar(17, 9);
+					cout<< "Lista Ordenada Con Exito!" <<endl;
+                    system("pause > 0");
 				break;
 
 				case 9:
@@ -260,6 +341,7 @@
 				break;
 
 				case 10:
+					system("cls");
 					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
 					Color(0, 13);
 					Posicionar(17, 17);
@@ -281,6 +363,9 @@
 	void MenuUsuarioCiclo()
 	{
 		string Aux = "";
+		time_t FechaActual;
+		FechaActual = time(NULL);
+		time(&FechaActual);
 
 		while(VariablesMetodos::OpcionMenuAdministrador != 8)
 		{
@@ -315,10 +400,13 @@
 				case 1:
 					system("cls");
 					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
+
 					MenuCrearActivo();
+
 					VariablesMetodos::CodigoAlfaNumerico = GenerarCodigoAlfanumerico();
-					VariablesMetodos::AgregueActivo = NuevoActivo -> InsertarActvioArbolAVLANuevoActivo(Variables::ArbolAVLAuxiliar, VariablesMetodos::CodigoAlfaNumerico, Variables::ArrayAux[0], Variables::ArrayAux[1]);
-					NuevoActivo -> CalcularAlturaVoidArbolAVLA(Variables::ArbolAVLAuxiliar, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
+
+					VariablesMetodos::AgregueActivo = InsertarActvioArbolAVLANuevoActivo(Variables::ArbolAVLAuxiliar, VariablesMetodos::CodigoAlfaNumerico, Variables::ArrayAux[0], Variables::ArrayAux[1]);
+					CalcularAlturaVoidArbolAVLA(Variables::ArbolAVLAuxiliar, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
 
 					if(VariablesMetodos::AgregueActivo == "Si")
 					{
@@ -334,39 +422,114 @@
 						cout << "El Activo Indicado Ya Existe En El Sistema.";
 						system("pause > 0");
 					}
-
 				break;
 
 				case 2:
+					system("cls");
+					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
+
 					MenuEliminarActivo();
-					VariablesMetodos::ElimineActivo = NuevoActivo -> EliminarActivoArbolAVLA(*Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario, Variables::ArrayAux[0]);
+
+					BuscarActivoArbolAVLA(Variables::ArbolAVLAuxiliar, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario, Variables::ArrayAux[0]);
+
+					VariablesMetodos::ElimineActivo = EliminarActivoArbolAVLA(Variables::ArbolAVLAuxiliar, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario, Variables::ArrayAux[0]);
 
 					if(VariablesMetodos::ElimineActivo == "Si")
 					{
-                        Color(0, 10);
-						Posicionar(12, 11);
-						cout << "Activo Eliminado Con Exito!";
-						system("pause > 0");
+                        system("cls");
+						Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
+						MenuEliminado();
+                        system("pause > 0");
 					}
 					else
 					{
-                        Color(0, 4);
-						Posicionar(19, 11);
+						Color(0, 4);
+						Posicionar(-18, Variables::ContadorActivos);
 						cout << "No Se Puede Eliminar El Activo Indicado.";
 						system("pause > 0");
-                    }
+					}
 
 				break;
 
 				case 3:
-					MostrarActivosArbolAVLA(Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
-					cout<< " ingrese " <<endl;
-					cin >> Aux;
+					system("cls");
+					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
 
-					NuevoActivo = BuscarActivoArbolAVLA(Variables::ArbolAVLAuxiliar, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario, Aux);
+					MenuModificarActivo();
 
+					VariablesMetodos::ElimineActivo = "No";
+
+					BuscarActivoArbolAVLA(Variables::ArbolAVLAuxiliar, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario, Variables::ArrayAux[0]);
+
+					if(VariablesMetodos::ElimineActivo == "Si")
+					{
+                        system("cls");
+						Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
+						MenuModificado();
+
+						VariablesMetodos::ElimineActivo = "No";
+
+                    	ModificarDescripcionActivoArbolAVLA(Variables::ArbolAVLAuxiliar, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario, Variables::ArrayAux[0], Variables::ArrayAux[1]);
+
+						if(VariablesMetodos::ElimineActivo == "No")
+						{
+							Color(0, 4);
+							Posicionar(17, 5);
+							cout << "  No Se Puede Modificar El Activo " <<endl;
+							system("pause > 0");
+						}
+					}
+					else
+					{
+                        Color(0, 4);
+						Posicionar(-16, Variables::ContadorActivos);
+						cout << "No Se Encuentra El Activo Indicado.";
+						system("pause > 0");
+					}
+				break;
+
+				case 4:
+                    system("cls");
+					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
+                    Variables::TodosLosActivos = 15;
+					MostrarActivosUsuarios(Variables::MatrizDispersaUsuarios, VariablesMetodos::ContadorAuxiliar);
+					MenuRentarActivo();
+
+					if(Variables::ArrayAux[0] == "Salir")
+					{
+						//Nada
+					}
+					else
+					{
+                        BuscarArbolUsuarioMatrizDispersaU(Variables::MatrizDispersaUsuarios, Variables::ArrayAux[1], UpperCase(Variables::ArrayAux[2]), UpperCase(Variables::ArrayAux[3]));
+						ModificarEstadoActivoArbolAVLA(Variables::ArbolAVLAuxiliar, *Variables::AuxiliarArbol -> ArbolAVLActivosUsuario, UpperCase(Variables::ArrayAux[0]));
+
+						Aux = GenerarCodigoAlfanumerico();
+
+						Aux = UpperCase(Aux);
+
+						InsertarTransaccionListaDobleCircularT(Variables::ListaDobleCircularTransaccion, Aux, Variables::ArrayAux[0], Variables::UsuarioA, Variables::EmpresaUA, Variables::DepartamentoUA, Variables::ArrayAux[1], Variables::ArrayAux[2], Variables::ArrayAux[3], FechaActual, stoi(Variables::ArrayAux[4]));
+
+						Posicionar(-10, Variables::TodosLosActivos);
+						cout<< "Activo Rentado Con Exito! " <<endl;
+
+						system("Pause > 0");
+                    }
+
+				break;
+
+				case 5:
+
+				break;
+
+				case 6:
+					Color(0, 13);
+					Posicionar(17, 17);
+					cout<< "         Mis Activos Rentados " <<endl;
+					Variables::ContadorActivos = 15;
+					Variables::ContadorAux = 1;
+					MostrarActivosRentados(Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
                     system("pause > 0");
-
 				break;
 
 				case 7:
@@ -378,7 +541,7 @@
 					Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
 					Color(0, 13);
 					Posicionar(17, 17);
-					cout<< "Gracias Por Usar Esta Aplicaion.. Vuelva Pronto...!";
+					cout<< "Gracias Por Usar Esta Aplicacion.. Vuelva Pronto...!";
 					system("pause > 0");
 					VariablesMetodos::OpcionMenuAdministrador = 10;
 				break;
@@ -392,7 +555,6 @@
 			system("cls");
 		}
 	}
-
 
 
 

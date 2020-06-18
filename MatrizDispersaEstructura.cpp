@@ -5,7 +5,9 @@
 //-----------------------------Librerias----------------------------------------
 
 	#include "MatrizDispersaEstructura.h"
+	#include "ArbolAVLEstructura.h"
 	#include "Metodos.h"
+	#include "Interfaz.h"
 	#include "Variables.h"
 	#include <iostream>
 	#include <fstream>
@@ -20,7 +22,243 @@
 
 //---------------------------------Métodos--------------------------------------
 
-	//Generación De Reportes
+	//Mostrar
+
+		//Mostar Todos Los Usuarios
+
+	void MostrarUsuarios(MatrizDU &Matriz, int ContadorAltura)
+	{
+		//Declaracion
+
+		//Objeto Tipo Matriz Dispersa
+
+		MatrizDU MatrizAuxiliarUsuario = Matriz -> Aba;
+
+		//Variables Tipo String
+
+		int ContadorAuxiliar = 1;
+
+		//Comienza Impresion
+
+		while(MatrizAuxiliarUsuario != nullptr)
+		{
+			MatrizDU AuxiliarEmpresa = MatrizAuxiliarUsuario;
+
+			while(MatrizAuxiliarUsuario != nullptr)
+			{
+				MatrizDU AuxiliarDepartamento = MatrizAuxiliarUsuario;
+
+				while(MatrizAuxiliarUsuario != nullptr)
+				{
+					MatrizDU AuxiliarUsuario = MatrizAuxiliarUsuario;
+
+					if(MatrizAuxiliarUsuario -> NombreUsuario != "")
+					{
+						Color(0, 15);
+						Posicionar(20, ContadorAltura);
+						cout<< ContadorAuxiliar << "." << "Nombre: " << MatrizAuxiliarUsuario -> NombreUsuario << "  Empresa: " << MatrizAuxiliarUsuario -> NombreEmpresa << "  Departamento: " << MatrizAuxiliarUsuario -> NombreDepartamento <<endl;
+						ContadorAltura = ContadorAltura - 2;
+						ContadorAuxiliar++;
+					}
+					MatrizAuxiliarUsuario = AuxiliarUsuario -> Atr;
+				}
+
+				MatrizAuxiliarUsuario = AuxiliarDepartamento -> Sgte;
+			}
+			MatrizAuxiliarUsuario = AuxiliarEmpresa -> Aba;
+		}
+	}
+
+		//Mostrar Todos Los Activos
+
+	void MostrarActivosUsuarios(MatrizDU &Matriz, int ContadorAltura)
+	{
+		//Declaracion
+
+		//Objeto Tipo Matriz Dispersa
+
+		MatrizDU MatrizAuxiliarUsuario = Matriz -> Aba;
+
+		//Variables Tipo String
+
+		int ContadorAuxiliar = 1;
+
+		//Comienza Impresion
+
+		while(MatrizAuxiliarUsuario != nullptr)
+		{
+			MatrizDU AuxiliarEmpresa = MatrizAuxiliarUsuario;
+
+			while(MatrizAuxiliarUsuario != nullptr)
+			{
+				MatrizDU AuxiliarDepartamento = MatrizAuxiliarUsuario;
+
+				while(MatrizAuxiliarUsuario != nullptr)
+				{
+					MatrizDU AuxiliarUsuario = MatrizAuxiliarUsuario;
+
+					if(MatrizAuxiliarUsuario -> NombreUsuario != "")
+					{
+						if(MatrizAuxiliarUsuario -> NombreUsuario != Variables::UsuarioA)
+						{
+							Color(0, 11);
+							Posicionar(17, 17);
+							cout<< "            Todos Los Activos " <<endl;
+							Posicionar(20, Variables::TodosLosActivos);
+							cout<< ContadorAuxiliar << "." << "Nombre: " << MatrizAuxiliarUsuario -> NombreUsuario << "  Empresa: " << MatrizAuxiliarUsuario -> NombreEmpresa << "  Departamento: " << MatrizAuxiliarUsuario -> NombreDepartamento <<endl;
+							Variables::TodosLosActivos = Variables::TodosLosActivos - 2;
+							Variables::Color = 11;
+							Variables::ContadorAux = 1;
+							MostrarTodosLosActivosArbolAVLA(MatrizAuxiliarUsuario -> ArbolAVLActivosUsuario);
+							ContadorAuxiliar++;
+                        }
+					}
+					MatrizAuxiliarUsuario = AuxiliarUsuario -> Atr;
+				}
+
+				MatrizAuxiliarUsuario = AuxiliarDepartamento -> Sgte;
+			}
+			MatrizAuxiliarUsuario = AuxiliarEmpresa -> Aba;
+		}
+    }
+
+	//Reportes
+
+		//Reporte Activos Por Departamento
+
+	void ReporteActivosPorDepartamentoMatrizDispersaU(MatrizDU &Matriz, string NombreDepartamento)
+	{
+		//Declaraciones
+		ofstream SalidaArchivo("C:\\ReportesEDD\\ReporteActivosPorDepartamento.txt");
+		MatrizDU MatrizAuxiliarUsuario = Matriz;
+		string CadenaArboles = "";
+		int Numero = 0;
+
+		if(SalidaArchivo.is_open())
+		{
+			if(Matriz != nullptr)
+			{
+				//Apertura Archivo Y Comienza Escritura
+
+				SalidaArchivo<< "digraph MatrizDispersa " <<endl;
+				SalidaArchivo<< "{" <<endl;
+				SalidaArchivo<< "graph[charset=latin1]" <<endl;
+				SalidaArchivo<< "node[shape = box, style = rounded, color = midnightblue, fontcolor = darkgreen];" <<endl;
+				SalidaArchivo<< "Departamento[ label =\"Departamento : " + NombreDepartamento + "\", width = 2];\n" <<endl;
+
+				while(MatrizAuxiliarUsuario != nullptr)
+				{
+					MatrizDU AuxiliarDepartamento = MatrizAuxiliarUsuario;
+
+					if(NombreDepartamento == MatrizAuxiliarUsuario -> NombreDepartamento)
+					{
+						while(MatrizAuxiliarUsuario != nullptr)
+						{
+							MatrizDU AuxiliarEmpresa = MatrizAuxiliarUsuario;
+
+							while(MatrizAuxiliarUsuario != nullptr)
+							{
+								MatrizDU AuxiliarUsuarios = MatrizAuxiliarUsuario;
+
+								if(MatrizAuxiliarUsuario -> ArbolAVLActivosUsuario != nullptr)
+								{
+									Variables::ReporteArbol += MatrizAuxiliarUsuario -> NombreUsuario + "[ label =\"Usuario : " + MatrizAuxiliarUsuario -> NombreUsuario + "\", width = 2];\n";
+									Variables::ReporteArbol += MatrizAuxiliarUsuario -> NombreUsuario + " -> NodoArbol" + to_string(Numero) + "0" + "\n\n";
+									ReporteActivosDepartamentosArbolAVLA(MatrizAuxiliarUsuario -> ArbolAVLActivosUsuario, Numero);
+									Numero++;
+									Variables::ReporteArbol += "\n\n";
+								}
+
+								MatrizAuxiliarUsuario = AuxiliarUsuarios -> Atr;
+							}
+
+							MatrizAuxiliarUsuario = AuxiliarEmpresa -> Aba;
+                        }
+					}
+
+					MatrizAuxiliarUsuario = AuxiliarDepartamento -> Sgte;
+				}
+
+				SalidaArchivo<< Variables::ReporteArbol << endl;
+				SalidaArchivo<< "}" << endl;
+				SalidaArchivo.close();
+
+                //Generar Archivo Dot Para Graficar
+				system("C:\\\"Program Files (x86)\"\\Graphviz2.38\\bin\\dot.exe  -Tpng C:\\ReportesEDD\\ReporteActivosPorDepartamento.txt -o C:\\ReportesEDD\\ReporteActivosPorDepartamento.png");
+				//Abrir Imagen Con El Vizualizador de Imagenes
+				system("C:\\ReportesEDD\\ReporteActivosPorDepartamento.png &" );
+			}
+		}
+	}
+
+		//Reporte Activos Por Empresa
+
+	void ReporteActivosPorEmpresaMatrizDispersaU(MatrizDU &Matriz, string NombreEmpresa)
+	{
+		//Declaraciones
+		ofstream SalidaArchivo("C:\\ReportesEDD\\ReporteActivosPorEmpresa.txt");
+		MatrizDU MatrizAuxiliarUsuario = Matriz;
+		string CadenaArboles = "";
+		int Numero = 0;
+
+		if(SalidaArchivo.is_open())
+		{
+			if(Matriz != nullptr)
+			{
+				//Apertura Archivo Y Comienza Escritura
+
+				SalidaArchivo<< "digraph MatrizDispersa " <<endl;
+				SalidaArchivo<< "{" <<endl;
+				SalidaArchivo<< "graph[charset=latin1]" <<endl;
+				SalidaArchivo<< "node[shape = box, style = rounded, color = midnightblue, fontcolor = darkgreen];" <<endl;
+				SalidaArchivo<< "Empresa[ label =\"Empresa: " + NombreEmpresa + "\", width = 2];\n" <<endl;
+
+				while(MatrizAuxiliarUsuario != nullptr)
+				{
+					MatrizDU AuxiliarDepartamento = MatrizAuxiliarUsuario;
+
+					if(NombreEmpresa == MatrizAuxiliarUsuario -> NombreEmpresa)
+					{
+						while(MatrizAuxiliarUsuario != nullptr)
+						{
+							MatrizDU AuxiliarEmpresa = MatrizAuxiliarUsuario;
+
+							while(MatrizAuxiliarUsuario != nullptr)
+							{
+								MatrizDU AuxiliarUsuarios = MatrizAuxiliarUsuario;
+
+								if(MatrizAuxiliarUsuario -> ArbolAVLActivosUsuario != nullptr)
+								{
+									Variables::ReporteArbol += MatrizAuxiliarUsuario -> NombreUsuario + "[ label =\"Usuario : " + MatrizAuxiliarUsuario -> NombreUsuario + "\", width = 2];\n";
+									Variables::ReporteArbol += MatrizAuxiliarUsuario -> NombreUsuario + " -> NodoArbol" + to_string(Numero) + "0" + "\n\n";
+									ReporteActivosDepartamentosArbolAVLA(MatrizAuxiliarUsuario -> ArbolAVLActivosUsuario, Numero);
+									Numero++;
+									Variables::ReporteArbol += "\n\n";
+								}
+
+								MatrizAuxiliarUsuario = AuxiliarUsuarios -> Atr;
+							}
+
+							MatrizAuxiliarUsuario = AuxiliarEmpresa -> Sgte;
+                        }
+					}
+
+					MatrizAuxiliarUsuario = AuxiliarDepartamento -> Aba;
+				}
+
+				SalidaArchivo<< Variables::ReporteArbol << endl;
+				SalidaArchivo<< "}" << endl;
+				SalidaArchivo.close();
+
+				//Generar Archivo Dot Para Graficar
+				system("C:\\\"Program Files (x86)\"\\Graphviz2.38\\bin\\dot.exe  -Tpng C:\\ReportesEDD\\ReporteActivosPorEmpresa.txt -o C:\\ReportesEDD\\ReporteActivosPorEmpresa.png");
+				//Abrir Imagen Con El Vizualizador de Imagenes
+				system("C:\\ReportesEDD\\ReporteActivosPorEmpresa.png &" );
+			}
+		}
+	}
+
+		//Reporte Matriz
 
 	void ReporteUsuariosMatrizDispersaU(MatrizDU &Matriz)
 	{
@@ -127,9 +365,15 @@
 
 					while(MatrizAuxiliarUsuario != nullptr)
 					{
-                        cout<< "usuario";
-						SalidaArchivo<< "NodoUsuario" << TrimCadena(MatrizAuxiliarUsuario -> NombreDepartamento) << TrimCadena(MatrizAuxiliarUsuario -> NombreEmpresa) << " [label = \" Usuario:" + MatrizAuxiliarUsuario -> NombreUsuario + "\\lNombre: " + MatrizAuxiliarUsuario -> NombreCompleto + "\", width = 2, color = steelblue, fontcolor = firebrick1, group = " + to_string(ContadorGrupos) + "];\n" <<endl;
-						//Nodo Xd
+						if(MatrizAuxiliarUsuario -> Atr != nullptr)
+						{
+							SalidaArchivo<< "NodoUsuario" << TrimCadena(MatrizAuxiliarUsuario -> NombreDepartamento) << TrimCadena(MatrizAuxiliarUsuario -> NombreEmpresa) << " [label = \" Usuario:" + MatrizAuxiliarUsuario -> NombreUsuario + "\\lNombre: " + MatrizAuxiliarUsuario -> NombreCompleto  + "\\l" + "Hay Mas Usuarios Atras" + "\", width = 2, color = steelblue, fontcolor = firebrick1, group = " + to_string(ContadorGrupos) + "];\n" <<endl;
+						}
+						else
+						{
+							SalidaArchivo<< "NodoUsuario" << TrimCadena(MatrizAuxiliarUsuario -> NombreDepartamento) << TrimCadena(MatrizAuxiliarUsuario -> NombreEmpresa) << " [label = \" Usuario:" + MatrizAuxiliarUsuario -> NombreUsuario + "\\lNombre: " + MatrizAuxiliarUsuario -> NombreCompleto + "\", width = 2, color = steelblue, fontcolor = firebrick1, group = " + to_string(ContadorGrupos) + "];\n" <<endl;
+                        }
+
 						MatrizAuxiliarUsuario = MatrizAuxiliarUsuario -> Aba;
 					}
 					MatrizAuxiliarUsuario = AuxiliarCabecera -> Sgte;
@@ -193,9 +437,412 @@
 		}
 	}
 
-	//Búsqueda De Usuarios
+	//Inserción
 
-	   //Búsqueda Usuario Retorna True = Existe False = No Existe
+		//Enlazar Cabecera Empresa
+
+	void EnalazarEmpresaNueva(MatrizDU &Inicio, MatrizDU &CabEmp)
+	{
+		//Declaraciones
+
+		//Objeto Tipo Matriz Dispersa
+
+		MatrizDU AuxInicio = Inicio;
+
+		//Variables Tipo String
+
+		string Empresa = CabEmp -> NombreEmpresa;
+		string AuxEmpresa = "";
+		string AuxEmpresaAba = "";
+
+		//Comienzo Recorrer Matriz
+
+		while(AuxInicio != nullptr)
+		{
+			//Asignar Nombre Empresa
+
+			AuxEmpresa = AuxInicio -> NombreEmpresa;
+
+			//Inicio A Comparar
+
+			if(Empresa.compare(AuxEmpresa) > 0)
+			{
+				//Comparación Empresa
+
+				//Es Mayor
+
+				if(AuxInicio -> Aba == nullptr)
+				{
+					//Enlazar Cabecera Empresa
+
+					AuxInicio -> Aba = CabEmp;
+					CabEmp -> Arr = AuxInicio;
+					break;
+				}
+				else
+				{
+					//Enalazar Cabecera Empresa
+
+					AuxEmpresaAba = AuxInicio -> Aba -> NombreEmpresa;
+
+					if(Empresa.compare(AuxEmpresaAba) < 0)
+					{
+						//Comparación Empresa
+
+						//Es Menor
+
+						MatrizDU Aba = AuxInicio -> Aba;
+						AuxInicio -> Aba = CabEmp;
+						CabEmp -> Arr = AuxInicio;
+						Aba -> Arr = CabEmp;
+						CabEmp -> Aba = Aba;
+						break;
+					}
+				}
+			}
+			AuxInicio = AuxInicio -> Aba;
+		}
+	}
+
+		//Enlazar Cabecera Departamento
+
+	void EnalazarDepartamentoNuevo(MatrizDU &Inicio, MatrizDU &CabDep)
+	{
+		//Declaraciones
+
+		//Obejto Tipo Matriz Dispersa
+
+		MatrizDU AuxInicio = Inicio;
+
+		//Variables Tipo String
+
+		string Departamento = CabDep -> NombreDepartamento;
+		string AuxDepartamento = "";
+		string AuxDepartamentoSgte = "";
+
+		//Comienzo Recorrer Matriz
+
+		while(AuxInicio != nullptr)
+		{
+			//Asignacion Nombre Departamento
+
+			AuxDepartamento = AuxInicio -> NombreDepartamento;
+
+			//Comparacion
+
+			if(Departamento.compare(AuxDepartamento) > 0)
+			{
+				//Comparación Departamento
+
+				//Es Mayor
+
+				if(AuxInicio -> Sgte == nullptr)
+				{
+					//Enlazar Cabecera Departamento
+
+					AuxInicio -> Sgte = CabDep;
+					CabDep -> Ante = AuxInicio;
+					break;
+				}
+				else
+				{
+					//Enlazar Cabecera Departamento
+
+					AuxDepartamentoSgte = AuxInicio -> Sgte -> NombreDepartamento;
+
+					if(Departamento.compare(AuxDepartamentoSgte) < 0)
+					{
+						//Comparación Departamento
+
+						//Es Menor
+
+						MatrizDU Sgte = AuxInicio -> Sgte;
+						AuxInicio -> Sgte = CabDep;
+						CabDep -> Ante = AuxInicio;
+						Sgte -> Ante = CabDep;
+						CabDep -> Sgte = Sgte;
+						break;
+					}
+				}
+			}
+			AuxInicio = AuxInicio -> Sgte;
+		}
+	}
+
+	//Comparación Y Elección Casos De Inserción
+
+	void CasosInsercion(MatrizDU &CabDep, MatrizDU &CabEmp, MatrizDU &Usuario, MatrizDU &Inicio)
+	{
+		//Declaracioens
+
+		bool HacerEmpresa=false;
+		bool HacerDepartamento=false;
+		MatrizDU Auxiliar=Inicio;
+
+		//El Departamento no existia y la empresa si
+
+		if(CabDep -> Aba == nullptr)
+		{
+			CabDep -> Aba = Usuario;
+			Usuario -> Arr = CabDep;
+			HacerEmpresa = true;
+			//revisar entre que nodos de empresa hay que insertar el nuevo
+		}
+
+		//La Empresa No Existia pero el departamento si
+
+		if(CabEmp -> Sgte == nullptr)
+		{
+			CabEmp -> Sgte = Usuario;
+			Usuario -> Ante = CabEmp;
+			HacerDepartamento = true;
+		}
+
+		if(HacerEmpresa == true && HacerDepartamento == true)
+		{
+			//no hace nada
+		}
+		else if(HacerEmpresa != true && HacerDepartamento == true)
+		{
+			//Tengo que enlazar con la empresa
+			MatrizDU Aux_Dep = CabDep;
+			string DepS_User = Usuario -> NombreEmpresa;
+			string DepS_Aux = "";
+			string DepS_Aux_Aba = "";
+
+			while(Aux_Dep != nullptr)
+			{
+				DepS_Aux = Aux_Dep -> NombreEmpresa;
+
+				if(DepS_User.compare(DepS_Aux) > 0)
+				{
+					//Adelante de Aux_Emp hay que insertar pero falta un If
+
+					if(Aux_Dep -> Aba != nullptr)
+					{
+						DepS_Aux_Aba = Aux_Dep -> Aba -> NombreEmpresa;
+
+						if(DepS_User.compare(DepS_Aux_Aba) < 0)
+						{
+							MatrizDU Aba=Aux_Dep->Aba;
+							Aux_Dep -> Aba = Usuario;
+							Usuario -> Arr = Aux_Dep;
+							Aba -> Arr = Usuario;
+							Usuario -> Aba = Aba;
+							break;
+						}
+					}
+					else
+					{
+						Aux_Dep -> Aba = Usuario;
+						Usuario -> Arr = Aux_Dep;
+						break;
+					}
+				}
+				Aux_Dep = Aux_Dep -> Aba;
+			}
+
+		}
+		else if(HacerEmpresa == true && HacerDepartamento != true)
+		{
+			MatrizDU Aux_Emp = CabEmp;
+			string EmpS_User = Usuario -> NombreDepartamento;
+			string EmpS_Aux = "";
+			string EmpS_Aux_Sgte = "";
+
+			while(Aux_Emp != nullptr)
+			{
+				EmpS_Aux = Aux_Emp -> NombreDepartamento;
+
+				if(EmpS_User.compare(EmpS_Aux) > 0)
+				{
+					//Adelante de Aux_Emp hay que insertar pero falta un If
+
+					if(Aux_Emp->Sgte != nullptr)
+					{
+						EmpS_Aux_Sgte = Aux_Emp -> Sgte -> NombreDepartamento;
+
+						if(EmpS_User.compare(EmpS_Aux_Sgte) < 0)
+						{
+							MatrizDU SIG=Aux_Emp->Sgte;
+							Aux_Emp -> Sgte = Usuario;
+							Usuario -> Ante = Aux_Emp;
+							SIG -> Ante = Usuario;
+							Usuario -> Sgte = SIG;
+							break;
+						}
+					}
+					else
+					{
+						Aux_Emp -> Sgte = Usuario;
+						Usuario -> Ante = Aux_Emp;
+						break;
+					}
+				}
+				Aux_Emp = Aux_Emp -> Sgte;
+			}
+		}
+		else if(HacerEmpresa != true && HacerDepartamento != true)
+		{
+			//Aqui Tengo que insertar
+			MatrizDU AuxDep = CabDep;
+			MatrizDU AuxEmp = CabEmp;
+			bool SeHizo = false;
+
+			while(AuxDep != nullptr)
+			{
+				if(AuxEmp -> NombreEmpresa.compare(AuxDep -> NombreEmpresa) == 0)
+				{
+					MatrizDU Aux2 = AuxDep;
+
+					while(Aux2 != nullptr)
+					{
+						if(Aux2 -> Atr == nullptr)
+						{
+							Aux2 -> Atr = Usuario;
+							Usuario -> Adte = Aux2;
+							SeHizo = true;
+							break;
+						}
+						Aux2 = Aux2 -> Atr;
+					}
+				}
+				AuxDep = AuxDep -> Aba;
+			}
+			if(SeHizo==false)
+			{
+				//Voy a Mover la cebecera en lugar de hacer una variable
+				string AuxS_Dep=Usuario->NombreEmpresa;
+				string AuxS_Dep_Evaluar="",AuxS_Dep_Sig="";
+				while(CabDep!=nullptr){
+					AuxS_Dep_Evaluar= CabDep->NombreEmpresa;
+					if(AuxS_Dep.compare(AuxS_Dep_Evaluar)>0){
+						if(CabDep->Aba==nullptr){
+							CabDep->Aba=Usuario;
+							Usuario->Arr=CabDep;
+							break;
+						}
+						else{
+							AuxS_Dep_Sig=CabDep->Aba->NombreEmpresa;
+							if(AuxS_Dep.compare(AuxS_Dep_Sig)<0){
+								MatrizDU ABA=CabDep->Aba;
+								CabDep->Aba=Usuario;
+								Usuario->Arr=CabDep;
+								ABA->Arr=Usuario;
+								Usuario->Aba=ABA;
+								break;
+							}
+						}
+					}
+					CabDep=CabDep->Aba;
+				}
+
+				//Empresa
+				string AuxS_Emp=Usuario->NombreDepartamento;
+				string AuxS_Emp_Evaluar="",AuxS_Emp_Sig="";
+				while(CabEmp!=nullptr){
+					AuxS_Emp_Evaluar= CabEmp->NombreDepartamento;
+					if(AuxS_Emp.compare(AuxS_Emp_Evaluar)>0){
+						if(CabEmp->Sgte==nullptr){
+							CabEmp->Sgte=Usuario;
+							Usuario->Ante=CabEmp;
+							break;
+						}
+						else{
+							AuxS_Emp_Sig=CabEmp->Sgte->NombreDepartamento;
+							if(AuxS_Emp.compare(AuxS_Emp_Sig)<0){
+								MatrizDU SGTE=CabEmp->Sgte;
+								CabEmp->Sgte=Usuario;
+								Usuario->Ante=CabEmp;
+								SGTE->Ante=Usuario;
+								Usuario->Sgte=SGTE;
+								break;
+							}
+						}
+					}
+					CabEmp=CabEmp->Sgte;
+				}
+
+			}
+		}
+	}
+
+		//Insertar Nuevo Usuario
+
+	void AgregarUsuario(string NombreCompleto_Usuario, string Nombre_Usuario, string Contrasena_Usuario, string Departamento_Usuario, string Empresa_Usuario, MatrizDU &Matriz)
+	{
+		//Declaraciones
+
+		//Objeto Tipo Matriz Dispersa
+
+		MatrizDU Inicio = Matriz;
+		MatrizDU CabDep = Inicio;
+		MatrizDU CabEmp = Inicio;
+
+		//Variables Tipo String
+
+		string Aux = "";
+
+        //UpperCase
+		Departamento_Usuario = UpperCase(Departamento_Usuario);
+		Empresa_Usuario = UpperCase(Empresa_Usuario);
+
+		//Buscar Cabecera Departamento
+
+		while(CabDep!=nullptr)
+		{
+			Aux = CabDep -> NombreDepartamento;
+
+			if(Aux.compare(Departamento_Usuario) == 0)
+			{
+				break;
+			}
+
+			CabDep = CabDep -> Sgte;
+		}
+
+		//Buscar Cabecera Empresa
+
+		while(CabEmp != nullptr)
+		{
+			Aux = CabEmp -> NombreEmpresa;
+
+			if(Aux.compare(Empresa_Usuario) == 0)
+			{
+				break;
+			}
+
+			CabEmp = CabEmp -> Aba;
+		}
+
+		//Crear Cabecera Departamento
+
+		if(CabDep == nullptr)
+		{
+			CabDep = new MatrizDispersaEstructura("Dep", Departamento_Usuario);
+			EnalazarDepartamentoNuevo(Inicio,CabDep);
+		}
+
+		//Crear Cabecera Empresa
+
+		if(CabEmp == nullptr)
+		{
+			CabEmp = new MatrizDispersaEstructura("Emp", Empresa_Usuario);
+			EnalazarEmpresaNueva(Inicio,CabEmp);
+		}
+
+		//Crear Usuario
+
+		MatrizDU Usuario = new MatrizDispersaEstructura(NombreCompleto_Usuario, Nombre_Usuario, Contrasena_Usuario, Empresa_Usuario, Departamento_Usuario);
+
+		//Verificar Casos Inserción
+
+		CasosInsercion(CabDep, CabEmp, Usuario, Inicio);
+	}
+
+	//Búsqueda
+
+		//Buscar Una Usuario
 
 	bool BuscarUsuarioMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreEmpresa, string NombreDepartamento)
 	{
@@ -256,376 +903,49 @@
 		return Bandera;
 	}
 
-		//Búsqueda Usuario Retorna AuxiliarMatriz
+		//Buscar Arbol Usuario
 
-	MatrizDU BuscarUsuarioAuxMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreEmpresa, string NombreDepartamento)
-	{
-		//Declraciones
-		MatrizDU UsuarioAuxiliar = Matriz;
-
-		if(UsuarioAuxiliar -> NombreUsuario == NombreUsuario && UsuarioAuxiliar -> NombreDepartamento == NombreDepartamento && UsuarioAuxiliar -> NombreEmpresa == NombreEmpresa)
-		{
-			return UsuarioAuxiliar;
-		}
-		else
-		{
-			while(UsuarioAuxiliar != nullptr)
-			{
-				if(UsuarioAuxiliar -> NombreDepartamento == NombreDepartamento)
-				{
-					while(UsuarioAuxiliar != nullptr)
-					{
-						if(UsuarioAuxiliar -> NombreEmpresa == NombreEmpresa)
-						{
-							while(UsuarioAuxiliar != nullptr)
-							{
-								if(UsuarioAuxiliar -> NombreUsuario == NombreUsuario)
-								{
-									return UsuarioAuxiliar;
-								}
-
-								UsuarioAuxiliar = UsuarioAuxiliar -> Atr;
-
-								if(UsuarioAuxiliar == nullptr)
-								{
-									return nullptr;
-								}
-							}
-						}
-						UsuarioAuxiliar = UsuarioAuxiliar -> Aba;
-
-						if(UsuarioAuxiliar == nullptr)
-						{
-							return nullptr;
-						}
-					}
-				}
-				UsuarioAuxiliar = UsuarioAuxiliar -> Sgte;
-			}
-		}
-		return nullptr;
-	}
-
-	//Insercion
-
-		//Crear Cabecera Empresa
-
-	bool InsertarCabeceraEmpresaMatrizDispersaU(MatrizDU &Matriz, string NombreEmpresa, MatrizDispersaEstructura& UsuarioAux, MatrizDispersaEstructura& EmpresaAux)
+	void BuscarArbolUsuarioMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreEmpresa, string NombreDepartamento)
 	{
 		//Declaraciones
-		MatrizDU UsuarioNuevoAuxiliar = &UsuarioAux;
-		MatrizDU EmpresaNuevaAuxiliar = &EmpresaAux;
-		MatrizDU AuxiliarEmpresa = Matriz;
-		string Comparacion = "";
-
-        //Insertar Cabecera De Tipo Empresa
-
-		//UpperCase
-		NombreEmpresa = UpperCase(NombreEmpresa);
-
-		while(AuxiliarEmpresa != nullptr)
-		{
-			Comparacion = AuxiliarEmpresa -> NombreEmpresa;
-
-			if(NombreEmpresa.compare(Comparacion) >= 0)
-			{
-				if(AuxiliarEmpresa -> Aba != nullptr)
-				{
-					Comparacion = AuxiliarEmpresa -> Aba -> NombreEmpresa;
-
-					if(NombreEmpresa.compare(Comparacion) <= 0)
-					{
-						MatrizDU AuxiliarAbajo = AuxiliarEmpresa -> Aba;
-						AuxiliarEmpresa -> Aba = EmpresaNuevaAuxiliar;
-						AuxiliarAbajo -> Arr = EmpresaNuevaAuxiliar;
-						EmpresaNuevaAuxiliar -> Arr = AuxiliarEmpresa;
-						EmpresaNuevaAuxiliar -> Aba = AuxiliarAbajo;
-						EmpresaNuevaAuxiliar -> Sgte = UsuarioNuevoAuxiliar;
-						UsuarioNuevoAuxiliar -> Ante = EmpresaNuevaAuxiliar;
-						return true;
-					}
-				}
-				else
-				{
-					AuxiliarEmpresa -> Aba = EmpresaNuevaAuxiliar;
-					EmpresaNuevaAuxiliar -> Arr = AuxiliarEmpresa;
-					EmpresaNuevaAuxiliar -> Sgte = UsuarioNuevoAuxiliar;
-					UsuarioNuevoAuxiliar -> Ante = EmpresaNuevaAuxiliar;
-					return true;
-				}
-			}
-			AuxiliarEmpresa = AuxiliarEmpresa -> Aba;
-		}
-		return false;
-	}
-
-		//Crear Cabecera Departamento
-
-	bool InsertarCabeceraDepartamentoMatrizDispersaU(MatrizDU &Matriz, string NombreDepartamento, MatrizDispersaEstructura& UsuarioAux, MatrizDispersaEstructura& DepartamentoAux)
-	{
-		//Declaraciones
-		MatrizDU UsuarioNuevoAuxiliar = &UsuarioAux;
-		MatrizDU DepartamentoNuevoAuxiliar = &DepartamentoAux;
-		MatrizDU AuxiliarDepartamento = Matriz;
-		string Comparacion = "";
-
-        //Insertar Cabecera De Tipo Departamento
-
-		//UpperCase
-		NombreDepartamento = UpperCase(NombreDepartamento);
-
-		while(AuxiliarDepartamento != nullptr)
-		{
-			Comparacion = AuxiliarDepartamento -> NombreDepartamento;
-
-			if(NombreDepartamento.compare(Comparacion) >= 0)
-			{
-				if(AuxiliarDepartamento -> Sgte != nullptr)
-				{
-                    Comparacion = AuxiliarDepartamento -> Sgte -> NombreDepartamento;
-
-					if(NombreDepartamento.compare(Comparacion) <= 0)
-					{
-						MatrizDU AuxiliarSiguiente = AuxiliarDepartamento -> Sgte;
-						AuxiliarDepartamento -> Sgte = DepartamentoNuevoAuxiliar;
-						AuxiliarSiguiente -> Ante = DepartamentoNuevoAuxiliar;
-						DepartamentoNuevoAuxiliar -> Ante = AuxiliarDepartamento;
-						DepartamentoNuevoAuxiliar -> Sgte = AuxiliarSiguiente;
-						DepartamentoNuevoAuxiliar -> Aba = UsuarioNuevoAuxiliar;
-						UsuarioNuevoAuxiliar -> Arr = DepartamentoNuevoAuxiliar;
-						return true;
-					}
-				}
-				else
-				{
-					AuxiliarDepartamento -> Sgte = DepartamentoNuevoAuxiliar;
-					DepartamentoNuevoAuxiliar -> Ante = AuxiliarDepartamento;
-					DepartamentoNuevoAuxiliar -> Aba = UsuarioNuevoAuxiliar;
-					UsuarioNuevoAuxiliar -> Arr = DepartamentoNuevoAuxiliar;
-					return true;
-				}
-			}
-			AuxiliarDepartamento = AuxiliarDepartamento -> Sgte;
-		}
-		return false;
-	}
-
-		//Comparar Y Elegir Caso De Inserción
-
-	void ComparacionYEleccionCasosInsercionMatrizDispersaU(MatrizDispersaEstructura& UsuarioNuevo, MatrizDispersaEstructura& EmpresaNueva, MatrizDispersaEstructura& DepartamentoNuevo)
-	{
-		//Declaraciones
-		MatrizDU DepartamentoAuxiliar = &DepartamentoNuevo;
-		MatrizDU EmpresaAuxiliar = &EmpresaNueva;
-		MatrizDU UsuarioAuxiliar = &UsuarioNuevo;
-		string ComparacionE = "";
-		string ComparacionE2 = "";
-		string ComparacionD = "";
-		string ComparacionD2 = "";
-
-
-        //Comienza Comparación Y Elección
-
-		//Comienzo En Empresa
-
-		while(EmpresaAuxiliar != nullptr)
-		{
-			ComparacionE = UsuarioAuxiliar -> NombreDepartamento;
-			ComparacionE2 = EmpresaAuxiliar -> NombreDepartamento;
-
-			if(ComparacionE.compare(ComparacionE2) >= 0)
-			{
-				if(EmpresaAuxiliar -> Sgte != nullptr)
-				{
-					ComparacionE = UsuarioAuxiliar -> NombreDepartamento;
-					ComparacionE2 = EmpresaAuxiliar -> Sgte -> NombreDepartamento;
-
-					if(ComparacionE.compare(ComparacionE2) <= 0)
-					{
-						cout<< "Agregue Empresa ";
-						MatrizDU AuxSiguiente = EmpresaAuxiliar -> Sgte;
-						EmpresaAuxiliar -> Sgte = UsuarioAuxiliar;
-						UsuarioAuxiliar -> Ante = EmpresaAuxiliar;
-						AuxSiguiente -> Ante = UsuarioAuxiliar;
-						UsuarioAuxiliar -> Sgte = AuxSiguiente;
-						break;
-					}
-				}
-				else
-				{
-                    cout<< "Agregue Empresa else ";
-					EmpresaAuxiliar -> Sgte = UsuarioAuxiliar;
-					UsuarioAuxiliar -> Ante = EmpresaAuxiliar;
-					break;
-				}
-			}
-			EmpresaAuxiliar = EmpresaAuxiliar -> Sgte;
-		}
-
-		//Comienzo En Departamento
-
-		while(DepartamentoAuxiliar != nullptr)
-		{
-			ComparacionD = UsuarioAuxiliar -> NombreEmpresa;
-			ComparacionD2 = DepartamentoAuxiliar -> NombreEmpresa;
-
-			if(ComparacionD.compare(ComparacionD2) >= 0)
-			{
-				if(DepartamentoAuxiliar -> Aba != nullptr)
-				{
-					ComparacionD = UsuarioAuxiliar -> NombreEmpresa;
-					ComparacionD2 = DepartamentoAuxiliar -> Aba -> NombreEmpresa;
-
-					if(ComparacionD.compare(ComparacionD2) <= 0)
-					{
-						cout<< "Agregue Departamento ";
-						MatrizDU AuxiliarAbajo = DepartamentoAuxiliar -> Aba;
-						DepartamentoAuxiliar -> Aba = UsuarioAuxiliar;
-						UsuarioAuxiliar -> Arr = DepartamentoAuxiliar;
-						AuxiliarAbajo -> Arr = UsuarioAuxiliar;
-						UsuarioAuxiliar -> Aba = AuxiliarAbajo;
-						break;
-					}
-				}
-				else
-				{
-                    cout<< "Agregue Departamento else ";
-					DepartamentoAuxiliar -> Aba = UsuarioAuxiliar;
-					UsuarioAuxiliar -> Arr = DepartamentoAuxiliar;
-					break;
-				}
-			}
-			DepartamentoAuxiliar = DepartamentoAuxiliar -> Aba;
-		}
-	}
-
-		//Insertar Usuario
-
-	bool InsertarUsuarioMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreCompleto, string Password, string NombreDepartamento, string NombreEmpresa)
-	{
-		//Declaraciones
-
-		MatrizDU DepartamentoAuxiliar = Matriz;
-		MatrizDU EmpresaAuxiliar = Matriz;
-		MatrizDU UsuarioAuxiliarBusqueda;
+		MatrizDU Auxiliar = Matriz;
+		bool Bandera = false;
 
 		//UpperCase
 		NombreEmpresa = UpperCase(NombreEmpresa);
 		NombreDepartamento = UpperCase(NombreDepartamento);
 
-        //Asignaciones
-
-		UsuarioAuxiliarBusqueda = BuscarUsuarioAuxMatrizDispersaU(Matriz, NombreUsuario, NombreEmpresa, NombreDepartamento);
-
-		//Comenzar Recorrer Matriz Dispersa
-
-		if(UsuarioAuxiliarBusqueda == nullptr)
+		while(Auxiliar != nullptr)
 		{
-			//Recorrer Departamentos
-
-			while(DepartamentoAuxiliar != nullptr)
+			if(Auxiliar -> NombreDepartamento == NombreDepartamento)
 			{
-				if(NombreDepartamento == DepartamentoAuxiliar -> NombreDepartamento)
+				while(Auxiliar != nullptr)
 				{
-					break;
-				}
-
-				DepartamentoAuxiliar = DepartamentoAuxiliar -> Sgte;
-			}
-
-			//Recorrer Empresas
-
-			while(EmpresaAuxiliar != nullptr)
-			{
-				if(NombreEmpresa == EmpresaAuxiliar -> NombreEmpresa)
-				{
-					break;
-				}
-
-				EmpresaAuxiliar = EmpresaAuxiliar -> Aba;
-			}
-
-			if(DepartamentoAuxiliar != nullptr && EmpresaAuxiliar != nullptr)
-			{
-				//Caso 1: Existen Ambas Cabecera
-
-				cout<< "Caso 1";
-
-				MatrizDU CabeceraDepartamento = DepartamentoAuxiliar;
-				MatrizDU CabeceraEmpresa = EmpresaAuxiliar;
-
-				while(DepartamentoAuxiliar != nullptr)
-				{
-					if(DepartamentoAuxiliar -> NombreDepartamento == NombreDepartamento && DepartamentoAuxiliar -> NombreEmpresa == NombreEmpresa)
+					if(Auxiliar -> NombreEmpresa == NombreEmpresa)
 					{
-						while(DepartamentoAuxiliar != nullptr)
+						if(Auxiliar -> Atr != nullptr)
 						{
-							if(DepartamentoAuxiliar -> Atr == nullptr)
+                            while(Auxiliar != nullptr)
 							{
-								MatrizDU Auxiliar = new MatrizDispersaEstructura(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
-								DepartamentoAuxiliar -> Atr = Auxiliar;
-								Auxiliar -> Adte = DepartamentoAuxiliar;
-								return true;
+								if(Auxiliar -> NombreUsuario == NombreUsuario)
+								{
+									Variables::AuxiliarArbol = Auxiliar;
+									break;
+								}
+								Auxiliar = Auxiliar -> Atr;
 							}
-
-							DepartamentoAuxiliar = DepartamentoAuxiliar -> Atr;
 						}
+						else
+						{
+							Variables::AuxiliarArbol = Auxiliar;
+						}
+						break;
 					}
-					DepartamentoAuxiliar = DepartamentoAuxiliar -> Aba;
+					Auxiliar = Auxiliar -> Aba;
 				}
-
-				MatrizDU Auxiliar2 = new MatrizDispersaEstructura(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
-				ComparacionYEleccionCasosInsercionMatrizDispersaU(*Auxiliar2, *CabeceraEmpresa, *CabeceraDepartamento);
-				return true;
+				break;
 			}
-			else if(DepartamentoAuxiliar == nullptr && EmpresaAuxiliar == nullptr)
-			{
-				//Caso 2: No Existe Ninguna Cabecera
-
-				cout<< "Caso 2";
-
-				MatrizDU DepartamentoNuevo = new MatrizDispersaEstructura("Dep", NombreDepartamento);
-				MatrizDU EmpresaNueva = new MatrizDispersaEstructura("Emp", NombreEmpresa);
-				MatrizDU UsuarioNuevo = new MatrizDispersaEstructura(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
-
-				if(InsertarCabeceraDepartamentoMatrizDispersaU(Matriz, NombreDepartamento, *UsuarioNuevo, *DepartamentoNuevo) == true)
-				{
-					if(InsertarCabeceraEmpresaMatrizDispersaU(Matriz, NombreEmpresa, *UsuarioNuevo, *EmpresaNueva) == true)
-					{
-						return true;
-					}
-				}
-			}
-			else if(DepartamentoAuxiliar != nullptr && EmpresaAuxiliar == nullptr)
-			{
-				//Caso 3: No Existe Empresa
-
-				cout<< "Caso 3";
-
-				MatrizDU EmpresaNueva = new MatrizDispersaEstructura("Emp", NombreEmpresa);
-				MatrizDU UsuarioNuevo = new MatrizDispersaEstructura(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
-				InsertarCabeceraEmpresaMatrizDispersaU(Matriz, NombreEmpresa, *UsuarioNuevo, *EmpresaNueva);
-				ComparacionYEleccionCasosInsercionMatrizDispersaU(*DepartamentoAuxiliar, *EmpresaNueva, *UsuarioNuevo);
-				return true;
-			}
-			else if(DepartamentoAuxiliar == nullptr && EmpresaAuxiliar != nullptr)
-			{
-				//Caso 4: No Existe Departamento
-
-				cout<< "Caso 4";
-
-				MatrizDU DepartamentoNuevo = new MatrizDispersaEstructura("Dep", NombreDepartamento);
-				MatrizDU UsuarioNuevo = new MatrizDispersaEstructura(NombreCompleto, NombreUsuario, Password, NombreEmpresa, NombreDepartamento);
-				InsertarCabeceraDepartamentoMatrizDispersaU(Matriz, NombreDepartamento, *UsuarioNuevo, *DepartamentoNuevo);
-				ComparacionYEleccionCasosInsercionMatrizDispersaU(*DepartamentoNuevo, *EmpresaAuxiliar, *UsuarioNuevo);
-				return true;
-			}
+			Auxiliar = Auxiliar -> Sgte;
 		}
-		else
-		{
-			return false;
-		}
-		return false;
 	}
-
 

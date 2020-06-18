@@ -1,0 +1,116 @@
+//------------------------------------------------------------------------------
+
+	#pragma hdrstop
+
+//---------------------------------Librerias------------------------------------
+
+	#include <iostream>
+	#include <stdio.h>
+	#include <conio.h>
+	#include <string>
+	#include <cstdlib>
+	#include <fstream>
+	#include "LIstaDobleCircularEstructura.h"
+	using namespace std;
+
+//------------------------------------------------------------------------------
+
+	#pragma package(smart_init)
+
+//---------------------------------Métodos--------------------------------------
+
+	//Reportes
+
+	//Generar Reporte Lista Circular
+
+	void ReporteListaDobleCircularT(ListaDCTrans &Lista)
+	{
+		ofstream ReporteDiccionario("C:\\ReportesEDD\\ReporteListaDobleCircularTransacciones.txt");
+
+		ListaDCTrans Auxliar = Lista;
+
+		ReporteDiccionario<< "digraph G" <<endl;
+		ReporteDiccionario<< "{" <<endl;
+		ReporteDiccionario<< "graph [charset=latin1]" <<endl;
+		ReporteDiccionario<< "node [shape = box, fontname = Arial, color = blue];" <<endl;
+
+		int Contador = 0;
+		string Temp[1000];
+		string Same = "";
+		string Asc = "";
+		string Desc = "";
+
+		if(Lista != NULL)
+		{
+			do
+			{
+				ReporteDiccionario<< "A" << Contador << " [label = " <<"\"" << Auxliar -> CodigoANumericoTrans <<"\"]" <<endl;
+				Temp[Contador] = "A" + to_string(Contador);
+				Contador++;
+				Auxliar = Auxliar -> Sgte;
+			}
+			while(Auxliar != Lista);
+
+			for(int i = 0; i < Contador; i++)
+			{
+				Same = Same + Temp[i] + " ";
+
+				if(i < Contador - 1)
+				{
+					Asc = Asc + Temp[i] + "->";
+					Desc = Desc + Temp[Contador - i - 1] + "->";
+				}
+				else
+				{
+					Asc = Asc + Temp[i];
+					Desc = Desc + Temp[Contador - i - 1];
+				}
+			}
+
+			
+			Asc = Asc + "->" + "A0" + "->" + "A" + to_string(Contador - 1);
+			ReporteDiccionario<< "{ rank = same " << Same << "}" << endl;
+			ReporteDiccionario<< Asc <<endl;
+            ReporteDiccionario<< Desc <<endl;
+			ReporteDiccionario<< " " <<endl;
+			ReporteDiccionario<< "}";
+			ReporteDiccionario.close();
+
+			//Generar Imagen
+			system("C:\\\"Program Files (x86)\"\\Graphviz2.38\\bin\\dot.exe  -Tpng C:\\ReportesEDD\\ReporteListaDobleCircularTransacciones.txt -o C:\\ReportesEDD\\ReporteListaDobleCircularTransacciones.png");
+			//Abrir Imagen
+			system("C:\\ReportesEDD\\ReporteListaDobleCircularTransacciones.png &" );
+		}
+		else
+		{
+
+		}
+
+	}
+
+	//Inserción
+
+		//Insertar Transicción
+
+	void InsertarTransaccionListaDobleCircularT(ListaDCTrans &Lista, string CodigoANumericoTrans, string UsuarioRentador, string  EmpresaRentador, string DepartamentoRentador, string UsuarioRentado, string EmpresaRentado, string DepartamentoRentado, int PeriodoRenta)
+	{
+		ListaDCTrans AuxiliarTransicion = new ListaDobleCircularEstructura(CodigoANumericoTrans, UsuarioRentador, EmpresaRentador, DepartamentoRentador, UsuarioRentado, EmpresaRentado, DepartamentoRentado, PeriodoRenta);
+
+		if(Lista == nullptr)
+		{
+			AuxiliarTransicion -> Sgte = AuxiliarTransicion;
+			AuxiliarTransicion -> Ante = AuxiliarTransicion;
+			Lista = AuxiliarTransicion;
+		}
+		else
+		{
+			ListaDCTrans Ultimo = Lista -> Ante;
+			AuxiliarTransicion -> Sgte = Lista;
+			AuxiliarTransicion -> Ante = Ultimo;
+			Lista -> Ante = AuxiliarTransicion;
+			Ultimo -> Sgte = AuxiliarTransicion;
+		}
+	}
+
+
+

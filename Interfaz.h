@@ -25,7 +25,9 @@
 
 	void MenuAdministrador();
 
-    void MenuUsuario();
+	void MenuUsuario();
+
+    void MenuOrdenamiento();
 
 	void MenuRegistrarUsuario();
 
@@ -34,6 +36,18 @@
 	void MenuEliminarActivo();
 
 	void MenuEliminado();
+
+    void MenuRentarActivo();
+
+	void MenuModificarActivo();
+
+	void MenuModificado();
+
+	void MenuReporteDepartamento();
+
+    void MenuReporteEmpresa();
+
+    void MenuRentarActivo();
 
     void MenuReporteActivoPorUsuario();
 

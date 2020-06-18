@@ -8,6 +8,7 @@
 	#include <iostream>
 	#include <string>
 	#include "MatrizDispersaEstructura.h"
+	#include "LIstaDobleCircularEstructura.h"
 
 	using namespace std;
 
@@ -33,7 +34,13 @@
 		extern int ContadorAux;
 		extern string IdentificadorAC;
 		extern string NombreAC;
-        extern string DescripcionAC;
+		extern string DescripcionAC;
+		extern int Color;
+		extern ListaDCTrans ListaDobleCircularTransaccion;
+		extern string TipoOrdenamiento;
+		extern string ReporteArbol;
+		extern int TodosLosActivos;
+		extern MatrizDU AuxiliarArbol;
 	}
 
 //------------------------------------------------------------------------------

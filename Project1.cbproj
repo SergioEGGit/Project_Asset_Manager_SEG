@@ -113,13 +113,17 @@
             <DependentOn>Interfaz.h</DependentOn>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
+        <CppCompile Include="LIstaDobleCircularEstructura.cpp">
+            <DependentOn>LIstaDobleCircularEstructura.h</DependentOn>
+            <BuildOrder>7</BuildOrder>
+        </CppCompile>
         <CppCompile Include="MatrizDispersaEstructura.cpp">
             <DependentOn>MatrizDispersaEstructura.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
         <CppCompile Include="Metodos.cpp">
             <DependentOn>Metodos.h</DependentOn>
-            <BuildOrder>4</BuildOrder>
+            <BuildOrder>7</BuildOrder>
         </CppCompile>
         <CppCompile Include="Principal.cpp">
             <BuildOrder>1</BuildOrder>

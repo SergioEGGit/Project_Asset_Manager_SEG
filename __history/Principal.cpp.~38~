@@ -1,0 +1,59 @@
+//------------------------------------------------------------------------------
+
+	#pragma hdrstop
+	#pragma argsused
+
+	#ifdef _WIN32
+	#include <tchar.h>
+	#else
+		typedef char _TCHAR;
+	#define _tmain main
+	#endif
+
+//-------------------------------Librerias--------------------------------------
+
+	#include <iostream>
+	#include <stdio.h>
+	#include <conio.h>
+	#include <string>
+	#include <windows.h>
+	#include <cstring>
+	#include "Interfaz.h"
+	#include "Variables.h"
+	#include "Metodos.h"
+	#include "MatrizDispersaEstructura.h"
+
+	using namespace std;
+
+//----------------------------------Main----------------------------------------
+
+	int _tmain(int argc, _TCHAR* argv[])
+	{
+		Resolucion();
+		Fullscreen();
+		Variables::MatrizDispersaUsuarios = new MatrizDispersaEstructura("Administrador", "Admin", "12345", "", "");
+		Variables::IdentificadorUsuario++;
+
+		time_t current_time;
+
+		current_time = time(NULL);
+
+		InsertarTransaccionListaDobleCircularT(Variables::ListaDobleCircularTransaccion, "Codigo Trans1", "Codgio Activo", "UsuarioRentador", "EmpresaRentador", "DepartamentoRentador", "UsuarioRentado", "EmpresaRentado", "DepartamentoRentado", current_time, 8);
+		InsertarTransaccionListaDobleCircularT(Variables::ListaDobleCircularTransaccion, "Codigo Trans2", "Codgio Activo", "UsuarioRentador", "EmpresaRentador", "DepartamentoRentador", "UsuarioRentado", "EmpresaRentado", "DepartamentoRentado", current_time, 8);
+		InsertarTransaccionListaDobleCircularT(Variables::ListaDobleCircularTransaccion, "Codigo Trans3", "Codgio Activo", "UsuarioRentador", "EmpresaRentador", "DepartamentoRentador", "UsuarioRentado", "EmpresaRentado", "DepartamentoRentado", current_time, 8);
+		InsertarTransaccionListaDobleCircularT(Variables::ListaDobleCircularTransaccion, "Codigo Trans4", "Codgio Activo", "UsuarioRentador", "EmpresaRentador", "DepartamentoRentador", "UsuarioRentado", "EmpresaRentado", "DepartamentoRentado", current_time, 8);
+		InsertarTransaccionListaDobleCircularT(Variables::ListaDobleCircularTransaccion, "Codigo Trans5", "Codgio Activo", "UsuarioRentador", "EmpresaRentador", "DepartamentoRentador", "UsuarioRentado", "EmpresaRentado", "DepartamentoRentado", current_time, 8);
+		InsertarTransaccionListaDobleCircularT(Variables::ListaDobleCircularTransaccion, "Codigo Trans6", "Codgio Activo", "UsuarioRentador", "EmpresaRentador", "DepartamentoRentador", "UsuarioRentado", "EmpresaRentado", "DepartamentoRentado", current_time, 8);
+		InsertarTransaccionListaDobleCircularT(Variables::ListaDobleCircularTransaccion, "Codigo Trans7", "Codgio Activo", "UsuarioRentador", "EmpresaRentador", "DepartamentoRentador", "UsuarioRentado", "EmpresaRentado", "DepartamentoRentado", current_time, 8);
+
+
+		system("pause");
+
+		ReporteListaDobleCircularT(Variables::ListaDobleCircularTransaccion);
+
+		system("pause");
+
+		MenuLoginCiclo();
+
+		return 0;
+	}

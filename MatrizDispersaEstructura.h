@@ -16,7 +16,7 @@
 
 	struct MatrizDispersaEstructura
 	{
-		//Objetos
+		//Variables
 		string NombreCompleto;
 		string NombreUsuario;
 		string Password;
@@ -95,15 +95,61 @@
 
 //--------------------------------Métodos---------------------------------------
 
-	bool InsertarCabeceraEmpresaMatrizDispersaU(string NombreEmpresa, MatrizDispersaEstructura& UsuarioAux, MatrizDispersaEstructura& EmpresaAux);
+	//Mostrar
 
-	bool InsertarCabeceraDepartamentoMatrizDispersaU(MatrizDU &Matriz, string NombreDepartamento, MatrizDispersaEstructura& UsuarioAux, MatrizDispersaEstructura& DepartamentoAux);
+		//Mostrar Todos Los Usuarios
 
-	bool InsertarUsuarioMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreCompleto, string Password, string NombreDepartamento, string NombreEmpresa);
+	void MostrarUsuarios(MatrizDU &Matriz, int ContadorAltura);
+
+		//Mostrar Todos Los Activos
+
+	void MostrarActivosUsuarios(MatrizDU &Matriz, int ContadorAltura);
+
+	//Reportes
+
+		//Reporte Activos Por Departamento
+
+	void ReporteActivosPorDepartamentoMatrizDispersaU(MatrizDU &Matriz, string NombreDepartamento);
+
+		//Reporte Activos Por Empresa
+
+	void ReporteActivosPorEmpresaMatrizDispersaU(MatrizDU &Matriz, string NombreEmpresa);
+
+		//Reporte Matriz
+
+	void ReporteUsuariosMatrizDispersaU(MatrizDU &Matriz);
+
+	//Inserción
+
+		//Enlazar Cabecera Empresa
+
+	void EnalazarEmpresaNueva(MatrizDU &Inicio, MatrizDU &CabEmp);
+
+		//Enlazar Cabecera Departamento
+
+	void EnalazarDepartamentoNuevo(MatrizDU &Inicio, MatrizDU &CabDep);
+
+	//Comparación Y Elección Casos De Inserción
+
+	void CasosInsercion(MatrizDU &CabDep, MatrizDU &CabEmp, MatrizDU &Usuario, MatrizDU &Inicio);
+
+		//Insertar Nuevo Usuario
+
+	void AgregarUsuario(string NombreCompleto_Usuario, string Nombre_Usuario, string Contrasena_Usuario, string Departamento_Usuario, string Empresa_Usuario, MatrizDU &Matriz);
+
+	//Búsqueda
+
+		//Buscar Una Usuario
 
 	bool BuscarUsuarioMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreEmpresa, string NombreDepartamento);
 
-	void ReporteUsuariosMatrizDispersaU(MatrizDU &Matriz);
+		//Buscar Arbol Usuario
+
+	void BuscarArbolUsuarioMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreEmpresa, string NombreDepartamento);
+
+
+
+
 
 //---------------------------------------------------------------------------
 	#endif

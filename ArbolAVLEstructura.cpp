@@ -32,7 +32,92 @@
 
 //---------------------------------Métodos--------------------------------------
 
-    //Generación De Reportes
+	//Generación De Reportes
+
+		//Generar Reporte Departamento Recursivo
+
+	void GenerarReporteRecursivoDepartamentoArbolAVLA(ArbolAVLActivos &Arbol, string Padre, int Numero, ArbolAVLEstructura& ArbolActivosActual)
+	{
+		//Declaraciones
+
+		//Objetos Tipo Arbol AVL
+
+		ArbolAVLActivos ArbolAuxiliar = Arbol;
+
+		//Variables Tipo String
+
+		string PadreAuxiliar;
+
+		//Comienzo A Generar Reporte
+
+		//SubArbol Izquierdo
+
+		if(ArbolAuxiliar -> LE != NULL)
+		{
+			Variables::ReporteArbol += "NodoArbol" + to_string(Numero) + to_string(Variables::NumerosDeNodosArbolAVL);
+
+			Variables::ReporteArbol += "[label = \" Código: " + ArbolAuxiliar -> LE -> CodigoANumericoActivo +
+							 + "\\lNombre: " + ArbolAuxiliar -> LE -> NombreActivo +
+							 + "\\lRentado: " + ArbolAuxiliar -> LE -> ExisteRentaActivo +
+					   + "\\lDescripción: " + ArbolAuxiliar -> DescripcionActivo +
+					   + "\\l" + + "\"]; \n";
+
+
+			Variables::ReporteArbol += Padre + "->" + "NodoArbol" + to_string(Numero) + to_string(Variables::NumerosDeNodosArbolAVL) + ";\n";
+			PadreAuxiliar  = "NodoArbol" + to_string(Numero) + to_string(Variables::NumerosDeNodosArbolAVL);
+			Variables::NumerosDeNodosArbolAVL++;
+			GenerarReporteRecursivoDepartamentoArbolAVLA(ArbolAuxiliar -> LE, PadreAuxiliar, Numero, *ArbolAuxiliar -> LE);
+		}
+
+		//SubArbol Derecho
+
+		if(ArbolAuxiliar -> RI != NULL)
+		{
+			Variables::ReporteArbol += "NodoArbol" + to_string(Numero) + to_string(Variables::NumerosDeNodosArbolAVL);
+
+			Variables::ReporteArbol += "[label = \" Código: " + ArbolAuxiliar -> RI -> CodigoANumericoActivo +
+							 + "\\lNombre: " + ArbolAuxiliar -> RI -> NombreActivo +
+							 + "\\lRentado: " + ArbolAuxiliar -> RI -> ExisteRentaActivo +
+					   + "\\lDescripción: " + ArbolAuxiliar -> DescripcionActivo +
+					   + "\\l" + + "\"]; \n";
+
+			Variables::ReporteArbol += Padre + "->" + "NodoArbol" + to_string(Numero) + to_string(Variables::NumerosDeNodosArbolAVL) + ";\n";
+			PadreAuxiliar = "NodoArbol" + to_string(Numero) + to_string(Variables::NumerosDeNodosArbolAVL);
+			Variables::NumerosDeNodosArbolAVL++;
+			GenerarReporteRecursivoDepartamentoArbolAVLA(ArbolAuxiliar -> RI, PadreAuxiliar, Numero, *ArbolAuxiliar -> RI);
+		}
+	}
+
+		//Generar Imagen Departamento Reporte
+
+	void ReporteActivosDepartamentosArbolAVLA(ArbolAVLActivos &Arbol, int Numero)
+	{
+		int ContadorNodosArbol = 0;
+
+		ArbolAVLActivos ArbolAuxiliar = Arbol;
+
+		Variables::NumerosDeNodosArbolAVL = 0;
+		Cadena = "";
+		string CadenaAux = "";
+
+		//Comienzo Generar Reporte
+
+		if(ArbolAuxiliar != nullptr)
+		{
+			Variables::ReporteArbol += "NodoArbol" + to_string(Numero) + to_string(ContadorNodosArbol);
+			CadenaAux = "NodoArbol" + to_string(Numero) + to_string(ContadorNodosArbol);
+
+			Variables::ReporteArbol  += "[label = \"Código: " + ArbolAuxiliar -> CodigoANumericoActivo +
+							+ "\\lNombre: " + ArbolAuxiliar-> NombreActivo +
+							+ "\\lRentado: " + ArbolAuxiliar -> ExisteRentaActivo +
+						   + "\\lDescripción: " + ArbolAuxiliar -> DescripcionActivo +
+						   + "\\l" + "\"]; \n";
+
+			Variables::NumerosDeNodosArbolAVL++;
+
+			GenerarReporteRecursivoDepartamentoArbolAVLA(ArbolAuxiliar, CadenaAux , Numero, *ArbolAuxiliar);
+		}
+	}
 
 		//Generar Cadena Reporte Recursivo
 
@@ -59,8 +144,8 @@
 			Cadena += "[label = \" Código: " + ArbolAuxiliar -> LE -> CodigoANumericoActivo +
 							 + "\\lNombre: " + ArbolAuxiliar -> LE -> NombreActivo +
 							 + "\\lRentado: " + ArbolAuxiliar -> LE -> ExisteRentaActivo +
-					   + "\\lDescripción: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> DescripcionActivo +
-					   + "\\l_" + + "\"]; \n";
+					   + "\\lDescripción: " + ArbolAuxiliar -> DescripcionActivo +
+					   + "\\l" + + "\"]; \n";
 
 
 			Cadena += Padre + "->" + "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL) + ";\n";
@@ -78,8 +163,8 @@
 			Cadena += "[label = \" Código: " + ArbolAuxiliar -> RI -> CodigoANumericoActivo +
 							 + "\\lNombre: " + ArbolAuxiliar -> RI -> NombreActivo +
 							 + "\\lRentado: " + ArbolAuxiliar -> RI -> ExisteRentaActivo +
-					   + "\\lDescripción: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> DescripcionActivo +
-					   + "\\l_" + + "\"]; \n";
+					   + "\\lDescripción: " + ArbolAuxiliar -> DescripcionActivo +
+					   + "\\l" + + "\"]; \n";
 
 			Cadena += Padre + "->" + "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL) + ";\n";
 			PadreAuxiliar = "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL);
@@ -118,7 +203,7 @@
 								+ "\\lNombre: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> NombreActivo +
 								+ "\\lRentado: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> ExisteRentaActivo +
 							   + "\\lDescripción: " + Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> DescripcionActivo +
-							   + "\\l_" + "\"]; \n";
+							   + "\\l" + "\"]; \n";
 
 				Variables::NumerosDeNodosArbolAVL++;
 
@@ -138,7 +223,6 @@
 				Color(0, 4);
 				Posicionar(17, 9);
 				cout<< "  El Arbol AVL Se Encuentra Vacio" <<endl;
-				system("pause > 0");
             }
 		}
 	}
@@ -149,6 +233,8 @@
 
 	void MostrarActivosArbolAVLA(ArbolAVLActivos &Arbol)
 	{
+		//Recorre Arbol AVL
+
 		if(Arbol == nullptr)
 		{
 			return;
@@ -157,21 +243,99 @@
 		{
 			if(Arbol -> RI == nullptr && Arbol -> LE == nullptr)
 			{
-				Color(0, 9);
-				Posicionar(17, Variables::ContadorActivos);
+				Color(0, Variables::Color);
+				Posicionar(22, Variables::ContadorActivos);
 				cout<< "            " << Variables::ContadorAux << "." << Arbol -> CodigoANumericoActivo << ", " << Arbol -> NombreActivo <<endl;
 				Variables::ContadorActivos = Variables::ContadorActivos - 2;
 				Variables::ContadorAux++;
 			}
 			else
 			{
-				Color(0, 9);
-				Posicionar(17, Variables::ContadorActivos);
+				Color(0, Variables::Color);
+				Posicionar(22, Variables::ContadorActivos);
 				cout<< "            " << Variables::ContadorAux << "." << Arbol -> CodigoANumericoActivo << ", " << Arbol -> NombreActivo <<endl;
 				Variables::ContadorActivos = Variables::ContadorActivos - 2;
 				Variables::ContadorAux++;
 				MostrarActivosArbolAVLA(Arbol -> LE);
 				MostrarActivosArbolAVLA(Arbol -> RI);
+			}
+		}
+	}
+
+		//Mostrar Todos Los Activos
+
+	void MostrarTodosLosActivosArbolAVLA(ArbolAVLActivos &Arbol)
+	{
+		//Recorre Arbol AVL
+
+		if(Arbol == nullptr)
+		{
+			return;
+		}
+		else
+		{
+			if(Arbol -> RI == nullptr && Arbol -> LE == nullptr)
+			{
+				if(Arbol -> ExisteRentaActivo == "No")
+				{
+					Color(0, Variables::Color);
+					Posicionar(22, Variables::TodosLosActivos);
+					cout<< "       " << Variables::ContadorAux << "." << Arbol -> CodigoANumericoActivo << ", " << Arbol -> NombreActivo <<endl;
+					Variables::TodosLosActivos = Variables::TodosLosActivos - 2;
+					Variables::ContadorAux++;
+                }
+			}
+			else
+			{
+				if(Arbol -> ExisteRentaActivo == "No")
+				{
+                    Color(0, Variables::Color);
+					Posicionar(22, Variables::TodosLosActivos);
+					cout<< "       " << Variables::ContadorAux << "." << Arbol -> CodigoANumericoActivo << ", " << Arbol -> NombreActivo <<endl;
+					Variables::TodosLosActivos = Variables::TodosLosActivos - 2;
+			    	Variables::ContadorAux++;
+                }
+				MostrarTodosLosActivosArbolAVLA(Arbol -> LE);
+				MostrarTodosLosActivosArbolAVLA(Arbol -> RI);
+            }
+		}
+	}
+
+		//Mostrar Activos Rentados
+
+	void MostrarActivosRentados(ArbolAVLActivos &Arbol)
+	{
+        //Recorre Arbol AVL
+
+		if(Arbol == nullptr)
+		{
+			return;
+		}
+		else
+		{
+			if(Arbol -> RI == nullptr && Arbol -> LE == nullptr)
+			{
+				if(Arbol -> ExisteRentaActivo == "Si")
+				{
+                    Color(0, Variables::Color);
+					Posicionar(22, Variables::ContadorActivos);
+					cout<< "            " << Variables::ContadorAux << "." << Arbol -> CodigoANumericoActivo << ", " << Arbol -> NombreActivo <<endl;
+					Variables::ContadorActivos = Variables::ContadorActivos - 2;
+					Variables::ContadorAux++;
+                }
+			}
+			else
+			{
+				if(Arbol -> ExisteRentaActivo == "Si")
+				{
+                    Color(0, Variables::Color);
+					Posicionar(22, Variables::ContadorActivos);
+					cout<< "            " << Variables::ContadorAux << "." << Arbol -> CodigoANumericoActivo << ", " << Arbol -> NombreActivo <<endl;
+					Variables::ContadorActivos = Variables::ContadorActivos - 2;
+					Variables::ContadorAux++;
+				}
+                MostrarActivosRentados(Arbol -> LE);
+				MostrarActivosRentados(Arbol -> RI);
 			}
 		}
 	}
@@ -614,7 +778,7 @@
 
 		//Verificar Y Devolver Casos Altura
 
-	void ArbolAVLEstructura::CalcularAlturaVoidArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura& ActivoParaCalcular)
+	void CalcularAlturaVoidArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura& ActivoParaCalcular)
 	{
 		//Declaracion
 
@@ -670,7 +834,7 @@
 
 		//Método Insertar
 
-	string ArbolAVLEstructura::InsertarActivoArbolAVLA(ArbolAVLActivos &Arbol, string CodigoANumerico, string NombreActivo, string DescripcionActivo, ArbolAVLEstructura& ActivoInsertar)
+	string InsertarActivoArbolAVLA(ArbolAVLActivos &Arbol, string CodigoANumerico, string NombreActivo, string DescripcionActivo, ArbolAVLEstructura& ActivoInsertar)
 	{
 		//Declaraciones
 
@@ -701,6 +865,8 @@
 				}
 
 				ComparacionYEleccionRotacionArbolAVLA(Arbol, *ArbolAuxiliar);
+				VariablesMetodos::AgregueActivo = Bandera;
+
 				return Bandera;
 			}
 			else
@@ -751,15 +917,12 @@
 				return "Si";
 			}
 		}
-		else
-		{
-			return "No";
-		}
+		return "No";
 	}
 
 		//Generar Nodo Y Llamar A Insertar
 
-	string ArbolAVLEstructura::InsertarActvioArbolAVLANuevoActivo(ArbolAVLActivos &Arbol, string CodigoANumerico, string NombreActivo, string DescripcionActivo)
+	string InsertarActvioArbolAVLANuevoActivo(ArbolAVLActivos &Arbol, string CodigoANumerico, string NombreActivo, string DescripcionActivo)
 	{
 		TengoQueAumentar = "No";
 
@@ -779,7 +942,7 @@
 
 		//Buscar Activo
 
-	ArbolAVLActivos BuscarActivoArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura &ActivoActualAuxiliar, string CodigoANumericoActivo)
+	void BuscarActivoArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura &ActivoActualAuxiliar, string CodigoANumericoActivo)
 	{
 		//Declaraciones
 
@@ -797,8 +960,10 @@
 
 			if(CodigoANumericoActivo.compare(RecorridoAuxiliar -> CodigoANumericoActivo) == 0)
 			{
-				cout<< RecorridoAuxiliar -> CodigoANumericoActivo;
-				return RecorridoAuxiliar;
+				Variables::IdentificadorAC = RecorridoAuxiliar -> CodigoANumericoActivo;
+				Variables::NombreAC = RecorridoAuxiliar -> NombreActivo;
+				Variables::DescripcionAC = RecorridoAuxiliar -> DescripcionActivo;
+				VariablesMetodos::ElimineActivo = "Si";
 			}
 			else if(CodigoANumericoActivo.compare(RecorridoAuxiliar -> CodigoANumericoActivo) > 0)
 			{
@@ -807,59 +972,96 @@
 			else if(CodigoANumericoActivo.compare(RecorridoAuxiliar -> CodigoANumericoActivo) < 0)
 			{
 				BuscarActivoArbolAVLA(Arbol, *RecorridoAuxiliar -> LE, CodigoANumericoActivo);
-            }
+			}
 		}
-
-		return nullptr;
 	}
-
-
 
 	//Actualización
 
 		//Actualizar Descripción
 
-   /*	string ModificarDescripcionActivoArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura &ActivoActualAuxiliar)
+	void ModificarDescripcionActivoArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura &ActivoActualAuxiliar, string CodigoANumericoActivo, string DescripcionActivo)
 	{
 		//Declaraciones
 
 		//Objetos Tipo Arbol AVL
 
-		ArbolAVLActivos RecorridoAuxiliar = &Nodo;
+		ArbolAVLActivos RecorridoAuxiliar = &ActivoActualAuxiliar;
 
-		if (Aux!=NULL) {
-		if (strcmp(Nombre.c_str(), Aux->Nombre.c_str()) == 0) {
-			Aux->Descripcion = Descripcion;
-			return true;
-		}
-		else if (strcmp(Nombre.c_str(), Aux->Nombre.c_str()) == 1) {
-			if (Aux->Derecha != NULL) {
-				bool Editado = NodoAVL::EditarActivo(*Aux->Derecha, Descripcion, Nombre);
-				return Editado;
+		//Variables Tipo String
+
+		string Bandera = "";
+
+		//UpperCase
+		CodigoANumericoActivo = TrimCadena(CodigoANumericoActivo);
+		CodigoANumericoActivo = UpperCase(CodigoANumericoActivo);
+
+		if(RecorridoAuxiliar != nullptr)
+		{
+			//Comienza Comparaciones
+
+			if(CodigoANumericoActivo.compare(RecorridoAuxiliar -> CodigoANumericoActivo) == 0)
+			{
+				RecorridoAuxiliar -> DescripcionActivo = DescripcionActivo;
+				Color(0, 10);
+				Posicionar(17, 7);
+				cout << "Activo Modificado Con Exito!" <<endl;
+				Posicionar(17, 5);
+				cout << "   Codigo: " << RecorridoAuxiliar -> CodigoANumericoActivo <<endl;
+				Posicionar(17, 3);
+				cout << "   Nombre: " << RecorridoAuxiliar -> NombreActivo <<endl;
+				Posicionar(17, 1);
+				cout << "   Descripcion: " << RecorridoAuxiliar -> DescripcionActivo <<endl;
+				VariablesMetodos::ElimineActivo = "Si";
+				system("pause > 0");
 			}
-			else {
-				return false;
+			else if(CodigoANumericoActivo.compare(RecorridoAuxiliar -> CodigoANumericoActivo) > 0)
+			{
+				ModificarDescripcionActivoArbolAVLA(Arbol, *RecorridoAuxiliar -> RI, CodigoANumericoActivo, DescripcionActivo);
+			}
+			else if(CodigoANumericoActivo.compare(RecorridoAuxiliar -> CodigoANumericoActivo) < 0)
+			{
+				ModificarDescripcionActivoArbolAVLA(Arbol, *RecorridoAuxiliar -> LE, CodigoANumericoActivo, DescripcionActivo);
 			}
 		}
-		else if (strcmp(Nombre.c_str(), Aux->Nombre.c_str()) == -1) {
-			if (Aux->Izquierda != NULL) {
-				bool Editado = NodoAVL::EditarActivo(*Aux->Izquierda, Descripcion, Nombre);
-				return Editado;
-			}
-			else {
-				return false;
-			}
-		}
-		else {
-			return false;
-		}
-	}
-	else {
-		return false;
-	}
     }
 
-		*/
+		//Actualizar Estado Renta
+
+	void ModificarEstadoActivoArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura &ActivoActualAuxiliar, string CodigoANumericoActivo)
+	{
+		//Declaraciones
+
+		//Objetos Tipo Arbol AVL
+
+		ArbolAVLActivos RecorridoAuxiliar = &ActivoActualAuxiliar;
+
+		//Variables Tipo String
+
+		string Bandera = "";
+
+		//UpperCase
+		CodigoANumericoActivo = TrimCadena(CodigoANumericoActivo);
+		CodigoANumericoActivo = UpperCase(CodigoANumericoActivo);
+
+		if(RecorridoAuxiliar != nullptr)
+		{
+			//Comienza Comparaciones
+
+			if(CodigoANumericoActivo.compare(RecorridoAuxiliar -> CodigoANumericoActivo) == 0)
+			{
+				RecorridoAuxiliar -> ExisteRentaActivo = "Si";
+			}
+			else if(CodigoANumericoActivo.compare(RecorridoAuxiliar -> CodigoANumericoActivo) > 0)
+			{
+				ModificarEstadoActivoArbolAVLA(Arbol, *RecorridoAuxiliar -> RI, CodigoANumericoActivo);
+			}
+			else if(CodigoANumericoActivo.compare(RecorridoAuxiliar -> CodigoANumericoActivo) < 0)
+			{
+				ModificarEstadoActivoArbolAVLA(Arbol, *RecorridoAuxiliar -> LE, CodigoANumericoActivo);
+			}
+		}
+	}
 
 	//Eliminación
 
@@ -961,17 +1163,60 @@
 
 		//Comienzo Reocrrer Arbol
 
-		if(RecorridosAuxiliar != nullptr)
+		if(RecorridosAuxiliar!= nullptr)
 		{
-
-			if(RecorridosAuxiliar -> LE == nullptr)
+			if(RecorridosAuxiliar -> RI == nullptr && RecorridosAuxiliar -> LE == nullptr)
 			{
-				if(RecorridosAuxiliar -> RI != nullptr)
-				{
-					OtroAuxiliarRecorridos = RecorridosAuxiliar -> RI;
+				RecorridosAuxiliar -> CodigoANumericoActivo = "";
+				RecorridosAuxiliar = nullptr;
+				return "Si";
+			}
+			else if(RecorridosAuxiliar -> RI != nullptr && RecorridosAuxiliar -> LE == nullptr)
+			{
+				OtroAuxiliarRecorridos = RecorridosAuxiliar -> RI;
+				RecorridosAuxiliar -> LE = RecorridosAuxiliar -> RI -> LE;
+				RecorridosAuxiliar -> RI = RecorridosAuxiliar -> RI -> RI;
 
-					RecorridosAuxiliar -> LE = RecorridosAuxiliar -> RI -> LE;
-					RecorridosAuxiliar -> RI = RecorridosAuxiliar -> RI -> RI;
+				RecorridosAuxiliar -> CodigoANumericoActivo = OtroAuxiliarRecorridos -> CodigoANumericoActivo;
+				RecorridosAuxiliar -> NombreActivo = OtroAuxiliarRecorridos -> NombreActivo;
+				RecorridosAuxiliar -> DescripcionActivo = OtroAuxiliarRecorridos -> DescripcionActivo;
+				RecorridosAuxiliar -> ExisteRentaActivo = OtroAuxiliarRecorridos -> ExisteRentaActivo;
+
+				OtroAuxiliarRecorridos -> CodigoANumericoActivo = "";
+				return "Si";
+			}
+			else if(RecorridosAuxiliar -> RI == nullptr && RecorridosAuxiliar  -> LE != nullptr)
+			{
+				OtroAuxiliarRecorridos = RecorridosAuxiliar  -> LE;
+
+				RecorridosAuxiliar  -> RI = RecorridosAuxiliar  -> LE -> RI;
+				RecorridosAuxiliar  -> LE = RecorridosAuxiliar  -> LE -> LE;
+
+				RecorridosAuxiliar -> CodigoANumericoActivo = OtroAuxiliarRecorridos -> CodigoANumericoActivo;
+				RecorridosAuxiliar -> NombreActivo = OtroAuxiliarRecorridos -> NombreActivo;
+				RecorridosAuxiliar -> DescripcionActivo = OtroAuxiliarRecorridos -> DescripcionActivo;
+				RecorridosAuxiliar -> ExisteRentaActivo = OtroAuxiliarRecorridos -> ExisteRentaActivo;
+
+				OtroAuxiliarRecorridos -> CodigoANumericoActivo = "";
+				return "Si";
+			}
+			else if(RecorridosAuxiliar -> RI != nullptr && RecorridosAuxiliar -> LE != nullptr)
+			{
+				OtroAuxiliarRecorridos = SoyElMayor(Arbol, *RecorridosAuxiliar -> LE);
+
+				if(OtroAuxiliarRecorridos -> RI == nullptr && OtroAuxiliarRecorridos -> LE == nullptr)
+				{
+					RecorridosAuxiliar -> CodigoANumericoActivo = OtroAuxiliarRecorridos -> CodigoANumericoActivo;
+					RecorridosAuxiliar -> NombreActivo = OtroAuxiliarRecorridos -> NombreActivo;
+					RecorridosAuxiliar -> DescripcionActivo = OtroAuxiliarRecorridos -> DescripcionActivo;
+					RecorridosAuxiliar -> ExisteRentaActivo = OtroAuxiliarRecorridos -> ExisteRentaActivo;
+
+					OtroAuxiliarRecorridos -> CodigoANumericoActivo = "";
+					return "Si";
+				}
+				else
+				{
+					RecorridosAuxiliar -> LE = OtroAuxiliarRecorridos -> LE;
 
 					RecorridosAuxiliar -> CodigoANumericoActivo = OtroAuxiliarRecorridos -> CodigoANumericoActivo;
 					RecorridosAuxiliar -> NombreActivo = OtroAuxiliarRecorridos -> NombreActivo;
@@ -979,70 +1224,6 @@
 					RecorridosAuxiliar -> ExisteRentaActivo = OtroAuxiliarRecorridos -> ExisteRentaActivo;
 
 					OtroAuxiliarRecorridos -> CodigoANumericoActivo = "";
-
-					return "Si";
-				}
-			}
-			else if(RecorridosAuxiliar -> LE != nullptr)
-			{
-				if(RecorridosAuxiliar -> RI != nullptr)
-				{
-					OtroAuxiliarRecorridos = SoyElMayor(Arbol, *RecorridosAuxiliar -> LE);
-
-					if(OtroAuxiliarRecorridos -> LE == nullptr)
-					{
-						if(OtroAuxiliarRecorridos -> RI == nullptr)
-						{
-							RecorridosAuxiliar -> CodigoANumericoActivo = OtroAuxiliarRecorridos -> CodigoANumericoActivo;
-							RecorridosAuxiliar -> NombreActivo = OtroAuxiliarRecorridos -> NombreActivo;
-							RecorridosAuxiliar -> DescripcionActivo = OtroAuxiliarRecorridos -> DescripcionActivo;
-							RecorridosAuxiliar -> ExisteRentaActivo = OtroAuxiliarRecorridos -> ExisteRentaActivo;
-
-							OtroAuxiliarRecorridos -> CodigoANumericoActivo = "";
-
-							return "Si";
-						}
-					}
-					else
-					{
-						RecorridosAuxiliar -> LE = OtroAuxiliarRecorridos -> LE;
-
-						RecorridosAuxiliar -> CodigoANumericoActivo = OtroAuxiliarRecorridos -> CodigoANumericoActivo;
-						RecorridosAuxiliar -> NombreActivo = OtroAuxiliarRecorridos -> NombreActivo;
-						RecorridosAuxiliar -> DescripcionActivo = OtroAuxiliarRecorridos -> DescripcionActivo;
-						RecorridosAuxiliar -> ExisteRentaActivo = OtroAuxiliarRecorridos -> ExisteRentaActivo;
-
-						OtroAuxiliarRecorridos -> CodigoANumericoActivo = "";
-
-						return "Si";
-					}
-				}
-			}
-			else if(RecorridosAuxiliar -> LE != nullptr)
-			{
-				if(RecorridosAuxiliar -> RI == nullptr)
-				{
-					OtroAuxiliarRecorridos = RecorridosAuxiliar -> LE;
-
-					RecorridosAuxiliar -> RI = RecorridosAuxiliar -> LE -> RI;
-					RecorridosAuxiliar -> LE = RecorridosAuxiliar -> LE -> LE;
-
-					RecorridosAuxiliar -> CodigoANumericoActivo = OtroAuxiliarRecorridos -> CodigoANumericoActivo;
-					RecorridosAuxiliar -> NombreActivo = OtroAuxiliarRecorridos -> NombreActivo;
-					RecorridosAuxiliar -> DescripcionActivo = OtroAuxiliarRecorridos -> DescripcionActivo;
-					RecorridosAuxiliar -> ExisteRentaActivo = OtroAuxiliarRecorridos -> ExisteRentaActivo;
-
-					OtroAuxiliarRecorridos -> CodigoANumericoActivo = "";
-
-					return "Si";
-				}
-			}
-			else if(RecorridosAuxiliar -> LE == nullptr)
-			{
-				if(RecorridosAuxiliar -> RI == nullptr)
-				{
-					RecorridosAuxiliar -> CodigoANumericoActivo = "";
-					RecorridosAuxiliar = nullptr;
 					return "Si";
 				}
 			}
@@ -1052,7 +1233,7 @@
 
 		//Eliminar Activo
 
-	string ArbolAVLEstructura::EliminarActivoArbolAVLA(ArbolAVLEstructura &ActivoActualArbol, string CodigoANumericoActivo)
+	string EliminarActivoArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura &ActivoActualArbol, string CodigoANumericoActivo)
 	{
 		//Declaraciones
 
@@ -1060,96 +1241,55 @@
 
 		ArbolAVLActivos AuxiliarRecorrido = &ActivoActualArbol;
 
-		//Variables Tipo String
+		//Variable Tipo String
 
-		string ActivoFueEliminado = "";
+		string Bandera = "";
+
+        //UpperCase
+		CodigoANumericoActivo = TrimCadena(CodigoANumericoActivo);
+		CodigoANumericoActivo = UpperCase(CodigoANumericoActivo);
 
 		//Recorrer Arbol AVL
-
 		if(AuxiliarRecorrido != nullptr)
 		{
-			if(CodigoANumericoActivo.compare(AuxiliarRecorrido -> CodigoANumericoActivo) > 0)
+			if(CodigoANumericoActivo.compare(AuxiliarRecorrido -> CodigoANumericoActivo) == 0)
 			{
-				if(AuxiliarRecorrido  -> RI != nullptr)
+				Bandera = "No";
+
+				if(AuxiliarRecorrido == Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario &&  Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> RI == nullptr && Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> LE == nullptr)
 				{
-					EliminarActivoArbolAVLA(*Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> RI, CodigoANumericoActivo);
+					Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario = nullptr;
+					Bandera = "Si";
 				}
 				else
 				{
-					return "No";
-				}
-			}
-			else if(CodigoANumericoActivo.compare(AuxiliarRecorrido -> CodigoANumericoActivo) < 0)
-			{
-				if(AuxiliarRecorrido -> LE != nullptr)
-				{
-					EliminarActivoArbolAVLA(*Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> LE, CodigoANumericoActivo);
-				}
-				else
-				{
-					return "No";
-				}
-			}
-			else if(CodigoANumericoActivo.compare(AuxiliarRecorrido -> CodigoANumericoActivo) == 0)
-			{
-				//Asignaciones
-
-				Variables::IdentificadorAC = AuxiliarRecorrido -> CodigoANumericoActivo;
-				Variables::NombreAC = AuxiliarRecorrido -> NombreActivo;
-				Variables::DescripcionAC = AuxiliarRecorrido -> DescripcionActivo;
-				ActivoFueEliminado = "No";
-
-				MenuEliminado();
-
-				//Recorrer Arbol Activos Usuarios
-
-				if(AuxiliarRecorrido == Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario)
-				{
-					if(Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> RI == nullptr)
+					if(Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> ExisteRentaActivo == "No")
 					{
-						if(Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario -> LE == nullptr)
-						{
-							Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario = nullptr;
-							ActivoFueEliminado = "Si";
-                        }
-					}
-				}
-				else
-				{
-					if(AuxiliarRecorrido -> ExisteRentaActivo == "No")
-					{
-						//Verificar Casos Eliminación
+						Bandera = ComparacionYEleccionArbolAVLA(Arbol, *AuxiliarRecorrido);
 
-						ActivoFueEliminado = ComparacionYEleccionArbolAVLA(AuxiliarRecorrido, *AuxiliarRecorrido);
-
-						//Eliminar Nodo
-
-						EliminarNodoAuxilair(AuxiliarRecorrido, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
-
-						//Calculo Altura Y Equilibrio
+						EliminarNodoAuxilair(Arbol, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
 
 						EstaEquilibrado = "Si";
 
-						ArbolAVLEstructura::CalcularAlturaVoidArbolAVLA(AuxiliarRecorrido, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
+						CalcularAlturaVoidArbolAVLA(Arbol, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
 
 						if(EstaEquilibrado == "No")
 						{
 							EstaEquilibrado = "Si";
-
-							ArbolAVLEstructura::CalcularAlturaVoidArbolAVLA(AuxiliarRecorrido, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
+							CalcularAlturaVoidArbolAVLA(Arbol, *Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
 						}
 					}
 				}
-				return ActivoFueEliminado;
+				return Bandera;
 			}
-			else
+			else if(CodigoANumericoActivo.compare(AuxiliarRecorrido -> CodigoANumericoActivo) > 0)
 			{
-				return "No";
+				return EliminarActivoArbolAVLA(Arbol, *AuxiliarRecorrido -> RI, CodigoANumericoActivo);
 			}
-		}
-		else
-		{
-			return "No";
+			else if(CodigoANumericoActivo.compare(AuxiliarRecorrido -> CodigoANumericoActivo) < 0)
+			{
+				return EliminarActivoArbolAVLA(Arbol, *AuxiliarRecorrido -> LE, CodigoANumericoActivo);
+			}
 		}
 		return "No";
 	}

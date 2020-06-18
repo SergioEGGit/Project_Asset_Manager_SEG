@@ -251,27 +251,28 @@
 
 	void MenuEliminarActivo()
 	{
-		Color(0,9);
+		Color(0,13);
 		Posicionar(17, 17);
 		cout<< "             Eliminar Activos" <<endl;
 		Posicionar(17, 15);
 		cout<< "                Mis Activos" <<endl;
 
+		Variables::Color = 13;
 		Variables::ContadorActivos = 13;
 		Variables::ContadorAux = 1;
 
 		MostrarActivosArbolAVLA(Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
 
-		Posicionar(30, Variables::ContadorActivos - 1);
+		Posicionar(30, Variables::ContadorActivos);
 		cout<< "Ingrese El Identificador Del Activo A Eliminar: " <<endl;
-		Posicionar(-18, Variables::ContadorActivos - 2);
+		Posicionar(-18, Variables::ContadorActivos);
 		cin >> Variables::ArrayAux[0];
 	}
 
 	void MenuEliminado()
 	{
 
-		Color(0,7);
+		Color(0,14);
 		Posicionar(17, 17);
 		cout<< "          Activo Eliminado" <<endl;
 		Posicionar(17, 15);
@@ -281,10 +282,79 @@
 		Posicionar(17, 11);
 		cout<< "       Descripcion:" << Variables::DescripcionAC <<endl;
 		Posicionar(17, 9);
-		cout<< "         Activo Eliminado Con Exito!" <<endl;
+		cout<< "      Activo Eliminado Con Exito!" <<endl;
 	}
 
+	void MenuModificarActivo()
+	{
+		Color(0, 15);
+		Posicionar(17, 17);
+		cout<< "             Modificar Activos" <<endl;
+		Posicionar(17, 15);
+		cout<< "               Mis Activos" <<endl;
 
+		Variables::Color = 15;
+		Variables::ContadorActivos = 13;
+		Variables::ContadorAux = 1;
+
+		MostrarActivosArbolAVLA(Variables::ArbolAVLActivosUsuarioActual -> ArbolAVLActivosUsuario);
+
+		Posicionar(33, Variables::ContadorActivos);
+		cout<< "Ingrese El Identificador Del Activo A Modificar: " <<endl;
+		Posicionar(-16, Variables::ContadorActivos);
+		cin >> Variables::ArrayAux[0];
+	}
+
+	void MenuModificado()
+	{
+		Color(0, 2);
+		Posicionar(17, 17);
+		cout<< "      Activo Seleccionado" <<endl;
+		Posicionar(17, 15);
+		cout<< "   Codigo: " << Variables::IdentificadorAC <<endl;
+		Posicionar(17, 13);
+		cout<< "   Nombre: " << Variables::NombreAC <<endl;
+		Posicionar(17, 11);
+		cout<< "   Descripcion: " << Variables::DescripcionAC <<endl;
+
+		Posicionar(20, 9);
+		cout<< "Ingrese Nueva Descripcion: " <<endl;
+		Posicionar(-7, 9);
+		getline(cin, Variables::ArrayAux[1]);
+	}
+
+	void MenuOrdenamiento()
+	{
+		int Aux = 0;
+
+		Color(0, 14);
+		Posicionar(17, 17);
+		cout<< "      Tipo Ordenamiento Transacciones" <<endl;
+		Posicionar(17, 15);
+		cout<< "      1.Ordenar De Manera Ascendente. " << Variables::IdentificadorAC <<endl;
+		Posicionar(17, 13);
+		cout<< "      2.Ordenar De Manera Descendente. " << Variables::NombreAC <<endl;
+
+		Posicionar(17, 11);
+		cout<< "          Ingrese Una Opcion: " <<endl;
+		Posicionar(-13, 11);
+		cin >> Aux;
+
+		if(Aux == 1)
+		{
+			Variables::TipoOrdenamiento = "Asc";
+		}
+		else if(Aux == 2)
+		{
+			Variables::TipoOrdenamiento = "Desc";
+		}
+		else
+		{
+            system("cls");
+			Marco(0, VariablesInterfaz::AnchoPantalla - 2, 0, VariablesInterfaz::AltoPantalla + 6);
+			MenuOrdenamiento();
+        }
+	}
 
 	void MenuReporteActivoPorUsuario()
 	{
@@ -304,6 +374,61 @@
 		Posicionar(-6, 11);
 		getline(cin, Variables::ArrayAux[2]);
 	}
+
+	void MenuReporteDepartamento()
+	{
+		Color(0,11);
+		Posicionar(17, 17);
+		cout<< " Reporte De Activos Por Departamento" <<endl;
+		Posicionar(17, 15);
+		cout<< "   Ingrese Nombre Del Departamento: " <<endl;
+		Posicionar(-19, 15);
+		getline(cin, Variables::ArrayAux[0]);
+	}
+
+	void MenuRentarActivo()
+	{
+        Color(0,11);
+		Posicionar(17, Variables::TodosLosActivos);
+		cout<< "           Renta De Activos " <<endl;
+		Variables::TodosLosActivos = Variables::TodosLosActivos - 2;
+		Posicionar(17, Variables::TodosLosActivos);
+		cout<< "        Ingrese Codigo Activo: " <<endl;
+		Posicionar(-14, Variables::TodosLosActivos);
+		getline(cin, Variables::ArrayAux[0]);
+		Variables::TodosLosActivos = Variables::TodosLosActivos - 2;
+		Posicionar(17, Variables::TodosLosActivos);
+		cout<< "    Ingrese Nombre Due\244o Activo: " <<endl;
+		Posicionar(-16, Variables::TodosLosActivos);
+		getline(cin, Variables::ArrayAux[1]);
+		Variables::TodosLosActivos = Variables::TodosLosActivos - 2;
+		Posicionar(17, Variables::TodosLosActivos);
+		cout<< "    Ingrese Empresa Due\244o Activo: " <<endl;
+		Posicionar(-17, Variables::TodosLosActivos);
+		getline(cin, Variables::ArrayAux[2]);
+		Variables::TodosLosActivos = Variables::TodosLosActivos - 2;
+		Posicionar(17, Variables::TodosLosActivos);
+		cout<< "    Ingrese Departamento Due\244o Activo: " <<endl;
+		Posicionar(-22, Variables::TodosLosActivos);
+		getline(cin, Variables::ArrayAux[3]);
+		Variables::TodosLosActivos = Variables::TodosLosActivos - 2;
+		Posicionar(17, Variables::TodosLosActivos);
+		cout<< "    Ingrese Dias De Renta: " <<endl;
+		Posicionar(-10, Variables::TodosLosActivos);
+		getline(cin, Variables::ArrayAux[4]);
+	}
+
+	void MenuReporteEmpresa()
+	{
+		Color(0,11);
+		Posicionar(17, 17);
+		cout<< " Reporte De Activos Por Departamento" <<endl;
+		Posicionar(17, 15);
+		cout<< "   Ingrese Nombre Del Empresa: " <<endl;
+		Posicionar(-15, 15);
+		getline(cin, Variables::ArrayAux[0]);
+	}
+
 
 	void Marco(int Col1, int Col2, int Fil1, int Fil2)
 	{
