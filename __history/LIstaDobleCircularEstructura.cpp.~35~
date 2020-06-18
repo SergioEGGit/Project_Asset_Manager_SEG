@@ -24,33 +24,6 @@
 
         //Mostrar Activos
 
-	int MostrarActivosListaDobleCircularT(ListaDCTrans &ListaDoble, string NombreUsuario, string NombreEmpresa, string NombreDepartamento, int Altura)
-	{
-		//Declaraciones
-
-		ListaDCTrans AuxiliarLista = ListaDoble;
-		int ContadorAux = 1;
-
-		//Comienza Recorrer Lista
-
-		if(ListaDoble != nullptr)
-		{
-			do
-			{
-				if(AuxiliarLista -> UsuarioRentador == NombreUsuario && AuxiliarLista -> EmpresaRentador == NombreEmpresa&& AuxiliarLista -> DepartamentoRentador == NombreDepartamento)
-				{
-					Posicionar(30, Altura);
-					cout<< ContadorAux << ". Codigo Transaccion: " << AuxiliarLista -> CodigoANumericoTrans << " Codigo Activo: " << AuxiliarLista -> CodigoANumericoActivo << " Periodo Renta : " << AuxiliarLista -> PeriodoRenta <<endl;
-					Altura = Altura - 2;
-					ContadorAux++;
-				}
-                AuxiliarLista = AuxiliarLista -> Sgte;
-			}
-			while(AuxiliarLista != ListaDoble);
-		}
-
-		return Altura;
-	}
 
 	//Reportes
 

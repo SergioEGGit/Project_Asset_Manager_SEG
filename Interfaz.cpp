@@ -429,7 +429,6 @@
 		getline(cin, Variables::ArrayAux[0]);
 	}
 
-
 	void Marco(int Col1, int Col2, int Fil1, int Fil2)
 	{
 		Color(0,9);

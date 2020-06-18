@@ -52,6 +52,15 @@
 		return Altura;
 	}
 
+	//Actualizar
+
+		//Devolver Activo
+
+	void DevolverActivoListaDobleCircularT()
+	{
+
+	}
+
 	//Reportes
 
 		//Generar Reporte Lista Circular

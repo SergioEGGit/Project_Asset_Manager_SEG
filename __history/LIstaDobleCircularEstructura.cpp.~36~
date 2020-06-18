@@ -20,9 +20,18 @@
 
 //---------------------------------Métodos--------------------------------------
 
+	//Mostar Rentados
+
+        //Mostrar Activos
+
+	void  MostrarActivosListaDobleCircularT(ListaDCTrans &ListaDoble, string NombreUsuario, string NombreEmpresa, string NombreDepartamento)
+	{
+
+    }
+
 	//Reportes
 
-	//Generar Reporte Lista Circular
+		//Generar Reporte Lista Circular
 
 	void ReporteListaDobleCircularT(ListaDCTrans &ListaDoble)
 	{
@@ -72,7 +81,7 @@
 				}
 			}
 
-			
+
 			Asc = Asc + "->" + "NodoLista0" + "->" + "NodoLista" + to_string(Contador - 1);
 			SalidaArchivo<< "{ rank = same " << Same << "}" << endl;
 			SalidaArchivo<< Asc <<endl;
@@ -94,9 +103,84 @@
 		}
 	}
 
+		//Generar Reporte Por Usuario
+
+	void ReporteUsuarioListaDobleCircularT(ListaDCTrans &ListaDoble, string NombreUsuario, string NombreEmpresa, string NombreDepartamento)
+	{
+		//Declaraciones
+
+		ofstream SalidaArchivo("C:\\ReportesEDD\\ReporteListaUsuarioDobleCircularTransacciones.txt");
+		ListaDCTrans AuxiliarListaDoble = ListaDoble;
+		int Contador = 0;
+		string Temp[1000];
+		string Same = "";
+		string Asc = "";
+		string Desc = "";
+
+		//Comienza Reporte
+
+		SalidaArchivo<< "digraph ListaDobleCircular" <<endl;
+		SalidaArchivo<< "{" <<endl;
+		SalidaArchivo<< "graph[charset=latin1]" <<endl;
+		SalidaArchivo<< "node[shape = box, style = rounded, fontcolor = darkslategrey, color = firebrick1];" <<endl;
+
+		//Recorrer Lista
+
+		if(ListaDoble != NULL)
+		{
+			do
+			{
+				if(AuxiliarListaDoble -> UsuarioRentador == NombreUsuario && AuxiliarListaDoble -> EmpresaRentador == NombreEmpresa && AuxiliarListaDoble -> DepartamentoRentador == NombreDepartamento)
+				{
+                    SalidaArchivo<< "NodoLista" << Contador << " [label = " <<"\" Codigo Transaccion: " << AuxiliarListaDoble -> CodigoANumericoTrans << "\\lCodigo Activo: " << AuxiliarListaDoble -> CodigoANumericoActivo << "\\lUsuario Rentador: " << AuxiliarListaDoble -> UsuarioRentador << "\\lDepartamento: " << AuxiliarListaDoble -> DepartamentoRentador << "\\lEmpresa: " << AuxiliarListaDoble -> EmpresaRentador << "\\lFecha Actual: " << AuxiliarListaDoble -> FechaActual << "\\lPeriodo Renta: " << AuxiliarListaDoble -> PeriodoRenta << "\\l" <<"\"]" <<endl;
+					Temp[Contador] = "NodoLista" + to_string(Contador);
+					Contador++;
+                }
+				AuxiliarListaDoble = AuxiliarListaDoble -> Sgte;
+			}
+			while(AuxiliarListaDoble != ListaDoble);
+
+			for(int i = 0; i < Contador; i++)
+			{
+				Same = Same + Temp[i] + " ";
+
+				if(i < Contador - 1)
+				{
+					Asc = Asc + Temp[i] + "->";
+					Desc = Desc + Temp[Contador - i - 1] + "->";
+				}
+				else
+				{
+					Asc = Asc + Temp[i];
+					Desc = Desc + Temp[Contador - i - 1];
+				}
+			}
+
+
+			Asc = Asc + "->" + "NodoLista0" + "->" + "NodoLista" + to_string(Contador - 1);
+			SalidaArchivo<< "{ rank = same " << Same << "}" << endl;
+			SalidaArchivo<< Asc <<endl;
+			SalidaArchivo<< Desc <<endl;
+			SalidaArchivo<< " " <<endl;
+			SalidaArchivo<< "}";
+			SalidaArchivo.close();
+
+			//Generar Imagen
+			system("C:\\\"Program Files (x86)\"\\Graphviz2.38\\bin\\dot.exe  -Tpng C:\\ReportesEDD\\ReporteListaUsuarioDobleCircularTransacciones.txt -o C:\\ReportesEDD\\ReporteListaUsuarioDobleCircularTransacciones.png");
+			//Abrir Imagen
+			system("C:\\ReportesEDD\\ReporteListaUsuarioDobleCircularTransacciones.png &" );
+		}
+		else
+		{
+			Color(0, 4);
+			Posicionar(17, 9);
+			cout<< "La Lista Circular Se Encuentra Vacia"<<endl;
+		}
+	}
+
 	//Ordenamientos
 
-	//Ordenar Lista Ordenamiento Burbuja
+		//Ordenar Lista Ordenamiento Burbuja
 
 	void OrdenarListaDobleCircularT(ListaDCTrans &ListaDoble, string Tipo)
 	{
@@ -113,12 +197,20 @@
 
 		Primero = ListaDoble;
 
-		while(Primero -> Sgte != nullptr)
+		//Comienzo Primero Valor
+
+		while(Primero -> Sgte != ListaDoble)
 		{
+			//Asignacion De Segundo
+
 			Segundo = Primero -> Sgte;
 
-			while(Segundo != nullptr)
+			//Comienzo Valor A Comparar
+
+			while(Segundo != ListaDoble)
 			{
+				//Seleccion Tipo De Ordenamiento
+
 				if(Tipo == "Asc")
 				{
 					if(Primero -> CodigoANumericoTrans > Segundo -> CodigoANumericoTrans)
@@ -140,7 +232,6 @@
 				Segundo = Segundo -> Sgte;
 			}
 			Primero = Primero -> Sgte;
-			Segundo = Primero -> Sgte;
 		}
 	}
 
@@ -180,6 +271,7 @@
 			Ultimo -> Sgte = AuxiliarTransicion;
 		}
 	}
+
 
 
 

@@ -9,12 +9,7 @@
 	#include <stdio.h>
 	#include <conio.h>
 	#include <string>
-	#include <windows.h>
 	#include <fstream>
-	#include <algorithm>
-	#include <functional>
-	#include <cctype>
-	#include <locale>
 	#include <cstring>
 	using namespace std;
 
@@ -24,6 +19,7 @@
 	{
 		//Variables
 		string CodigoANumericoTrans;
+		string CodigoANumericoActivo;
 		string UsuarioRentador;
 		string EmpresaRentador;
 		string DepartamentoRentador;
@@ -40,9 +36,10 @@
 
 		//Nueva Transacción
 
-		ListaDobleCircularEstructura(string CodigoANumericoTrans, string UsuarioRentador, string  EmpresaRentador, string DepartamentoRentador, string UsuarioRentado, string EmpresaRentado, string DepartamentoRentado, time_t FechaActual, int PeriodoRenta)
+		ListaDobleCircularEstructura(string CodigoANumericoTrans, string CodigoANumericoActivo, string UsuarioRentador, string  EmpresaRentador, string DepartamentoRentador, string UsuarioRentado, string EmpresaRentado, string DepartamentoRentado, time_t FechaActual, int PeriodoRenta)
 		{
 			this -> CodigoANumericoTrans = CodigoANumericoTrans;
+			this -> CodigoANumericoActivo = CodigoANumericoActivo;
 			this -> UsuarioRentador = UsuarioRentador;
 			this -> EmpresaRentador = EmpresaRentador;
 			this -> DepartamentoRentador = DepartamentoRentador;
@@ -61,17 +58,33 @@
 
 //-----------------------------Métodos------------------------------------------
 
-    //Reportes
+    //Mostar Rentados
 
-	//Generar Reporte Lista Circular
+        //Mostrar Activos
+
+	void  MostrarActivosListaDobleCircularT(ListaDCTrans &ListaDoble, string NombreUsuario, string NombreEmpresa, string NombreDepartamento, int Altura);
+
+	//Reportes
+
+		//Generar Reporte Lista Circular
 
 	void ReporteListaDobleCircularT(ListaDCTrans &Lista);
+
+		//Generar Reporte Lista Circular
+
+	void ReporteUsuarioListaDobleCircularT(ListaDCTrans &ListaDoble, string NombreUsuario, string NombreEmpresa, string NombreDepartamento);
+
+	//Ordenamientos
+
+		//Ordenar Lista Ordenamiento Burbuja
+
+	void OrdenarListaDobleCircularT(ListaDCTrans &Lista, string Tipo);
 
 	//Inserción
 
 		//Insertar Transicción
 
-	void InsertarTransaccionListaDobleCircularT(ListaDCTrans &Lista, string CodigoANumericoTrans, string UsuarioRentador, string  EmpresaRentador, string DepartamentoRentador, string UsuarioRentado, string EmpresaRentado, string DepartamentoRentado, time_t FechaActual, int PeriodoRenta);
+	void InsertarTransaccionListaDobleCircularT(ListaDCTrans &Lista, string CodigoANumericoTrans, string CodigoANumericoActivo, string UsuarioRentador, string  EmpresaRentador, string DepartamentoRentador, string UsuarioRentado, string EmpresaRentado, string DepartamentoRentado, time_t FechaActual, int PeriodoRenta);
 
 //---------------------------------------------------------------------------
 #endif

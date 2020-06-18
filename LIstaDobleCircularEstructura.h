@@ -58,7 +58,13 @@
 
 //-----------------------------Métodos------------------------------------------
 
-    //Reportes
+    //Mostar Rentados
+
+        //Mostrar Activos
+
+	int MostrarActivosListaDobleCircularT(ListaDCTrans &ListaDoble, string NombreUsuario, string NombreEmpresa, string NombreDepartamento, int Altura);
+
+	//Reportes
 
 		//Generar Reporte Lista Circular
 

@@ -99,16 +99,19 @@
 
 					if(MatrizAuxiliarUsuario -> NombreUsuario != "")
 					{
-						Color(0, 11);
-						Variables::TodosLosActivos = 15;
-						Posicionar(20, Variables::TodosLosActivos);
-						cout<< ContadorAuxiliar << "." << "Nombre: " << MatrizAuxiliarUsuario -> NombreUsuario << "  Empresa: " << MatrizAuxiliarUsuario -> NombreEmpresa << "  Departamento: " << MatrizAuxiliarUsuario -> NombreDepartamento <<endl;
-						Variables::Color = 11;
-						Variables::ContadorAux = 1;
-                        Variables::TodosLosActivos--;
-						MostrarActivosArbolAVLA(MatrizAuxiliarUsuario -> ArbolAVLActivosUsuario);
-						Variables::TodosLosActivos = Variables::TodosLosActivos - 2;
-						ContadorAuxiliar++;
+						if(MatrizAuxiliarUsuario -> NombreUsuario != Variables::UsuarioA)
+						{
+							Color(0, 11);
+							Posicionar(17, 17);
+							cout<< "            Todos Los Activos " <<endl;
+							Posicionar(20, Variables::TodosLosActivos);
+							cout<< ContadorAuxiliar << "." << "Nombre: " << MatrizAuxiliarUsuario -> NombreUsuario << "  Empresa: " << MatrizAuxiliarUsuario -> NombreEmpresa << "  Departamento: " << MatrizAuxiliarUsuario -> NombreDepartamento <<endl;
+							Variables::TodosLosActivos = Variables::TodosLosActivos - 2;
+							Variables::Color = 11;
+							Variables::ContadorAux = 1;
+							MostrarTodosLosActivosArbolAVLA(MatrizAuxiliarUsuario -> ArbolAVLActivosUsuario);
+							ContadorAuxiliar++;
+                        }
 					}
 					MatrizAuxiliarUsuario = AuxiliarUsuario -> Atr;
 				}
@@ -362,10 +365,9 @@
 
 					while(MatrizAuxiliarUsuario != nullptr)
 					{
-						cout<< "usuario";
 						if(MatrizAuxiliarUsuario -> Atr != nullptr)
 						{
-							SalidaArchivo<< "NodoUsuario" << TrimCadena(MatrizAuxiliarUsuario -> NombreDepartamento) << TrimCadena(MatrizAuxiliarUsuario -> NombreEmpresa) << " [label = \" Usuario:" + MatrizAuxiliarUsuario -> NombreUsuario + "\\lNombre: " + MatrizAuxiliarUsuario -> NombreCompleto +  "\\l Tengo Culo " + "\", width = 2, color = steelblue, fontcolor = firebrick1, group = " + to_string(ContadorGrupos) + "];\n" <<endl;
+							SalidaArchivo<< "NodoUsuario" << TrimCadena(MatrizAuxiliarUsuario -> NombreDepartamento) << TrimCadena(MatrizAuxiliarUsuario -> NombreEmpresa) << " [label = \" Usuario:" + MatrizAuxiliarUsuario -> NombreUsuario + "\\lNombre: " + MatrizAuxiliarUsuario -> NombreCompleto  + "\\l" + "Hay Mas Usuarios Atras" + "\", width = 2, color = steelblue, fontcolor = firebrick1, group = " + to_string(ContadorGrupos) + "];\n" <<endl;
 						}
 						else
 						{
@@ -569,95 +571,6 @@
 
 	//Comparación Y Elección Casos De Inserción
 
-		//Casos Extras
-
-	void Caso(MatrizDU &CabDep, MatrizDU &CabEmp, MatrizDU &Usuario, MatrizDU &Inicio)
-	{
-		//Declaraciones
-
-		MatrizDU Aux_Dep = CabDep;
-		string DepS_User = Usuario->NombreEmpresa;
-		string DepS_Aux = "";
-		string DepS_Aux_Aba = "";
-
-		while(Aux_Dep != nullptr)
-		{
-			DepS_Aux = Aux_Dep->NombreEmpresa;
-
-			if(DepS_User.compare(DepS_Aux) > 0)
-			{
-				//Adelante de Aux_Emp hay que insertar pero falta un If
-
-				if(Aux_Dep -> Aba != nullptr)
-				{
-					DepS_Aux_Aba= Aux_Dep->Aba->NombreEmpresa;
-
-					if(DepS_User.compare(DepS_Aux_Aba) < 0)
-					{
-							//MatrizDU Aba=Aux_Dep->Aba;
-							Aux_Dep -> Aba = Usuario;
-							Usuario -> Arr = Aux_Dep;
-							Aux_Dep -> Aba -> Arr = Usuario;
-							Usuario -> Aba = Aux_Dep -> Aba;
-							break;
-					}
-				}
-				else
-				{
-					Aux_Dep -> Aba = Usuario;
-					Usuario -> Arr = Aux_Dep;
-					break;
-				}
-			}
-			Aux_Dep=Aux_Dep->Aba;
-		}
-
-
-		MatrizDU Aux_Emp = CabEmp;
-		string EmpS_User = Usuario -> NombreDepartamento;
-		string EmpS_Aux = "";
-		string EmpS_Aux_Sgte = "";
-
-		while(Aux_Emp != nullptr)
-		{
-			EmpS_Aux = Aux_Emp -> NombreDepartamento;
-
-			cout<<EmpS_User<<" "<<Aux_Emp->NombreDepartamento<<" MAYOR"<<EmpS_User.compare(EmpS_Aux)<<endl;
-
-			if(EmpS_User.compare(EmpS_Aux) > 0)
-			{
-				//Adelante de Aux_Emp hay que insertar pero falta un If
-				cout<<"Entro desde Mayor"<<endl;
-				if(Aux_Emp -> Sgte != nullptr)
-				{
-					EmpS_Aux_Sgte = Aux_Emp -> Sgte -> NombreDepartamento;
-
-					cout<<"MENOR"<< EmpS_User.compare(EmpS_Aux_Sgte) <<endl;
-
-					if(EmpS_User.compare(EmpS_Aux_Sgte) < 0)
-					{
-						cout<<"Entro desde Menor"<<endl;
-						//MatrizDU SIG=Aux_Emp->Sgte;
-						Aux_Emp -> Sgte = Usuario;
-						Usuario -> Ante = Aux_Emp;
-						Aux_Emp -> Sgte -> Ante = Usuario;
-						Usuario -> Sgte = Aux_Emp -> Sgte;
-						break;
-					}
-				}
-				else
-				{
-					Aux_Emp -> Sgte = Usuario;
-					Usuario -> Ante = Aux_Emp;
-					break;
-				}
-			}
-			Aux_Emp=Aux_Emp->Sgte;
-		}
-	}
-
-		//Casos Principales
-
 	void CasosInsercion(MatrizDU &CabDep, MatrizDU &CabEmp, MatrizDU &Usuario, MatrizDU &Inicio)
 	{
 		//Declaracioens
@@ -711,11 +624,11 @@
 
 						if(DepS_User.compare(DepS_Aux_Aba) < 0)
 						{
-							//MatrizDU Aba=Aux_Dep->Aba;
+							MatrizDU Aba=Aux_Dep->Aba;
 							Aux_Dep -> Aba = Usuario;
 							Usuario -> Arr = Aux_Dep;
-							Aux_Dep -> Aba -> Arr = Usuario;
-							Usuario -> Aba = Aux_Dep -> Aba;
+							Aba -> Arr = Usuario;
+							Usuario -> Aba = Aba;
 							break;
 						}
 					}
@@ -728,6 +641,7 @@
 				}
 				Aux_Dep = Aux_Dep -> Aba;
 			}
+
 		}
 		else if(HacerEmpresa == true && HacerDepartamento != true)
 		{
@@ -740,28 +654,21 @@
 			{
 				EmpS_Aux = Aux_Emp -> NombreDepartamento;
 
-				cout<<EmpS_User<<" "<<Aux_Emp->NombreDepartamento<<" MAYOR"<<EmpS_User.compare(EmpS_Aux)<<endl;
-
 				if(EmpS_User.compare(EmpS_Aux) > 0)
 				{
 					//Adelante de Aux_Emp hay que insertar pero falta un If
-
-					cout<<"Entro desde Mayor"<<endl;
 
 					if(Aux_Emp->Sgte != nullptr)
 					{
 						EmpS_Aux_Sgte = Aux_Emp -> Sgte -> NombreDepartamento;
 
-						cout<<"MENOR"<<EmpS_User.compare(EmpS_Aux_Sgte)<<endl;
-
 						if(EmpS_User.compare(EmpS_Aux_Sgte) < 0)
 						{
-							cout<<"Entro desde Menor"<<endl;
-							//MatrizDU SIG=Aux_Emp->Sgte;
+							MatrizDU SIG=Aux_Emp->Sgte;
 							Aux_Emp -> Sgte = Usuario;
 							Usuario -> Ante = Aux_Emp;
-							Aux_Emp -> Sgte -> Ante = Usuario;
-							Usuario -> Sgte = Aux_Emp -> Sgte;
+							SIG -> Ante = Usuario;
+							Usuario -> Sgte = SIG;
 							break;
 						}
 					}
@@ -804,8 +711,58 @@
 			}
 			if(SeHizo==false)
 			{
-				//aqui falta un caso pero me da hueva jaja
-                //Caso(CabDep,CabEmp,Usuario,Inicio);
+				//Voy a Mover la cebecera en lugar de hacer una variable
+				string AuxS_Dep=Usuario->NombreEmpresa;
+				string AuxS_Dep_Evaluar="",AuxS_Dep_Sig="";
+				while(CabDep!=nullptr){
+					AuxS_Dep_Evaluar= CabDep->NombreEmpresa;
+					if(AuxS_Dep.compare(AuxS_Dep_Evaluar)>0){
+						if(CabDep->Aba==nullptr){
+							CabDep->Aba=Usuario;
+							Usuario->Arr=CabDep;
+							break;
+						}
+						else{
+							AuxS_Dep_Sig=CabDep->Aba->NombreEmpresa;
+							if(AuxS_Dep.compare(AuxS_Dep_Sig)<0){
+								MatrizDU ABA=CabDep->Aba;
+								CabDep->Aba=Usuario;
+								Usuario->Arr=CabDep;
+								ABA->Arr=Usuario;
+								Usuario->Aba=ABA;
+								break;
+							}
+						}
+					}
+					CabDep=CabDep->Aba;
+				}
+
+				//Empresa
+				string AuxS_Emp=Usuario->NombreDepartamento;
+				string AuxS_Emp_Evaluar="",AuxS_Emp_Sig="";
+				while(CabEmp!=nullptr){
+					AuxS_Emp_Evaluar= CabEmp->NombreDepartamento;
+					if(AuxS_Emp.compare(AuxS_Emp_Evaluar)>0){
+						if(CabEmp->Sgte==nullptr){
+							CabEmp->Sgte=Usuario;
+							Usuario->Ante=CabEmp;
+							break;
+						}
+						else{
+							AuxS_Emp_Sig=CabEmp->Sgte->NombreDepartamento;
+							if(AuxS_Emp.compare(AuxS_Emp_Sig)<0){
+								MatrizDU SGTE=CabEmp->Sgte;
+								CabEmp->Sgte=Usuario;
+								Usuario->Ante=CabEmp;
+								SGTE->Ante=Usuario;
+								Usuario->Sgte=SGTE;
+								break;
+							}
+						}
+					}
+					CabEmp=CabEmp->Sgte;
+				}
+
 			}
 		}
 	}
@@ -825,6 +782,10 @@
 		//Variables Tipo String
 
 		string Aux = "";
+
+        //UpperCase
+		Departamento_Usuario = UpperCase(Departamento_Usuario);
+		Empresa_Usuario = UpperCase(Empresa_Usuario);
 
 		//Buscar Cabecera Departamento
 
@@ -881,7 +842,7 @@
 
 	//Búsqueda
 
-	//Buscar Una Usuario
+		//Buscar Una Usuario
 
 	bool BuscarUsuarioMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreEmpresa, string NombreDepartamento)
 	{
@@ -942,27 +903,49 @@
 		return Bandera;
 	}
 
+		//Buscar Arbol Usuario
 
+	void BuscarArbolUsuarioMatrizDispersaU(MatrizDU &Matriz, string NombreUsuario, string NombreEmpresa, string NombreDepartamento)
+	{
+		//Declaraciones
+		MatrizDU Auxiliar = Matriz;
+		bool Bandera = false;
 
+		//UpperCase
+		NombreEmpresa = UpperCase(NombreEmpresa);
+		NombreDepartamento = UpperCase(NombreDepartamento);
 
-
-
-
-
-
-
-	void Imprimir(){
-		MatrizDU Aux=Variables::MatrizDispersaUsuarios->Aba;
-		while(Aux!=nullptr){
-			MatrizDU CabEmp=Aux;
-			cout<<"EMPRESA: "<<Aux->NombreEmpresa<<endl;
-			Aux=Aux->Sgte;
-			while(Aux!=nullptr){
-				cout<<"DEPARTAMENTO: "<<Aux->NombreDepartamento<<endl;
-				Aux=Aux->Sgte;
+		while(Auxiliar != nullptr)
+		{
+			if(Auxiliar -> NombreDepartamento == NombreDepartamento)
+			{
+				while(Auxiliar != nullptr)
+				{
+					if(Auxiliar -> NombreEmpresa == NombreEmpresa)
+					{
+						if(Auxiliar -> Atr != nullptr)
+						{
+                            while(Auxiliar != nullptr)
+							{
+								if(Auxiliar -> NombreUsuario == NombreUsuario)
+								{
+									Variables::AuxiliarArbol = Auxiliar;
+									break;
+								}
+								Auxiliar = Auxiliar -> Atr;
+							}
+						}
+						else
+						{
+							Variables::AuxiliarArbol = Auxiliar;
+						}
+						break;
+					}
+					Auxiliar = Auxiliar -> Aba;
+				}
+				break;
 			}
-			Aux=CabEmp->Aba;
+			Auxiliar = Auxiliar -> Sgte;
 		}
-		system("pause>0");
 	}
 

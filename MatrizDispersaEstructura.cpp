@@ -134,6 +134,9 @@
 		string CadenaArboles = "";
 		int Numero = 0;
 
+		//UpperCase
+		NombreDepartamento = UpperCase(NombreDepartamento);
+
 		if(SalidaArchivo.is_open())
 		{
 			if(Matriz != nullptr)
@@ -200,6 +203,10 @@
 		MatrizDU MatrizAuxiliarUsuario = Matriz;
 		string CadenaArboles = "";
 		int Numero = 0;
+
+        //UpperCase
+		NombreEmpresa = UpperCase(NombreEmpresa);
+
 
 		if(SalidaArchivo.is_open())
 		{

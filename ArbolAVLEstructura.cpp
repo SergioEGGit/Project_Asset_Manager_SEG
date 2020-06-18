@@ -59,7 +59,7 @@
 			Variables::ReporteArbol += "[label = \" Código: " + ArbolAuxiliar -> LE -> CodigoANumericoActivo +
 							 + "\\lNombre: " + ArbolAuxiliar -> LE -> NombreActivo +
 							 + "\\lRentado: " + ArbolAuxiliar -> LE -> ExisteRentaActivo +
-					   + "\\lDescripción: " + ArbolAuxiliar -> DescripcionActivo +
+					   + "\\lDescripción: " + ArbolAuxiliar -> LE -> DescripcionActivo +
 					   + "\\l" + + "\"]; \n";
 
 
@@ -78,7 +78,7 @@
 			Variables::ReporteArbol += "[label = \" Código: " + ArbolAuxiliar -> RI -> CodigoANumericoActivo +
 							 + "\\lNombre: " + ArbolAuxiliar -> RI -> NombreActivo +
 							 + "\\lRentado: " + ArbolAuxiliar -> RI -> ExisteRentaActivo +
-					   + "\\lDescripción: " + ArbolAuxiliar -> DescripcionActivo +
+					   + "\\lDescripción: " + ArbolAuxiliar -> RI -> DescripcionActivo +
 					   + "\\l" + + "\"]; \n";
 
 			Variables::ReporteArbol += Padre + "->" + "NodoArbol" + to_string(Numero) + to_string(Variables::NumerosDeNodosArbolAVL) + ";\n";
@@ -144,7 +144,7 @@
 			Cadena += "[label = \" Código: " + ArbolAuxiliar -> LE -> CodigoANumericoActivo +
 							 + "\\lNombre: " + ArbolAuxiliar -> LE -> NombreActivo +
 							 + "\\lRentado: " + ArbolAuxiliar -> LE -> ExisteRentaActivo +
-					   + "\\lDescripción: " + ArbolAuxiliar -> DescripcionActivo +
+					   + "\\lDescripción: " + ArbolAuxiliar -> LE -> DescripcionActivo +
 					   + "\\l" + + "\"]; \n";
 
 
@@ -163,7 +163,7 @@
 			Cadena += "[label = \" Código: " + ArbolAuxiliar -> RI -> CodigoANumericoActivo +
 							 + "\\lNombre: " + ArbolAuxiliar -> RI -> NombreActivo +
 							 + "\\lRentado: " + ArbolAuxiliar -> RI -> ExisteRentaActivo +
-					   + "\\lDescripción: " + ArbolAuxiliar -> DescripcionActivo +
+					   + "\\lDescripción: " + ArbolAuxiliar -> RI -> DescripcionActivo +
 					   + "\\l" + + "\"]; \n";
 
 			Cadena += Padre + "->" + "NodoArbol" + to_string(Variables::NumerosDeNodosArbolAVL) + ";\n";
@@ -982,7 +982,7 @@
 
 	void ModificarDescripcionActivoArbolAVLA(ArbolAVLActivos &Arbol, ArbolAVLEstructura &ActivoActualAuxiliar, string CodigoANumericoActivo, string DescripcionActivo)
 	{
-		//Declaraciones
+        //Declaraciones
 
 		//Objetos Tipo Arbol AVL
 
@@ -992,7 +992,7 @@
 
 		string Bandera = "";
 
-		//UpperCase
+        //UpperCase
 		CodigoANumericoActivo = TrimCadena(CodigoANumericoActivo);
 		CodigoANumericoActivo = UpperCase(CodigoANumericoActivo);
 

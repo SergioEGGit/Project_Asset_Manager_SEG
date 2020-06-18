@@ -278,7 +278,7 @@
 			{
 				if(Arbol -> ExisteRentaActivo == "No")
 				{
-                    Color(0, Variables::Color);
+					Color(0, Variables::Color);
 					Posicionar(22, Variables::TodosLosActivos);
 					cout<< "       " << Variables::ContadorAux << "." << Arbol -> CodigoANumericoActivo << ", " << Arbol -> NombreActivo <<endl;
 					Variables::TodosLosActivos = Variables::TodosLosActivos - 2;
@@ -293,10 +293,49 @@
 					Posicionar(22, Variables::TodosLosActivos);
 					cout<< "       " << Variables::ContadorAux << "." << Arbol -> CodigoANumericoActivo << ", " << Arbol -> NombreActivo <<endl;
 					Variables::TodosLosActivos = Variables::TodosLosActivos - 2;
-					Variables::ContadorAux++;
-					MostrarTodosLosActivosArbolAVLA(Arbol -> LE);
-					MostrarTodosLosActivosArbolAVLA(Arbol -> RI);
+			    	Variables::ContadorAux++;
                 }
+				MostrarTodosLosActivosArbolAVLA(Arbol -> LE);
+				MostrarTodosLosActivosArbolAVLA(Arbol -> RI);
+            }
+		}
+	}
+
+		//Mostrar Activos Rentados
+
+	void MostrarActivosRentados(ArbolAVLActivos &Arbol)
+	{
+        //Recorre Arbol AVL
+
+		if(Arbol == nullptr)
+		{
+			return;
+		}
+		else
+		{
+			if(Arbol -> RI == nullptr && Arbol -> LE == nullptr)
+			{
+				if(Arbol -> ExisteRentaActivo == "Si")
+				{
+                    Color(0, Variables::Color);
+					Posicionar(22, Variables::ContadorActivos);
+					cout<< "            " << Variables::ContadorAux << "." << Arbol -> CodigoANumericoActivo << ", " << Arbol -> NombreActivo <<endl;
+					Variables::ContadorActivos = Variables::ContadorActivos - 2;
+					Variables::ContadorAux++;
+                }
+			}
+			else
+			{
+				if(Arbol -> ExisteRentaActivo == "Si")
+				{
+                    Color(0, Variables::Color);
+					Posicionar(22, Variables::ContadorActivos);
+					cout<< "            " << Variables::ContadorAux << "." << Arbol -> CodigoANumericoActivo << ", " << Arbol -> NombreActivo <<endl;
+					Variables::ContadorActivos = Variables::ContadorActivos - 2;
+					Variables::ContadorAux++;
+				}
+                MostrarActivosRentados(Arbol -> LE);
+				MostrarActivosRentados(Arbol -> RI);
 			}
 		}
 	}
